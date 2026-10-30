@@ -27,6 +27,7 @@
 # Para corregir erratas deprisa: generar_pdf <- FALSE (y recompilar el
 # PDF antes de publicar la versión definitiva).
 # ---------------------------------------------------------------------
+
 generar_web <- FALSE
 generar_pdf <- TRUE   # el PDF de la versión Lite aún no se ha revisado
 
