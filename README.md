@@ -11,7 +11,7 @@ remotes::install_github("teckel71/MATlite")
 ## Compilar el libro
 
 ```r
-source("render.R")   # o, desde la terminal: Rscript render.R
+source("Build.R")    # compila la web en docs/ (como en R-Stars: La Guía)
 ```
 
 El libro se genera en `docs/` (publicado con GitHub Pages). `numerar_tablas_figuras.R` es el preprocesador de *R-Stars: La Guía*, ampliado para las funciones de MATlite: las piezas de un resultado (`objeto$pieza`) se muestran una por chunk con la opción `lite = "tabla"` o `lite = "figura"`.
