@@ -28,7 +28,7 @@
 # PDF antes de publicar la versión definitiva).
 # ---------------------------------------------------------------------
 generar_web <- TRUE
-generar_pdf <- FALSE   # el PDF de la versión Lite aún no se ha revisado
+generar_pdf <- TRUE
 
 build_book <- function(formato = NULL) {
 
