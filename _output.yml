@@ -1,0 +1,48 @@
+bookdown::bs4_book:
+  theme:
+    bootswatch: litera
+    primary: "#475569"
+    base_font:
+      google: "Source Serif 4"
+    heading_font:
+      google: "Source Sans 3"
+    code_font:
+      google: "JetBrains Mono"
+  css: assets/styles.css
+
+  # repo: https://github.com/teckel71/RStarslite-book   # opcional
+
+
+bookdown::pdf_book:
+  # Versión PDF en A4 para descargar e imprimir (la genera Build.R).
+  latex_engine: xelatex
+  dev: cairo_pdf
+  highlight: tango
+  toc_depth: 2
+  keep_tex: true
+  keep_md: true      # conserva el markdown intermedio (diagnóstico)
+  includes:
+    in_header: preamble.tex
+    before_body: pdf/portada.tex
+  pandoc_args:
+    - "--lua-filter=pdf/filtro.lua"
+    - "-V"
+    - "papersize=a4"
+    - "-V"
+    - "fontsize=11pt"
+    - "-V"
+    - "classoption=twoside"
+    - "-V"
+    - "classoption=openright"
+    - "-V"
+    - "colorlinks=true"
+    - "-V"
+    - "linkcolor=rstars"
+    - "-V"
+    - "urlcolor=rstars"
+    - "-V"
+    - "citecolor=rstars"
+    - "-V"
+    - "toccolor=black"
+    - "-M"
+    - "lang=es"

@@ -1,0 +1,3 @@
+# Análisis clúster jerárquico.
+
+*Capítulo en preparación.*

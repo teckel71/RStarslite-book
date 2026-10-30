@@ -1,0 +1,49 @@
+---
+title: "R-Stars Lite"
+subtitle: "Análisis de datos con R, paso a paso y sin vértigo"
+author: 'Miguel-Ángel Tarancón Morán'
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- lola.bib
+- packages.bib
+biblio-style: apalike
+link-citations: true
+url: https://teckel71.github.io/RStarslite-book/
+cover-image: figuras/Portada_v3-2.jpg
+description: |
+  Versión reducida de R-Stars: La Guía para la asignatura Métodos Aplicados
+  al Análisis del Entorno Empresarial, con el paquete MATlite.
+rights: "Copyright 2026 Miguel Ángel Tarancón Morán. Licencia CC BY-NC-ND 4.0."
+always_allow_html: true
+---
+
+#  {.unnumbered}
+
+![](figuras/Portada_v3-2.jpg){.portada-img width="100%"}
+
+**Autor:**
+
+| Miguel Ángel Tarancón Morán.
+
+| Catedrático de Economía Aplicada. Universidad de Castilla - La Mancha.
+
+<div style="margin-top: 3em; padding-top: 1em; border-top: 1px solid #ddd;
+            font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.82em; color: #666; line-height: 1.5;">
+  Esta obra está publicada bajo una licencia
+  <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es">Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional (CC BY-NC-ND 4.0)</a>.
+  Véase el capítulo de <a href="#licencia">Licencia</a> al final del libro.
+</div>
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+```{r include=FALSE}
+if (knitr:::is_html_output()) '# Bibliografía {-}'
+```

@@ -1,0 +1,32 @@
+# Prefacio {.unnumbered}
+
+![[Estrellas... y R.]{.smallcaps}](figuras/00%20Prefacio.jpg){width="100%"}
+
+**R-Stars Lite** es la versión reducida de [*R-Stars: La Guía*](https://teckel71.github.io/RStars-book/), pensada para la asignatura **Métodos Aplicados al Análisis del Entorno Empresarial** del Máster Universitario en Iniciativa Empresarial: Análisis y Estrategias de la Universidad de Castilla-La Mancha.
+
+Comparte con *La Guía* la teoría, los casos prácticos y los datos: las mismas empresas de **transporte interestelar de mercancías** del proyecto **R-Stars**, los mismos encargos y los mismos resultados. Lo que cambia es **el modo de llegar a ellos**.
+
+En *La Guía*, cada práctica se resuelve con un *script* que escribe paso a paso todo el código: importar, depurar, calcular, dibujar y dar formato a cada tabla. En *R-Stars Lite*, ese código está **empaquetado** en las funciones del paquete **`{MATlite}`**, de modo que cada paso del análisis se hace con **una sola línea**. Se pierde flexibilidad, sí, pero se gana lo más importante en un primer contacto con R: tiempo y atención para lo que de verdad importa, que es **plantear bien el análisis e interpretar sus resultados**.
+
+Todas las funciones de `{MATlite}` empiezan por `lite_`. Basta con escribir esas cinco letras en RStudio para que el autocompletado las muestre todas. El apéndice *Guía de uso de MATlite* recoge la ficha de cada una.
+
+## Correspondencia con *R-Stars: La Guía* {.unnumbered}
+
+| *R-Stars Lite* | *R-Stars: La Guía* | Contenido |
+|:--|:--|:--|
+| 1. Introducción | 1 | R, RStudio y el paquete `{MATlite}` |
+| 2. Almacenando y manipulando datos | 2 | Importar, seleccionar, filtrar y ordenar datos |
+| 3. Análisis previo de datos | 5 | Valores ausentes, *outliers*, descripción, normalidad y correlación |
+| 4. Componentes principales | 6 (sin 6.10) | Adecuación, componentes, retención y *rankings* |
+| 5. Análisis clúster jerárquico | 7 (solo 7.3) | Método de Ward |
+| 6. Modelos de elección discreta | 10 | Modelo logit binomial |
+| 7. Tablas de contingencia | 11 (hasta 11.2) | Contraste ji-cuadrado y medidas de asociación |
+| 8. Escalado multidimensional | 12 | Mapas perceptuales |
+
+Quien quiera ver el código completo que hay detrás de cada función, o ampliar el análisis, encontrará en *La Guía* los *scripts* originales de cada práctica.
+
+------------------------------------------------------------------------
+
+**Sobre el carácter gratuito de este libro.** Este manual es, y seguirá siendo, de acceso libre y gratuito. Se agradecen tanto los comentarios y sugerencias que ayuden a su mejora, como su cita en aquellos documentos en los que se utilice como referencia. La referencia recomendada, en formato APA, es la siguiente:
+
+> Tarancón Morán, M. Á. (2026). *R-Stars Lite* [libro electrónico]. Universidad de Castilla-La Mancha. <https://teckel71.github.io/RStarslite-book/>

@@ -1,0 +1,31 @@
+# Archivos de sesión local de R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# Carpeta temporal de compilación: render.R la borra y la recrea siempre
+/_build/
+
+# Carpeta temporal de compilación del PDF (el PDF final se copia a docs/)
+/_pdf/
+
+# Restos que genera bookdown al compilar capítulos sueltos desde RStudio
+# (NO es docs/, que es el libro publicado)
+/_book/
+/_main.*
+/_main_files/
+/_bookdown_files/
+/RStarsLite_files/
+/RStarsLite.*
+
+# Copias de seguridad y material de trabajo que no se publica
+BACKUP_*.tar
+BACKUP_*.zip
+/_figuras_no_usadas/
+
+# RStudio Connect / shinyapps.io
+rsconnect/
+
+# IMPORTANTE: docs/ y docs/RStarsLite_files/ NUNCA deben ignorarse:
+# son el libro publicado (GitHub Pages lo sirve desde docs/).
