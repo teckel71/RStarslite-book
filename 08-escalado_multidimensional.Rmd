@@ -1,3 +1,284 @@
 # Escalado multidimensional.
 
-*Capítulo en preparación.*
+```{r setup-cap08, include=FALSE}
+source("_common.R")
+library(MATlite)
+
+# NOTA DE CONSTRUCCIÓN (no se publica)
+# Bloques de código = script download/emd_lite.R, que reproduce los
+# resultados de emd_rstars.R (R-Stars: La Guía, cap. 12).
+# Se corrige la calificación del Stress en 2 dimensiones (0,0196 es
+# "perfecta" en la escala de Kruskal, no "buena o excelente").
+```
+
+![[¿Cómo nos ven? El mapa de las percepciones.]{.smallcaps}](figuras/mirandano_indeciso.jpg){width="100%"}
+
+## ![](figuras/book.svg){.hicon} Introducción: los mapas perceptuales. {#c08-introduccion-los-mapas-perceptuales}
+
+En capítulos anteriores hemos utilizado diversas técnicas para describir, clasificar o explicar el comportamiento de un conjunto de variables. Todas ellas comparten un rasgo: parten de datos objetivos —cifras de ventas, ratios financieros, índices de satisfacción— y aplican procedimientos estadísticos para extraer conclusiones. Sin embargo, en el ámbito de la estrategia empresarial y el marketing, existe una pregunta que los datos objetivos, por sí solos, no responden: **¿cómo perciben los clientes nuestro servicio en relación con los de la competencia?**
+
+Esta pregunta es esencialmente **subjetiva**, y para abordarla necesitamos una herramienta capaz de traducir las percepciones humanas en una representación visual interpretable. Esa herramienta es el **mapa perceptual**.
+
+Un mapa perceptual es una **representación gráfica de las percepciones** que tienen los clientes (o cualquier grupo de evaluadores) sobre las **relaciones entre un conjunto de casos** —productos, servicios, marcas, empresas— en un espacio de pocas dimensiones (habitualmente dos). Su objetivo es revelar las **estructuras ocultas** que subyacen en los datos de percepción: qué casos se consideran similares, cuáles se perciben como diferentes, y qué ejes o dimensiones latentes organizan esas percepciones en la mente de los encuestados.
+
+Los mapas perceptuales permiten responder a interrogantes fundamentales para la toma de decisiones empresariales:
+
+-   ¿Quiénes son nuestros **competidores** más directos, desde el punto de vista del cliente?
+
+-   ¿Cuál es nuestra **posición en el mercado** respecto a la competencia?
+
+-   ¿Cómo podemos **reposicionar** nuestra marca o servicio?
+
+-   ¿A qué **segmento** debemos dirigir nuestros esfuerzos?
+
+-   ¿Cuáles son nuestras **fortalezas y debilidades** percibidas?
+
+-   ¿Existe algún **nicho** de mercado no cubierto?
+
+Para construir estos mapas a partir de datos de percepción, se han desarrollado diversas técnicas estadísticas, entre las cuales destaca la familia de métodos conocida como **Escalado Multidimensional** (EMD).
+
+## ![](figuras/book.svg){.hicon} Escalado Multidimensional: concepto y tipos. {#c08-escalado-multidimensional-concepto-y-tipos}
+
+El **Escalado Multidimensional** (*Multidimensional Scaling*, MDS) es una técnica que permite descubrir estructuras o patrones dentro de una **matriz de proximidades** entre casos. Su objetivo es doble:
+
+1.  Determinar la **dimensión del modelo** (el número de ejes) que proporcione un ajuste satisfactorio.
+
+2.  Obtener las **coordenadas de los casos** en esas dimensiones, de manera que las distancias entre los puntos en el mapa reflejen fielmente las proximidades percibidas: cuanto más cercanos sean dos puntos, más similares serán las opiniones de los encuestados sobre esos dos casos.
+
+Una ventaja importante del EMD frente a otras técnicas multivariantes es que los **resultados no dependen de los juicios del investigador** sobre qué variables o características incluir: las dimensiones que emergen del análisis proceden directamente de los **juicios globales de los encuestados sobre la similitud entre los casos**.
+
+Dicho esto, en la práctica aplicada es frecuente que los datos de partida no sean juicios directos de similitud, sino **valoraciones de los casos en un conjunto de atributos** (por ejemplo, mediante escalas Likert). En estos casos, la matriz de proximidades se **deriva** de los datos de valoración, como veremos más adelante.
+
+### Proximidades y distancias. {#c08-proximidades-y-distancias}
+
+El concepto central del EMD es la **proximidad** entre dos casos: un valor que indica cuán similares o diferentes los perciben los encuestados. Cuando se habla de proximidad en este contexto, nos referimos a una «distancia perceptual» entre los casos.
+
+El procedimiento más directo para obtener datos de proximidad es **preguntar a las personas** acerca del parecido que perciben entre cada par de casos. Sin embargo, este enfoque resulta costoso cuando el número de casos es elevado (con $n$ casos hay $n(n-1)/2$ pares distintos), y en la práctica se recurre con frecuencia a un procedimiento indirecto: pedir a los encuestados que **valoren cada caso en una serie de atributos** mediante una escala tipo Likert, y calcular después la distancia entre los perfiles de valoración.
+
+Formalmente, la **matriz de proximidades** $\Delta$ recoge las distancias $\delta_{ij}$ entre todos los pares de casos $i$ y $j$. Esta matriz es simétrica ($\delta_{ij} = \delta_{ji}$) y tiene ceros en la diagonal ($\delta_{ii} = 0$). El objetivo del EMD es encontrar, a partir de $\Delta$, una **matriz de coordenadas** $X$, de $n$ filas (casos) y $p$ columnas (dimensiones), que represente cada caso como un punto en un espacio de $p$ dimensiones, de modo que las distancias entre los puntos sean lo más coherentes posible con las proximidades originales.
+
+### EMD métrico y no métrico. {#c08-emd-metrico-y-no-metrico}
+
+La diferencia entre ambos tipos radica en el **nivel de exigencia** con que se pide que las distancias en el mapa reproduzcan las proximidades originales:
+
+-   **EMD métrico (clásico):** exige que las distancias en el mapa sean **proporcionales** a las proximidades originales. Es decir, si la distancia entre A y B es el doble que la distancia entre C y D en los datos, también debe serlo en el mapa.
+
+-   **EMD no métrico (ordinal):** exige únicamente que las distancias en el mapa preserven el **orden** de las proximidades originales. Si A y B están más cerca que C y D en los datos, también deben estarlo en el mapa, pero no importa cuánto más cerca.
+
+El EMD no métrico es el más utilizado en Ciencias Sociales y en investigación de mercados, porque los datos de encuesta (escalas Likert, valoraciones ordinales) no tienen un significado métrico estricto: la diferencia entre un 4 y un 5 en una escala de satisfacción no es necesariamente la misma que la diferencia entre un 6 y un 7. En este capítulo nos centraremos en el **EMD no métrico**.
+
+## ![](figuras/book.svg){.hicon} El algoritmo SMACOF y el Stress. {#c08-el-algoritmo-smacof-y-el-stress}
+
+### SMACOF. {#c08-smacof}
+
+Para pasar de la matriz de proximidades a la matriz de coordenadas, se han desarrollado diversos algoritmos. Uno de los más utilizados en EMD no métrico es **SMACOF** (*Scaling by Majorizing a Complicated Function*), implementado en el paquete `{smacof}` de R, que es el que utilizan internamente las funciones de `{MATlite}`.
+
+SMACOF busca iterativamente las coordenadas de los casos que minimizan una medida de desajuste denominada **Stress**. El proceso es conceptualmente sencillo: parte de una configuración inicial y la va refinando en sucesivas iteraciones hasta que el Stress deja de mejorar apreciablemente.
+
+### El Stress como medida de bondad del ajuste. {#c08-el-stress-como-medida-de-bondad-del-ajuste}
+
+El **Stress** cuantifica la discrepancia entre las proximidades originales y las distancias obtenidas en la configuración. Su valor oscila entre 0 (ajuste perfecto) y valores positivos que indican grados crecientes de desajuste. Kruskal (1964) propuso la siguiente escala orientativa para interpretarlo:
+
+|       Stress       | Calidad de la representación |
+|:------------------:|:-----------------------------|
+|     $> 0{,}20$     | Pobre                        |
+| $0{,}10 - 0{,}20$  | Razonable                    |
+| $0{,}05 - 0{,}10$  | Buena                        |
+| $0{,}025 - 0{,}05$ | Excelente                    |
+|   $0 - 0{,}025$    | Perfecta                     |
+
+La elección del número de dimensiones $p$ se basa en un equilibrio entre parsimonia (pocas dimensiones, fáciles de interpretar) y calidad del ajuste (Stress bajo). La herramienta visual para esta decisión es el **gráfico de codo** del Stress: se representan los valores obtenidos para $p = 1, 2, 3, \ldots$ y se busca el punto a partir del cual añadir una dimensión más produce una mejora reducida.
+
+### El diagrama de Shepard. {#c08-el-diagrama-de-shepard}
+
+Además del Stress, disponemos de una herramienta visual para evaluar la calidad del ajuste: el **diagrama de Shepard**. Este gráfico enfrenta en el eje horizontal las proximidades originales y en el eje vertical las distancias obtenidas en la configuración. Si el ajuste es bueno, los puntos se alinearán sobre una función **monótona creciente** (en el caso no métrico). Los puntos muy alejados de la tendencia general señalan pares de casos cuya distancia en el mapa no se corresponde con su proximidad original.
+
+## ![](figuras/pie-chart.svg) Práctica: el mapa perceptual del sector interestelar. {#c08-practica-el-mapa-perceptual-del-sector}
+
+### ![](figuras/star.svg){.hicon} La imagen del sector. {#c08-la-imagen-del-sector}
+
+La **Asociación Sectorial de Transporte Interestelar (ASTI)** ha detectado una tendencia preocupante entre las pequeñas y medianas empresas que contratan servicios de transporte de mercancías: muchos clientes consideran que «todas las compañías navieras son iguales» y eligen transportista basándose casi exclusivamente en el precio. Esto está erosionando los márgenes de todo el sector y dificultando que las compañías con mejor servicio puedan diferenciarse.
+
+Para combatir esta dinámica, la ASTI ha encargado a la consultora *Data-Evidence* un estudio que responda a dos preguntas clave: **¿cómo perciben realmente los clientes a las distintas compañías del sector?** y **¿existen dimensiones latentes de diferenciación que el sector no está comunicando adecuadamente?**
+
+El equipo de *Data-Evidence* diseña un cuestionario con seis atributos clave del servicio de transporte de mercancías —fiabilidad, puntualidad, seguridad de la carga, relación calidad-precio, atención al cliente e innovación tecnológica— y recoge las valoraciones de 30 clientes frecuentes sobre 15 de las principales compañías del sector, utilizando una escala Likert de 1 (muy deficiente) a 7 (excelente). Con estos datos, construirá un **mapa perceptual** mediante Escalado Multidimensional no métrico.
+
+### ![](figuras/pie-chart.svg) Preparación de los datos. {#c08-preparacion-de-los-datos}
+
+Necesitamos en la carpeta del proyecto el archivo de datos **percepcion_interestelar.xlsx**, cuya hoja "Datos" contiene las valoraciones medias de cada empresa en cada uno de los seis atributos, y el *script* **emd_lite.R**. Las 15 compañías pertenecen al universo de 300 empresas de la Base de Datos Interestelar, y presentan perfiles muy diversos: desde grandes corporaciones con flota renovada como *Arrakis Freight* o *Excalibur Freight Systems*, hasta compañías pequeñas con flota antigua como *Sandworm Freight* o *First Order Cargo*, pasando por empresas de tamaño medio con flota madura como *Shuttlepod Movers* o *Defiant Cargo*:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+# Limpiando el Global Environment
+rm(list = ls())
+
+# Cargando el paquete de la asignatura
+library(MATlite)
+
+# Importando datos desde Excel
+PERCEPCION <- lite_importa("percepcion_interestelar.xlsx")
+lite_resumen(PERCEPCION)
+```
+
+El *data frame* resultante tiene 15 filas (una por empresa) y 6 columnas (una por atributo), con los nombres de las empresas como nombres de fila. Las valoraciones oscilan entre 1 y 7, como corresponde a la escala Likert utilizada en la encuesta.
+
+### ![](figuras/pie-chart.svg) Exploración y número de dimensiones. {#c08-exploracion-y-numero-de-dimensiones}
+
+La función `lite_emd_dimensiones()` realiza toda la fase exploratoria: muestra los perfiles de valoración, calcula la matriz de proximidades (distancias euclídeas entre los perfiles de cada par de empresas) y estima el EMD no métrico con 1 a 6 dimensiones para ayudarnos a elegir cuántas utilizar. Si no indicamos el argumento `variables`, utiliza todas las columnas del *data frame*:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+exploracion <- lite_emd_dimensiones(PERCEPCION)
+```
+
+Antes de calcular proximidades, conviene examinar los perfiles de valoración de las compañías. La tabla de perfiles recoge los datos de partida:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, lite="tabla"}
+exploracion$tabla_perfiles
+```
+
+Un gráfico de **coordenadas paralelas** permite visualizar simultáneamente los seis atributos para cada empresa, revelando patrones de similitud a simple vista:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, out.width="100%", fig.width=10, fig.height=5, lite="figura"}
+exploracion$perfiles
+```
+
+El gráfico ya permite intuir la existencia de grupos de empresas con perfiles similares. Se aprecia, por ejemplo, que las compañías con flota renovada (*Arrakis Freight*, *Excalibur Freight Systems*, *Kaiju Haulage Co.*) comparten un perfil característico: valoraciones altas en atención, fiabilidad, innovación y seguridad, pero bajas en precio (son percibidas como caras). En el extremo opuesto, compañías como *Sandworm Freight* o *First Order Cargo* muestran el patrón inverso. Sin embargo, la maraña de líneas resulta difícil de interpretar con 15 compañías. Precisamente para eso sirve el mapa perceptual.
+
+La **matriz de proximidades** contiene las $15 \times 14 / 2 = 105$ distancias entre todos los pares de empresas, y se visualiza como un **mapa de calor**, donde los tonos anaranjados indican proximidad (empresas percibidas como similares) y los tonos azulados indican distancia:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, out.width="85%", fig.width=8, fig.height=7, lite="figura"}
+exploracion$distancias
+```
+
+El mapa de calor revela patrones interesantes. Compañías como *Shuttlepod Movers* y *Defiant Cargo* presentan tonos anaranjados muy intensos entre sí, lo que indica que los clientes las perciben de manera muy similar. Lo mismo ocurre entre *Starfighter Logistics* y *Endor Express*. En el extremo opuesto, *Sandworm Freight* destaca por su fila y columna dominadas por tonos azulados: es la compañía más «peculiar» del grupo. También se aprecian bloques de color anaranjado entre las grandes empresas de flota renovada, confirmando que los clientes las perciben como un grupo homogéneo.
+
+Pasamos a decidir **cuántas dimensiones** utilizar. Aunque nuestro objetivo final es un mapa bidimensional (el más fácil de interpretar), necesitamos verificar que dos dimensiones son suficientes. La pieza `stress` recoge el Stress de cada solución, con su calificación según la escala de Kruskal, y la pieza `codo`, el gráfico de codo:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, lite="tabla"}
+exploracion$stress
+```
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, out.width="80%", fig.width=7, fig.height=4.5, lite="figura"}
+exploracion$codo
+```
+
+El Stress desciende marcadamente al pasar de una a dos dimensiones, y a partir de dos dimensiones la mejora es progresivamente menor. Con dos dimensiones, el Stress (0,0196) se sitúa ya en el rango de calidad **perfecta** de la escala de Kruskal, lo que confirma que **dos dimensiones son suficientes** para representar adecuadamente las proximidades perceptuales.
+
+### ![](figuras/pie-chart.svg) La solución en dos dimensiones. {#c08-la-solucion-en-dos-dimensiones}
+
+Ajustamos el EMD no métrico con dos dimensiones mediante la función `lite_emd()`. El argumento `ndim` fija el número de dimensiones, y `titulo` y `subtitulo` rotulan los mapas:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+mapa <- lite_emd(PERCEPCION, ndim = 2,
+                 titulo    = "SECTOR INTERESTELAR DE TRANSPORTE DE MERCANCÍAS",
+                 subtitulo = "Mapa perceptual - Configuración de opiniones de clientes")
+```
+
+La pieza `ajuste` muestra el valor del Stress y el número de iteraciones que ha necesitado el algoritmo SMACOF para converger:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, lite="tabla"}
+mapa$ajuste
+```
+
+Las coordenadas de las 15 empresas en las dos dimensiones son:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, lite="tabla"}
+mapa$coordenadas
+```
+
+### ![](figuras/pie-chart.svg) Diagrama de Shepard. {#c08-diagrama-de-shepard}
+
+Para evaluar visualmente la calidad del ajuste, examinamos el **diagrama de Shepard**, que enfrenta las proximidades originales (eje horizontal) con las distancias obtenidas en la configuración bidimensional (eje vertical):
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, out.width="75%", fig.width=6, fig.height=5, lite="figura"}
+mapa$shepard
+```
+
+La línea escalonada es la **función de transformación monótona** que el algoritmo ha encontrado para relacionar las proximidades con las distancias. En el EMD no métrico, esta función no necesita ser lineal: solo necesita ser no decreciente. Los puntos representan los 105 pares de empresas: cuanto más cerca estén de la línea, mejor es el ajuste para ese par concreto. En nuestro caso, todos siguen de cerca la tendencia, en coherencia con el reducido valor del Stress.
+
+### ![](figuras/pie-chart.svg) El mapa perceptual. {#c08-el-mapa-perceptual}
+
+Estamos en condiciones de examinar el mapa perceptual. Las empresas cercanas en el mapa son percibidas de forma similar por los clientes; las lejanas, de forma diferente:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, out.width="100%", fig.width=9, fig.height=6, lite="figura"}
+mapa$mapa
+```
+
+El mapa confirma y enriquece lo que el mapa de calor ya apuntaba. Las grandes compañías con flota renovada (*Arrakis Freight*, *Excalibur Freight Systems*, *Kaiju Haulage Co.*) se agrupan en la zona izquierda del mapa, claramente separadas del resto. Las compañías con flota antigua (*Sandworm Freight*, *First Order Cargo*, *Dark Star Haulage*, *Endor Express*, *Starfighter Logistics*) ocupan la zona derecha. Entre ambos grupos, las compañías con flota madura (*Shuttlepod Movers*, *Defiant Cargo*, *Ragnar Freight Lines*, *Prometheus Transport*, *Rebel Alliance Transport*) se sitúan en posiciones intermedias. Nótese también cómo las empresas que en el mapa de calor aparecían con tonos anaranjados intensos entre sí (*Shuttlepod Movers* y *Defiant Cargo*, por ejemplo) están ahora efectivamente muy próximas en el mapa, y cómo *Sandworm Freight* ocupa el extremo derecho, aislada de las demás.
+
+Pero las dimensiones en sí mismas no tienen un significado predeterminado: el EMD nos dice *dónde* se sitúan las empresas, pero no *por qué* están ahí. Para responder a esta segunda pregunta, necesitamos interpretar las dimensiones.
+
+### ![](figuras/pie-chart.svg) Interpretación de las dimensiones. {#c08-interpretacion-de-las-dimensiones}
+
+Para averiguar qué representan las dos dimensiones, se calcula la **correlación** entre cada atributo original y las coordenadas de las empresas en cada dimensión. Los atributos con mayor correlación (en valor absoluto) con una dimensión nos indican qué está midiendo ese eje:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, lite="tabla"}
+mapa$correlaciones
+```
+
+Para facilitar la lectura, la pieza `biplot` superpone los atributos como **vectores** sobre el mapa perceptual. La dirección del vector indica con qué dimensiones se asocia el atributo; su longitud, la intensidad de esa asociación:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, out.width="100%", fig.width=9, fig.height=6, lite="figura"}
+mapa$biplot
+```
+
+Este es el gráfico central del análisis, y su lectura permite al equipo de *Data-Evidence* interpretar las dimensiones latentes y extraer conclusiones sobre la estructura competitiva del sector.
+
+La **Dimensión 1** (eje horizontal) es la que mayor variabilidad recoge, y separa las compañías esencialmente por un eje de **calidad percibida frente a precio**. Los vectores de INNOVACION, PUNTUALIDAD, ATENCION, SEGURIDAD y FIABILIDAD apuntan hacia la izquierda, donde se sitúan las compañías mejor valoradas en estos atributos (*Arrakis Freight*, *Excalibur Freight Systems*, *Kaiju Haulage Co.*). El vector de PRECIO (correlación de 0,986 con la dimensión) apunta en la dirección opuesta, hacia la derecha, donde están las compañías percibidas como más económicas pero con peor servicio (*Sandworm Freight*, *First Order Cargo*). Esta dimensión refleja, por tanto, un continuo que va de «caro pero excelente» a «económico pero deficiente».
+
+La **Dimensión 2** (eje vertical) introduce un matiz adicional: FIABILIDAD y SEGURIDAD apuntan hacia arriba, mientras que PUNTUALIDAD y ATENCION lo hacen ligeramente hacia abajo. Esto distingue, dentro de las compañías de calidad similar, entre aquellas que destacan por la seguridad e integridad de la carga (zona superior: *Corellian Freightworks*, *Mothership Movers*) y las que destacan más por la puntualidad y la atención al cliente (zona inferior: *Arrakis Freight*, *Kaiju Haulage Co.*).
+
+### ![](figuras/pie-chart.svg) Ampliación: la solución en tres dimensiones. {#c08-ampliacion-la-solucion-en-tres-dimensiones}
+
+El gráfico de codo mostró que dos dimensiones proporcionan un ajuste satisfactorio. Sin embargo, puede resultar instructivo explorar qué aporta una **tercera dimensión** al análisis. Basta con cambiar el argumento `ndim`:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+mapa3 <- lite_emd(PERCEPCION, ndim = 3)
+```
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, lite="tabla"}
+mapa3$ajuste
+```
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, lite="tabla"}
+mapa3$correlaciones
+```
+
+El Stress baja hasta 0,0038, y las correlaciones de las dos primeras dimensiones apenas cambian. La tercera dimensión recoge, sobre todo, la **FIABILIDAD** (correlación de 0,49) y, en menor medida, la ATENCION: un aspecto de la percepción que no quedaba del todo representado con solo dos ejes.
+
+Con tres dimensiones existen tres combinaciones posibles de pares de ejes: D1-D2, D1-D3 y D2-D3. Cada combinación genera un mapa perceptual que muestra una proyección distinta de las posiciones de las compañías. La pieza `mapas` los reúne en una sola composición:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, out.width="100%", fig.width=14, fig.height=10, lite="figura"}
+mapa3$mapas[[1]]
+```
+
+La lectura conjunta de los tres paneles revela información que el mapa bidimensional no podía mostrar por sí solo:
+
+-   **Panel D1–D2** (arriba a la izquierda): reproduce la estructura principal del análisis bidimensional. Los grupos de compañías (RENOVADA a la izquierda, ANTIGUA a la derecha, MADURA en el centro) se mantienen estables, lo que indica que las dos primeras dimensiones son robustas.
+
+-   **Panel D1–D3** (arriba a la derecha): la tercera dimensión reorganiza verticalmente a las compañías. El cambio más llamativo afecta a las compañías de flota antigua: *Endor Express*, *First Order Cargo*, *Starfighter Logistics* y *Dark Star Haulage*, que en el plano D1-D2 aparecían como un grupo relativamente compacto, se separan ahora en el eje D3. Esto indica que, aunque todas sean percibidas como «económicas», los clientes detectan diferencias entre ellas, relacionadas sobre todo con la fiabilidad.
+
+-   **Panel D2–D3** (abajo a la izquierda): al prescindir de la primera dimensión (la de mayor variabilidad), este plano aísla los matices más finos de la percepción. Aquí se aprecia cómo compañías que en los otros paneles se solapaban (por compartir valores similares en D1) se diferencian en las dimensiones secundarias.
+
+## ![](figuras/star.svg){.hicon} Cierre: el informe de *Data-Evidence*. {#c08-cierre-el-informe-de-data-evidence}
+
+El equipo de *Data-Evidence* presenta su mapa perceptual ante la Asamblea General de la ASTI —por boca de la propia **Li Ti-Oh**, directora ejecutiva de la consultora, que para la ocasión solo tuvo que cruzar el desierto de Tatooine— con tres conclusiones principales:
+
+1.  **El sector no es percibido como homogéneo: existen grupos de posicionamiento claramente diferenciados.** Lejos de la percepción generalizada de que «todas las navieras son iguales», el mapa revela al menos tres perfiles perceptuales distintos, organizados en torno a dos dimensiones latentes que los clientes utilizan intuitivamente para evaluar a las compañías. Las grandes corporaciones con flota renovada se agrupan en una zona del mapa claramente diferenciada de las compañías de flota antigua, y a su vez de las empresas con flota madura que ocupan posiciones intermedias.
+
+2.  **Las dimensiones latentes del mapa perceptual revelan los ejes de diferenciación que el sector debería comunicar.** La calidad del servicio frente al precio es el eje principal; la seguridad y fiabilidad frente a la puntualidad y la atención, el secundario. Las compañías que deseen reposicionarse deben trabajar sobre los atributos que definen estas dimensiones.
+
+3.  **El mapa identifica oportunidades de nicho.** Las zonas del espacio perceptual con baja densidad de competidores representan posiciones de mercado no cubiertas. Una compañía que logre ubicarse en una de estas zonas tendría una ventaja competitiva perceptual sobre las demás.
+
+Cuentan las crónicas que, tras la presentación, varias compañías del sector solicitaron a *Data-Evidence* estudios de reposicionamiento individuales. Que *Tasha Tachybaptus*, CEO de *Shuttlepod Movers*, tomó nota de la posición de su empresa en el mapa y comentó que «ahora entiendo por qué nos comparan con *Defiant Cargo*, y también por qué no nos comparan con *Arrakis*». Y que *Arg-us Korp*, que no aparecía en el estudio pero había leído con atención el informe, murmuró: *«Interesante... si yo estuviera en ese mapa, ¿dónde me colocaría?»*. Li Ti-Oh, que alcanzó a oírle, se limitó a responder: *«En la zona de baja densidad, señor Korp. Siempre en la zona de baja densidad.»*
+
+## ![](figuras/arrow-down-circle.svg){.hicon} Materiales para realizar las prácticas del capítulo. {#c08-materiales-para-realizar-las-practicas-del}
+
+En esta sección se muestran los links de acceso a los diferentes materiales (*scripts*, datos...) necesarios para llevar a cabo los contenidos prácticos del capítulo.
+
+**Datos (en formato Microsoft® Excel®):**
+
+-   percepcion_interestelar.xlsx ([obtener aquí](https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/percepcion_interestelar.xlsx)), o bien, desde R: `lite_datos("percepcion_interestelar")`.
+
+**Script:**
+
+-   emd_lite.R ([obtener aquí](https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/emd_lite.R))

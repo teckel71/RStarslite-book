@@ -1,0 +1,408 @@
+# Apéndice: Guía de uso de `MATlite`. {-}
+
+## Qué es `MATlite` y cómo funciona. {#c81-que-es-matlite .unnumbered}
+
+`MATlite` es el paquete de R de la asignatura. Reúne en un pequeño número de funciones, todas con el prefijo `lite_`, el código que en *R-Stars: La Guía* ocupa decenas de líneas por técnica. Las funciones reproducen los mismos cálculos y los mismos resultados que los *scripts* de La Guía, de modo que el usuario puede concentrarse en **interpretar** los resultados.
+
+`MATlite` no está en CRAN. Se instala desde GitHub, una sola vez:
+
+```{r, eval=FALSE, echo=TRUE}
+# install.packages("remotes")           # solo si no está instalado
+remotes::install_github("teckel71/MATlite")
+```
+
+Al instalarlo se instalan también, automáticamente, los paquetes de los que depende (entre ellos, `{MATrstars}`, el paquete de funciones auxiliares de La Guía). En cada sesión de trabajo basta con activarlo:
+
+```{r, eval=FALSE, echo=TRUE}
+library(MATlite)
+```
+
+El código fuente del paquete está en [https://github.com/teckel71/MATlite](https://github.com/teckel71/MATlite).
+
+### Tres ideas para usar el paquete. {#c81-tres-ideas .unnumbered}
+
+1.  **Se ejecuta la función una vez y se guarda el resultado en un objeto.** Por ejemplo: `componentes <- lite_acp(seleccion_so)`.
+
+2.  **Escribir el nombre del objeto lo muestra todo.** Las tablas aparecen juntas en el panel *Viewer* de RStudio y los gráficos, en el panel *Plots* (con las flechas de ese panel se pasa de uno a otro). En la consola aparece, además, un índice de las piezas que contiene el objeto.
+
+3.  **Cada resultado es una "pieza" del objeto, a la que se accede con `$`.** Por ejemplo, `componentes$cargas` muestra solo la tabla de cargas. Algunas piezas son, a su vez, listas (por ejemplo, la composición de cada grupo de un clúster); sus elementos se muestran con dobles corchetes: `grupos$composicion[[1]]`.
+
+Las variables se indican siempre **sin comillas** (`RENECO`, `c(RENECO, ACTIVO)`), y si una función admite el argumento `variables` y no se indica, utiliza todas las variables numéricas del *data frame*. Para consultar la ayuda de cualquier función, basta con anteponerle una interrogación: `?lite_logit`.
+
+### Mapa de funciones. {#c81-mapa-de-funciones .unnumbered}
+
+| Capítulo | Funciones |
+|:---|:---|
+| 1. Introducción | `lite_comprueba()`, `lite_datos()` |
+| 2. Datos | `lite_importa()`, `lite_resumen()`, `select()`, `filter()`, `arrange()`, `mutate()`, `%>%` |
+| 3. Análisis previo | `lite_na()`, `lite_outliers()`, `lite_describe()`, `lite_correlaciones()` |
+| 4. Componentes principales | `lite_acp()`, `lite_acp_ranking()` |
+| 5. Clúster jerárquico | `lite_cluster_ward()` |
+| 6. Elección discreta | `lite_factor()`, `lite_logit_descriptivo()`, `lite_particion()`, `lite_logit()`, `lite_logit_escenarios()`, `lite_logit_seleccion()` |
+| 7. Tablas de contingencia | `lite_recodifica()`, `lite_contingencia()` |
+| 8. Escalado multidimensional | `lite_emd_dimensiones()`, `lite_emd()` |
+| Auxiliares | `lite_tabla()`, `lite_patchwork()` |
+
+## Funciones generales. {#c81-funciones-generales .unnumbered}
+
+### `lite_comprueba()`. {#c81-lite-comprueba .unnumbered}
+
+**Para qué sirve.** Comprueba que la instalación está completa: versión de R, paquetes necesarios y ficheros de datos presentes en la carpeta de trabajo. Para cada problema, indica la instrucción que lo resuelve. Conviene ejecutarla la primera vez.
+
+```{r, eval=FALSE, echo=TRUE}
+lite_comprueba()
+```
+
+**Argumentos.** No tiene.
+
+**Devuelve.** Una tabla con el resultado de cada comprobación (en la consola).
+
+### `lite_datos()`. {#c81-lite-datos .unnumbered}
+
+**Para qué sirve.** Descarga los ficheros de datos del libro a la carpeta de trabajo.
+
+```{r, eval=FALSE, echo=TRUE}
+lite_datos()                              # descarga todos
+lite_datos("interestelar_100")            # descarga uno
+lite_datos(c("interestelar_25", "interestelar_300"))
+```
+
+**Argumentos.**
+
+-   `nombre`: nombre de uno o varios ficheros, con o sin `.xlsx`. Si se omite, se descargan todos.
+-   `destino`: carpeta de destino. Por defecto, la carpeta de trabajo.
+
+### `lite_importa()`. {#c81-lite-importa .unnumbered}
+
+**Para qué sirve.** Importa una hoja de un fichero Excel y, si se desea, convierte la primera columna en nombres de fila (los nombres de las empresas).
+
+```{r, eval=FALSE, echo=TRUE}
+interestelar_100 <- lite_importa("interestelar_100.xlsx")
+```
+
+**Argumentos.**
+
+-   `archivo`: nombre (o ruta) del fichero Excel.
+-   `hoja`: nombre o número de la hoja. Por defecto, `"Datos"`.
+-   `na`: texto que debe leerse como valor ausente. Por defecto, `"n.d."`.
+-   `nombres_fila`: si es `TRUE` (por defecto), la primera columna pasa a ser el nombre de las filas.
+
+**Devuelve.** Un *data frame*.
+
+### `lite_resumen()`. {#c81-lite-resumen .unnumbered}
+
+**Para qué sirve.** Presenta un resumen visual de todas las variables de un *data frame*: tipo, gráfico de distribución, porcentaje de valores ausentes y estadísticos básicos.
+
+```{r, eval=FALSE, echo=TRUE}
+lite_resumen(interestelar_100)
+```
+
+**Argumentos.** `datos` (*data frame*) y `titulo` (opcional; por defecto, el nombre del *data frame*).
+
+### Verbos de `{dplyr}`. {#c81-verbos-dplyr .unnumbered}
+
+Al activar `MATlite` quedan disponibles, sin cargar otros paquetes, el operador `%>%` y los verbos de `{dplyr}` utilizados en el libro: `select()` (seleccionar variables), `filter()` (seleccionar casos), `arrange()` y `desc()` (ordenar), `mutate()` (crear o transformar variables), `rename()`, `slice()`, `group_by()` y `summarise()`. Su uso se explica en el capítulo 2.
+
+## Análisis previo de datos. {#c81-analisis-previo .unnumbered}
+
+### `lite_na()`. {#c81-lite-na .unnumbered}
+
+**Para qué sirve.** Localiza los valores ausentes (*missing values*): muestra un mapa de ausencias y una tabla con los casos afectados. Opcionalmente, elimina esos casos.
+
+```{r, eval=FALSE, echo=TRUE}
+muestra <- lite_na(muestra, RENECO, accion = "eliminar")
+```
+
+**Argumentos.**
+
+-   `datos`: *data frame*.
+-   `variables`: variables a analizar, sin comillas. Si se omiten, todas.
+-   `accion`: `"documentar"` (por defecto) solo muestra el diagnóstico; `"eliminar"` además quita los casos con algún valor ausente.
+-   `titulo`, `subtitulo`: títulos del gráfico.
+
+**Devuelve.** El *data frame* (sin cambios, o sin los casos con valores ausentes). Si no hay valores ausentes, solo muestra un mensaje.
+
+### `lite_outliers()`. {#c81-lite-outliers .unnumbered}
+
+**Para qué sirve.** Localiza los valores extremos (*outliers*). Con una variable aplica la regla de 1,5 veces el recorrido intercuartílico sobre un *box-plot*; con varias, la aplica sobre la distancia de Mahalanobis (*outliers* multivariantes). Opcionalmente, los elimina.
+
+```{r, eval=FALSE, echo=TRUE}
+muestra_so   <- lite_outliers(muestra, RENECO, accion = "eliminar")
+seleccion_so <- lite_outliers(seleccion, accion = "eliminar")   # Mahalanobis
+```
+
+**Argumentos.** Los mismos que `lite_na()`, más `escala`: `"auto"` (por defecto), `"lineal"` o `"pseudo_log"`, para el eje del *box-plot*.
+
+**Devuelve.** El *data frame* (sin cambios, o sin los *outliers*).
+
+### `lite_describe()`. {#c81-lite-describe .unnumbered}
+
+**Para qué sirve.** Describe una variable métrica: distribución de frecuencias, estadísticos, contraste de normalidad de Shapiro-Wilk y cuatro gráficos.
+
+```{r, eval=FALSE, echo=TRUE}
+descriptivo <- lite_describe(muestra_so, RENECO,
+                             etiqueta = "Rentabilidad Económica (%)")
+```
+
+**Argumentos.**
+
+-   `datos`, `variable`: *data frame* y variable a describir.
+-   `intervalos`: número de intervalos de la distribución de frecuencias y del histograma: `"sturges"` (por defecto), `"fd"` (Freedman-Diaconis) o un número.
+-   `etiqueta`: texto para los ejes. Por defecto, el nombre de la variable.
+-   `titulo`, `subtitulo`: títulos del resumen gráfico.
+
+**Piezas.** `$frecuencias`, `$estadisticos`, `$normalidad` (tablas); `$histograma`, `$densidad`, `$boxplot`, `$qq` y `$resumen` (los cuatro gráficos juntos).
+
+### `lite_correlaciones()`. {#c81-lite-correlaciones .unnumbered}
+
+**Para qué sirve.** Construye la matriz gráfica de correlaciones de Pearson, con la significación de cada coeficiente. Opcionalmente, la compara con la de otro *data frame* (por ejemplo, el que aún conserva los *outliers*).
+
+```{r, eval=FALSE, echo=TRUE}
+correlaciones <- lite_correlaciones(muestra2_so, comparar_con = muestra2)
+```
+
+**Argumentos.**
+
+-   `datos`, `variables`.
+-   `comparar_con`: *data frame* opcional para la comparación.
+-   `titulo`, `titulo_comparacion`: títulos de las dos matrices.
+
+**Piezas.** `$matriz` (tabla de coeficientes), `$grafico` y, si hay comparación, `$grafico_comparacion` y `$comparacion` (las dos matrices lado a lado).
+
+## Componentes principales. {#c81-componentes-principales .unnumbered}
+
+### `lite_acp()`. {#c81-lite-acp .unnumbered}
+
+**Para qué sirve.** Realiza el análisis de componentes principales con las variables tipificadas: adecuación muestral (KMO y MSA, con la escala de Kaiser), varianza explicada, cargas, autovalores y número de componentes a retener (criterio del autovalor mayor que 1).
+
+```{r, eval=FALSE, echo=TRUE}
+componentes <- lite_acp(seleccion_so)
+```
+
+**Argumentos.** `datos`, `variables` y `subtitulo` (de los gráficos).
+
+**Piezas.** `$kmo`, `$varianza`, `$cargas`, `$autovalores`, `$retencion` (tablas); `$grafico_autovalores` y `$grafico_acumulada` (gráficos); `$n_retener` (número de componentes con autovalor mayor o igual que 1); `$modelo` (el objeto de R con el análisis completo).
+
+### `lite_acp_ranking()`. {#c81-lite-acp-ranking .unnumbered}
+
+**Para qué sirve.** Ordena los casos según su puntuación en una componente y presenta los primeros en una tabla y un gráfico.
+
+```{r, eval=FALSE, echo=TRUE}
+ranking <- lite_acp_ranking(componentes, componente = 1, n = 10)
+```
+
+**Argumentos.**
+
+-   `acp`: resultado de `lite_acp()`.
+-   `datos`: *data frame* opcional con los casos que se quieren puntuar (por ejemplo, la selección que aún conserva los *outliers*). Si se omite, se usan los casos con que se calcularon las componentes.
+-   `componente`: número de la componente. Por defecto, 1.
+-   `n`: número de casos del ranking. Por defecto, 10.
+-   `etiquetas`, `caption`: nombres para las variables y título de la tabla.
+
+**Piezas.** `$ranking` (tabla), `$grafico` y `$puntuaciones` (todas las puntuaciones).
+
+## Análisis clúster jerárquico. {#c81-analisis-cluster .unnumbered}
+
+### `lite_cluster_ward()`. {#c81-lite-cluster-ward .unnumbered}
+
+**Para qué sirve.** Realiza el análisis clúster jerárquico con el método de Ward sobre las variables tipificadas. Se usa en dos fases:
+
+1.  **Exploración** (sin `k`): matriz de distancias, dendrograma y número de grupos sugerido por el método de la silueta.
+2.  **Resultados** (con `k`, el número de grupos decidido): grupos marcados en el dendrograma, centroides, composición de cada grupo y gráficos.
+
+```{r, eval=FALSE, echo=TRUE}
+exploracion <- lite_cluster_ward(seleccion)          # fase 1
+grupos      <- lite_cluster_ward(seleccion, k = 5)   # fase 2
+```
+
+**Argumentos.**
+
+-   `datos`, `variables`.
+-   `k`: número de grupos. Si se omite, solo se hace la exploración.
+-   `k_max`: número máximo de grupos que se prueba con la silueta. Por defecto, 15.
+-   `titulo`, `subtitulo`: títulos de los dendrogramas.
+-   `subtitulo_graficos`: subtítulo de los gráficos de medias y dispersión.
+
+**Piezas.** En la exploración: `$distancias`, `$dendrograma`, `$silueta` y `$k_sugerido`. En los resultados: `$dendrograma`, `$centroides`, `$graficos_centroides`, `$composicion` (lista, un elemento por grupo), `$dispersion` y `$datos` (el *data frame* con una nueva columna, `grupo`). Los grupos se numeran de izquierda a derecha según el dendrograma.
+
+## Modelos de elección discreta. {#c81-eleccion-discreta .unnumbered}
+
+### `lite_factor()`. {#c81-lite-factor .unnumbered}
+
+**Para qué sirve.** Convierte una variable en factor y fija su categoría de referencia. Muestra en la consola la codificación de las variables *dummy*.
+
+```{r, eval=FALSE, echo=TRUE}
+LICENCIAS <- lite_factor(LICENCIAS, EFLO, niveles = c("ANTIGUA", "MADURA", "RENOVADA"))
+```
+
+**Argumentos.**
+
+-   `datos`, `variable`.
+-   `niveles`: orden de las categorías (opcional). La primera es la referencia.
+-   `referencia`: categoría de referencia (opcional; alternativa a `niveles`).
+
+**Devuelve.** El *data frame* con la variable convertida.
+
+### `lite_logit_descriptivo()`. {#c81-lite-logit-descriptivo .unnumbered}
+
+**Para qué sirve.** Compara los dos grupos que define la variable dependiente antes de estimar el modelo: tablas cruzadas y gráficos de barras para las variables categóricas, y medias por grupo para las métricas.
+
+```{r, eval=FALSE, echo=TRUE}
+descriptivo <- lite_logit_descriptivo(LICENCIAS, LICENCIA,
+                                      etiquetas = c("0" = "Denegada", "1" = "Concedida"))
+```
+
+**Argumentos.**
+
+-   `datos`, `dependiente`.
+-   `variables`: explicativas a describir. Si se omiten, todas (salvo las categóricas con más de 10 categorías).
+-   `etiquetas`: nombres para las dos categorías de la dependiente.
+
+**Piezas.** `$dependiente`, `$cruzadas` (lista, una tabla por variable categórica), `$graficos_categoricas`, `$medias` y `$graficos_metricas` (lista de composiciones).
+
+### `lite_particion()`. {#c81-lite-particion .unnumbered}
+
+**Para qué sirve.** Divide los datos en una muestra de estimación y una de test. Por defecto, la partición es secuencial (los `n_estimacion` primeros casos para estimar); con `aleatoria = TRUE`, aleatoria.
+
+```{r, eval=FALSE, echo=TRUE}
+muestras <- lite_particion(LICENCIAS, n_estimacion = 80, dependiente = LICENCIA)
+```
+
+**Argumentos.** `datos`, `n_estimacion`, `dependiente` (opcional, para mostrar su distribución en cada muestra), `aleatoria` (por defecto, `FALSE`) y `semilla` (por defecto, 123).
+
+**Piezas.** `$resumen`, `$estimacion` y `$test` (los dos *data frames*).
+
+### `lite_logit()`. {#c81-lite-logit .unnumbered}
+
+**Para qué sirve.** Estima un modelo logit binomial y presenta todos sus resultados. Muestra en la consola la especificación estimada.
+
+```{r, eval=FALSE, echo=TRUE}
+completo <- lite_logit(muestras$estimacion, LICENCIA,
+                       explicativas = c(SOLVENCIA, IPUNT, TINCID, EFLO),
+                       test = muestras$test)
+```
+
+**Argumentos.**
+
+-   `datos`: *data frame* de estimación.
+-   `dependiente`: variable dependiente con dos categorías. Se modeliza la probabilidad de la segunda (por ejemplo, el 1 en una variable 0/1).
+-   `explicativas`: variables explicativas, por ejemplo `c(SOLVENCIA, IPUNT, EFLO)`.
+-   `test`: *data frame* de test (opcional).
+-   `umbral`: probabilidad a partir de la cual un caso se clasifica como "éxito". Por defecto, 0,5.
+
+**Piezas.** `$coeficientes` (con el contraste de Wald individual), `$wald_factores` (contraste de Wald conjunto de los factores con más de dos categorías), `$odds` (*odd ratios*), `$ajuste` (pseudo R² de Nagelkerke, AIC, devianzas), `$devianza` (análisis de la devianza), `$aic`, `$confusion` y `$confusion_test` (matrices de confusión), `$modelo` (el objeto de R con el modelo).
+
+### `lite_logit_escenarios()`. {#c81-lite-logit-escenarios .unnumbered}
+
+**Para qué sirve.** Calcula la probabilidad estimada, su intervalo de confianza y la clasificación para unos casos hipotéticos (escenarios) definidos en una hoja de Excel. La hoja debe tener una columna identificativa y una columna por cada variable explicativa del modelo, con los mismos nombres.
+
+```{r, eval=FALSE, echo=TRUE}
+escenarios <- lite_logit_escenarios(completo, "escenarios_logit_rstars.xlsx")
+```
+
+**Argumentos.**
+
+-   `logit`: resultado de `lite_logit()` o de `lite_logit_seleccion()`.
+-   `archivo`, `hoja` (por defecto, `"Escenarios"`) e `id` (columna identificativa; por defecto, `"ESCENARIO"`).
+-   `umbral`: por defecto, el del modelo.
+-   `nivel`: nivel de confianza del intervalo. Por defecto, 0,95.
+
+**Piezas.** `$tabla` y `$datos`.
+
+### `lite_logit_seleccion()`. {#c81-lite-logit-seleccion .unnumbered}
+
+**Para qué sirve.** Busca una especificación más sencilla del modelo con el algoritmo *step* (eliminación sucesiva de variables según el AIC) y la compara con el modelo de partida.
+
+```{r, eval=FALSE, echo=TRUE}
+reducido <- lite_logit_seleccion(completo)
+```
+
+**Argumentos.** `logit` (resultado de `lite_logit()`) y `mostrar_pasos` (si es `TRUE`, por defecto, muestra cada paso en la consola).
+
+**Piezas.** Las mismas que `lite_logit()`, para el modelo reducido, más `$comparacion` (modelo de partida frente a reducido).
+
+## Tablas de contingencia. {#c81-tablas-de-contingencia .unnumbered}
+
+### `lite_recodifica()`. {#c81-lite-recodifica .unnumbered}
+
+**Para qué sirve.** Cambia el nombre de algunas categorías de una variable. Las categorías no mencionadas se mantienen.
+
+```{r, eval=FALSE, echo=TRUE}
+seleccion <- lite_recodifica(seleccion, GALAXIA,
+                             c("Galaxia de Andrómeda" = "Andrómeda"))
+```
+
+**Argumentos.** `datos`, `variable` y `cambios`: vector de la forma `c("nombre actual" = "nombre nuevo", ...)`.
+
+**Devuelve.** El *data frame* con la variable recodificada.
+
+### `lite_contingencia()`. {#c81-lite-contingencia .unnumbered}
+
+**Para qué sirve.** Analiza la asociación entre dos atributos: tabla de contingencia, gráficos de mosaico y de barras, contraste ji-cuadrado de independencia, residuos estandarizados ajustados, gráfico de asociación y medidas de asociación.
+
+```{r, eval=FALSE, echo=TRUE}
+galaxia_fjur <- lite_contingencia(seleccion, GALAXIA, FJUR)
+```
+
+**Argumentos.**
+
+-   `datos`, `fila`, `columna`: *data frame* y atributos de filas y columnas.
+-   `alfa`: nivel de significación. Por defecto, 0,05.
+-   `titulo`, `subtitulo`: títulos de los gráficos.
+
+**Piezas.** `$tabla`, `$mosaico`, `$barras`, `$chi2`, `$esperadas` (frecuencias esperadas bajo independencia), `$residuos`, `$asociacion` y `$medidas` (coeficiente de contingencia *C*, su máximo y su valor corregido, *V* de Cramér y, en tablas 2 × 2, Phi).
+
+## Escalado multidimensional. {#c81-escalado-multidimensional .unnumbered}
+
+### `lite_emd_dimensiones()`. {#c81-lite-emd-dimensiones .unnumbered}
+
+**Para qué sirve.** Fase exploratoria del escalado multidimensional: perfiles de los casos, matriz de distancias euclídeas y Stress de las soluciones de 1 a `max_dim` dimensiones, con su calificación según la escala de Kruskal.
+
+```{r, eval=FALSE, echo=TRUE}
+exploracion <- lite_emd_dimensiones(PERCEPCION)
+```
+
+**Argumentos.**
+
+-   `datos`, `variables`: *data frame* con los atributos de cada caso.
+-   `max_dim`: número máximo de dimensiones. Por defecto, 6.
+-   `tipo`: `"ordinal"` (EMD no métrico, por defecto) o `"interval"`/`"ratio"` (métrico).
+
+**Piezas.** `$tabla_perfiles`, `$perfiles`, `$distancias`, `$stress` y `$codo`.
+
+### `lite_emd()`. {#c81-lite-emd .unnumbered}
+
+**Para qué sirve.** Obtiene la solución del escalado multidimensional en el número de dimensiones elegido y construye el mapa perceptual.
+
+```{r, eval=FALSE, echo=TRUE}
+mapa <- lite_emd(PERCEPCION, ndim = 2)
+```
+
+**Argumentos.** `datos`, `variables`, `ndim` (por defecto, 2), `tipo` (por defecto, `"ordinal"`), y `titulo` y `subtitulo` del mapa.
+
+**Piezas.** `$ajuste` (Stress e iteraciones), `$coordenadas`, `$shepard`, `$correlaciones` (atributos frente a dimensiones) y, con dos dimensiones, `$mapa` y `$biplot` (mapa con los vectores de los atributos); con tres o más, `$mapas` (los mapas de cada par de dimensiones). `$modelo` guarda el objeto de R con la solución.
+
+## Funciones auxiliares. {#c81-funciones-auxiliares .unnumbered}
+
+### `lite_tabla()`. {#c81-lite-tabla .unnumbered}
+
+**Para qué sirve.** Presenta un *data frame* o una matriz como tabla con el estilo del libro.
+
+```{r, eval=FALSE, echo=TRUE}
+lite_tabla(head(interestelar_100), caption = "Primeras empresas", digits = 2)
+```
+
+**Argumentos.** `x` (*data frame* o matriz) y, opcionalmente, `caption` (título), `col.names` (nombres de las columnas) y `digits` (decimales).
+
+### `lite_patchwork()`. {#c81-lite-patchwork .unnumbered}
+
+**Para qué sirve.** Agrupa una lista de gráficos en composiciones de 2 × 2 (cuatro gráficos por composición). Es la función que usan internamente otras funciones del paquete para presentar baterías de gráficos.
+
+```{r, eval=FALSE, echo=TRUE}
+composiciones <- lite_patchwork(lista_de_graficos)
+composiciones
+```
+
+**Argumentos.** `graficos`: lista de gráficos `ggplot`.
+
+**Devuelve.** Una lista de composiciones, que se muestran todas al escribir el nombre del objeto.
