@@ -1,6 +1,6 @@
 ---
 title: "R-Stars Lite"
-subtitle: "Análisis de datos con R, paso a paso y sin vértigo"
+subtitle: "Análisis de datos con R y sin vértigo"
 author: 'Miguel-Ángel Tarancón Morán'
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
