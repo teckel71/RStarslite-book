@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>8 Escalado multidimensional. | R-Stars Lite</title>
 <meta name="author" content="Miguel-Ángel Tarancón Morán">
-<meta name="description" content="Capítulo en preparación.">
+<meta name="description" content="Figura 8.1. ¿Cómo nos ven? El mapa de las percepciones.  8.1 Introducción: los mapas perceptuales. En capítulos anteriores hemos utilizado diversas técnicas para describir, clasificar o explicar...">
 <meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="8 Escalado multidimensional. | R-Stars Lite">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://teckel71.github.io/RStarslite-book/escalado-multidimensional..html">
 <meta property="og:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
-<meta property="og:description" content="Capítulo en preparación.">
+<meta property="og:description" content="Figura 8.1. ¿Cómo nos ven? El mapa de las percepciones.  8.1 Introducción: los mapas perceptuales. En capítulos anteriores hemos utilizado diversas técnicas para describir, clasificar o explicar...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8 Escalado multidimensional. | R-Stars Lite">
-<meta name="twitter:description" content="Capítulo en preparación.">
+<meta name="twitter:description" content="Figura 8.1. ¿Cómo nos ven? El mapa de las percepciones.  8.1 Introducción: los mapas perceptuales. En capítulos anteriores hemos utilizado diversas técnicas para describir, clasificar o explicar...">
 <meta name="twitter:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,8 +61,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Análisis de datos con R, paso a paso y sin vértigo">R-Stars Lite</a>:
-        <small class="text-muted">Análisis de datos con R, paso a paso y sin vértigo</small>
+        <a href="index.html" title="Análisis de datos con R y sin vértigo">R-Stars Lite</a>:
+        <small class="text-muted">Análisis de datos con R y sin vértigo</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -85,10 +85,10 @@
 <li><a class="" href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></li>
 <li><a class="active" href="escalado-multidimensional..html"><span class="header-section-number">8</span> Escalado multidimensional.</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+<li><a class="" href="ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite..html">Apéndice: Guía de uso de MATlite.</a></li>
 <li><a class="" href="licencia.html">Licencia</a></li>
 </ul>
-
-        <div class="book-extra">
+<div class="book-extra">
           
         </div>
       </nav>
@@ -97,20 +97,1768 @@
 <h1>
 <span class="header-section-number">8</span> Escalado multidimensional.<a class="anchor" aria-label="anchor" href="#escalado-multidimensional."><i class="fas fa-link"></i></a>
 </h1>
-<p><em>Capítulo en preparación.</em></p>
+<div class="inline-figure"><img src="figuras/mirandano_indeciso.jpg" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 8.1.</strong> <span class="smallcaps">¿Cómo nos ven? El mapa de las percepciones.</span></p>
+</div>
+<div id="c08-introduccion-los-mapas-perceptuales" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> <img src="figuras/book.svg" class="hicon"> Introducción: los mapas perceptuales.<a class="anchor" aria-label="anchor" href="#c08-introduccion-los-mapas-perceptuales"><i class="fas fa-link"></i></a>
+</h2>
+<p>En capítulos anteriores hemos utilizado diversas técnicas para describir, clasificar o explicar el comportamiento de un conjunto de variables. Todas ellas comparten un rasgo: parten de datos objetivos —cifras de ventas, ratios financieros, índices de satisfacción— y aplican procedimientos estadísticos para extraer conclusiones. Sin embargo, en el ámbito de la estrategia empresarial y el marketing, existe una pregunta que los datos objetivos, por sí solos, no responden: <strong>¿cómo perciben los clientes nuestro servicio en relación con los de la competencia?</strong></p>
+<p>Esta pregunta es esencialmente <strong>subjetiva</strong>, y para abordarla necesitamos una herramienta capaz de traducir las percepciones humanas en una representación visual interpretable. Esa herramienta es el <strong>mapa perceptual</strong>.</p>
+<p>Un mapa perceptual es una <strong>representación gráfica de las percepciones</strong> que tienen los clientes (o cualquier grupo de evaluadores) sobre las <strong>relaciones entre un conjunto de casos</strong> —productos, servicios, marcas, empresas— en un espacio de pocas dimensiones (habitualmente dos). Su objetivo es revelar las <strong>estructuras ocultas</strong> que subyacen en los datos de percepción: qué casos se consideran similares, cuáles se perciben como diferentes, y qué ejes o dimensiones latentes organizan esas percepciones en la mente de los encuestados.</p>
+<p>Los mapas perceptuales permiten responder a interrogantes fundamentales para la toma de decisiones empresariales:</p>
+<ul>
+<li><p>¿Quiénes son nuestros <strong>competidores</strong> más directos, desde el punto de vista del cliente?</p></li>
+<li><p>¿Cuál es nuestra <strong>posición en el mercado</strong> respecto a la competencia?</p></li>
+<li><p>¿Cómo podemos <strong>reposicionar</strong> nuestra marca o servicio?</p></li>
+<li><p>¿A qué <strong>segmento</strong> debemos dirigir nuestros esfuerzos?</p></li>
+<li><p>¿Cuáles son nuestras <strong>fortalezas y debilidades</strong> percibidas?</p></li>
+<li><p>¿Existe algún <strong>nicho</strong> de mercado no cubierto?</p></li>
+</ul>
+<p>Para construir estos mapas a partir de datos de percepción, se han desarrollado diversas técnicas estadísticas, entre las cuales destaca la familia de métodos conocida como <strong>Escalado Multidimensional</strong> (EMD).</p>
+</div>
+<div id="c08-escalado-multidimensional-concepto-y-tipos" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> <img src="figuras/book.svg" class="hicon"> Escalado Multidimensional: concepto y tipos.<a class="anchor" aria-label="anchor" href="#c08-escalado-multidimensional-concepto-y-tipos"><i class="fas fa-link"></i></a>
+</h2>
+<p>El <strong>Escalado Multidimensional</strong> (<em>Multidimensional Scaling</em>, MDS) es una técnica que permite descubrir estructuras o patrones dentro de una <strong>matriz de proximidades</strong> entre casos. Su objetivo es doble:</p>
+<ol style="list-style-type: decimal">
+<li><p>Determinar la <strong>dimensión del modelo</strong> (el número de ejes) que proporcione un ajuste satisfactorio.</p></li>
+<li><p>Obtener las <strong>coordenadas de los casos</strong> en esas dimensiones, de manera que las distancias entre los puntos en el mapa reflejen fielmente las proximidades percibidas: cuanto más cercanos sean dos puntos, más similares serán las opiniones de los encuestados sobre esos dos casos.</p></li>
+</ol>
+<p>Una ventaja importante del EMD frente a otras técnicas multivariantes es que los <strong>resultados no dependen de los juicios del investigador</strong> sobre qué variables o características incluir: las dimensiones que emergen del análisis proceden directamente de los <strong>juicios globales de los encuestados sobre la similitud entre los casos</strong>.</p>
+<p>Dicho esto, en la práctica aplicada es frecuente que los datos de partida no sean juicios directos de similitud, sino <strong>valoraciones de los casos en un conjunto de atributos</strong> (por ejemplo, mediante escalas Likert). En estos casos, la matriz de proximidades se <strong>deriva</strong> de los datos de valoración, como veremos más adelante.</p>
+<div id="c08-proximidades-y-distancias" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> Proximidades y distancias.<a class="anchor" aria-label="anchor" href="#c08-proximidades-y-distancias"><i class="fas fa-link"></i></a>
+</h3>
+<p>El concepto central del EMD es la <strong>proximidad</strong> entre dos casos: un valor que indica cuán similares o diferentes los perciben los encuestados. Cuando se habla de proximidad en este contexto, nos referimos a una «distancia perceptual» entre los casos.</p>
+<p>El procedimiento más directo para obtener datos de proximidad es <strong>preguntar a las personas</strong> acerca del parecido que perciben entre cada par de casos. Sin embargo, este enfoque resulta costoso cuando el número de casos es elevado (con <span class="math inline">\(n\)</span> casos hay <span class="math inline">\(n(n-1)/2\)</span> pares distintos), y en la práctica se recurre con frecuencia a un procedimiento indirecto: pedir a los encuestados que <strong>valoren cada caso en una serie de atributos</strong> mediante una escala tipo Likert, y calcular después la distancia entre los perfiles de valoración.</p>
+<p>Formalmente, la <strong>matriz de proximidades</strong> <span class="math inline">\(\Delta\)</span> recoge las distancias <span class="math inline">\(\delta_{ij}\)</span> entre todos los pares de casos <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span>. Esta matriz es simétrica (<span class="math inline">\(\delta_{ij} = \delta_{ji}\)</span>) y tiene ceros en la diagonal (<span class="math inline">\(\delta_{ii} = 0\)</span>). El objetivo del EMD es encontrar, a partir de <span class="math inline">\(\Delta\)</span>, una <strong>matriz de coordenadas</strong> <span class="math inline">\(X\)</span>, de <span class="math inline">\(n\)</span> filas (casos) y <span class="math inline">\(p\)</span> columnas (dimensiones), que represente cada caso como un punto en un espacio de <span class="math inline">\(p\)</span> dimensiones, de modo que las distancias entre los puntos sean lo más coherentes posible con las proximidades originales.</p>
+</div>
+<div id="c08-emd-metrico-y-no-metrico" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> EMD métrico y no métrico.<a class="anchor" aria-label="anchor" href="#c08-emd-metrico-y-no-metrico"><i class="fas fa-link"></i></a>
+</h3>
+<p>La diferencia entre ambos tipos radica en el <strong>nivel de exigencia</strong> con que se pide que las distancias en el mapa reproduzcan las proximidades originales:</p>
+<ul>
+<li><p><strong>EMD métrico (clásico):</strong> exige que las distancias en el mapa sean <strong>proporcionales</strong> a las proximidades originales. Es decir, si la distancia entre A y B es el doble que la distancia entre C y D en los datos, también debe serlo en el mapa.</p></li>
+<li><p><strong>EMD no métrico (ordinal):</strong> exige únicamente que las distancias en el mapa preserven el <strong>orden</strong> de las proximidades originales. Si A y B están más cerca que C y D en los datos, también deben estarlo en el mapa, pero no importa cuánto más cerca.</p></li>
+</ul>
+<p>El EMD no métrico es el más utilizado en Ciencias Sociales y en investigación de mercados, porque los datos de encuesta (escalas Likert, valoraciones ordinales) no tienen un significado métrico estricto: la diferencia entre un 4 y un 5 en una escala de satisfacción no es necesariamente la misma que la diferencia entre un 6 y un 7. En este capítulo nos centraremos en el <strong>EMD no métrico</strong>.</p>
+</div>
+</div>
+<div id="c08-el-algoritmo-smacof-y-el-stress" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> <img src="figuras/book.svg" class="hicon"> El algoritmo SMACOF y el Stress.<a class="anchor" aria-label="anchor" href="#c08-el-algoritmo-smacof-y-el-stress"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c08-smacof" class="section level3" number="8.3.1">
+<h3>
+<span class="header-section-number">8.3.1</span> SMACOF.<a class="anchor" aria-label="anchor" href="#c08-smacof"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para pasar de la matriz de proximidades a la matriz de coordenadas, se han desarrollado diversos algoritmos. Uno de los más utilizados en EMD no métrico es <strong>SMACOF</strong> (<em>Scaling by Majorizing a Complicated Function</em>), implementado en el paquete <code>{smacof}</code> de R, que es el que utilizan internamente las funciones de <a href="https://github.com/teckel71/MATlite">MATlite</a>.</p>
+<p>SMACOF busca iterativamente las coordenadas de los casos que minimizan una medida de desajuste denominada <strong>Stress</strong>. El proceso es conceptualmente sencillo: parte de una configuración inicial y la va refinando en sucesivas iteraciones hasta que el Stress deja de mejorar apreciablemente.</p>
+</div>
+<div id="c08-el-stress-como-medida-de-bondad-del-ajuste" class="section level3" number="8.3.2">
+<h3>
+<span class="header-section-number">8.3.2</span> El Stress como medida de bondad del ajuste.<a class="anchor" aria-label="anchor" href="#c08-el-stress-como-medida-de-bondad-del-ajuste"><i class="fas fa-link"></i></a>
+</h3>
+<p>El <strong>Stress</strong> cuantifica la discrepancia entre las proximidades originales y las distancias obtenidas en la configuración. Su valor oscila entre 0 (ajuste perfecto) y valores positivos que indican grados crecientes de desajuste. Kruskal (1964) propuso la siguiente escala orientativa para interpretarlo:</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="center">Stress</th>
+<th align="left">Calidad de la representación</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(&gt; 0{,}20\)</span></td>
+<td align="left">Pobre</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(0{,}10 - 0{,}20\)</span></td>
+<td align="left">Razonable</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(0{,}05 - 0{,}10\)</span></td>
+<td align="left">Buena</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(0{,}025 - 0{,}05\)</span></td>
+<td align="left">Excelente</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(0 - 0{,}025\)</span></td>
+<td align="left">Perfecta</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.1</strong></p>
+</div>
+<p>La elección del número de dimensiones <span class="math inline">\(p\)</span> se basa en un equilibrio entre parsimonia (pocas dimensiones, fáciles de interpretar) y calidad del ajuste (Stress bajo). La herramienta visual para esta decisión es el <strong>gráfico de codo</strong> del Stress: se representan los valores obtenidos para <span class="math inline">\(p = 1, 2, 3, \ldots\)</span> y se busca el punto a partir del cual añadir una dimensión más produce una mejora reducida.</p>
+</div>
+<div id="c08-el-diagrama-de-shepard" class="section level3" number="8.3.3">
+<h3>
+<span class="header-section-number">8.3.3</span> El diagrama de Shepard.<a class="anchor" aria-label="anchor" href="#c08-el-diagrama-de-shepard"><i class="fas fa-link"></i></a>
+</h3>
+<p>Además del Stress, disponemos de una herramienta visual para evaluar la calidad del ajuste: el <strong>diagrama de Shepard</strong>. Este gráfico enfrenta en el eje horizontal las proximidades originales y en el eje vertical las distancias obtenidas en la configuración. Si el ajuste es bueno, los puntos se alinearán sobre una función <strong>monótona creciente</strong> (en el caso no métrico). Los puntos muy alejados de la tendencia general señalan pares de casos cuya distancia en el mapa no se corresponde con su proximidad original.</p>
+</div>
+</div>
+<div id="c08-practica-el-mapa-perceptual-del-sector" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> <img src="figuras/pie-chart.svg"> Práctica: el mapa perceptual del sector interestelar.<a class="anchor" aria-label="anchor" href="#c08-practica-el-mapa-perceptual-del-sector"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c08-la-imagen-del-sector" class="section level3" number="8.4.1">
+<h3>
+<span class="header-section-number">8.4.1</span> <img src="figuras/star.svg" class="hicon"> La imagen del sector.<a class="anchor" aria-label="anchor" href="#c08-la-imagen-del-sector"><i class="fas fa-link"></i></a>
+</h3>
+<p>La <strong>Asociación Sectorial de Transporte Interestelar (ASTI)</strong> ha detectado una tendencia preocupante entre las pequeñas y medianas empresas que contratan servicios de transporte de mercancías: muchos clientes consideran que «todas las compañías navieras son iguales» y eligen transportista basándose casi exclusivamente en el precio. Esto está erosionando los márgenes de todo el sector y dificultando que las compañías con mejor servicio puedan diferenciarse.</p>
+<p>Para combatir esta dinámica, la ASTI ha encargado a la consultora <em>Data-Evidence</em> un estudio que responda a dos preguntas clave: <strong>¿cómo perciben realmente los clientes a las distintas compañías del sector?</strong> y <strong>¿existen dimensiones latentes de diferenciación que el sector no está comunicando adecuadamente?</strong></p>
+<p>El equipo de <em>Data-Evidence</em> diseña un cuestionario con seis atributos clave del servicio de transporte de mercancías —fiabilidad, puntualidad, seguridad de la carga, relación calidad-precio, atención al cliente e innovación tecnológica— y recoge las valoraciones de 30 clientes frecuentes sobre 15 de las principales compañías del sector, utilizando una escala Likert de 1 (muy deficiente) a 7 (excelente). Con estos datos, construirá un <strong>mapa perceptual</strong> mediante Escalado Multidimensional no métrico.</p>
+</div>
+<div id="c08-preparacion-de-los-datos" class="section level3" number="8.4.2">
+<h3>
+<span class="header-section-number">8.4.2</span> <img src="figuras/pie-chart.svg"> Preparación de los datos.<a class="anchor" aria-label="anchor" href="#c08-preparacion-de-los-datos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Necesitamos en la carpeta del proyecto el archivo de datos <strong>percepcion_interestelar.xlsx</strong>, cuya hoja “Datos” contiene las valoraciones medias de cada empresa en cada uno de los seis atributos, y el <em>script</em> <strong>emd_lite.R</strong>. Las 15 compañías pertenecen al universo de 300 empresas de la Base de Datos Interestelar, y presentan perfiles muy diversos: desde grandes corporaciones con flota renovada como <em>Arrakis Freight</em> o <em>Excalibur Freight Systems</em>, hasta compañías pequeñas con flota antigua como <em>Sandworm Freight</em> o <em>First Order Cargo</em>, pasando por empresas de tamaño medio con flota madura como <em>Shuttlepod Movers</em> o <em>Defiant Cargo</em>:</p>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Limpiando el Global Environment</span></span>
+<span><span class="fu"><span>rm</span></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><span>ls</span></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Cargando el paquete de la asignatura</span></span>
+<span><span class="kw"><span>library</span></span><span class="op">(</span><span class="va"><a href="https://github.com/teckel71/MATlite">MATlite</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Importando datos desde Excel</span></span>
+<span><span class="va">PERCEPCION</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_importa</span></span><span class="op">(</span><span class="st">"percepcion_interestelar.xlsx"</span><span class="op">)</span></span>
+<span><span class="fu"><span>lite_resumen</span></span><span class="op">(</span><span class="va">PERCEPCION</span><span class="op">)</span></span></code></pre></div>
+<div id="ucqhqyesnf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#ucqhqyesnf table {
+  font-family: Lato, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+#ucqhqyesnf thead, #ucqhqyesnf tbody, #ucqhqyesnf tfoot, #ucqhqyesnf tr, #ucqhqyesnf td, #ucqhqyesnf th {
+  border-style: none;
+}
+
+#ucqhqyesnf p {
+  margin: 0;
+  padding: 0;
+}
+
+#ucqhqyesnf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #FFFFFF;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ucqhqyesnf .gt_title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ucqhqyesnf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ucqhqyesnf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ucqhqyesnf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ucqhqyesnf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ucqhqyesnf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ucqhqyesnf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ucqhqyesnf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ucqhqyesnf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ucqhqyesnf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ucqhqyesnf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ucqhqyesnf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ucqhqyesnf .gt_row {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #F6F7F7;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ucqhqyesnf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ucqhqyesnf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ucqhqyesnf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ucqhqyesnf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ucqhqyesnf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ucqhqyesnf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ucqhqyesnf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ucqhqyesnf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_striped {
+  background-color: #FAFAFA;
+}
+
+#ucqhqyesnf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ucqhqyesnf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ucqhqyesnf .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ucqhqyesnf .gt_left {
+  text-align: left;
+}
+
+#ucqhqyesnf .gt_center {
+  text-align: center;
+}
+
+#ucqhqyesnf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ucqhqyesnf .gt_font_normal {
+  font-weight: normal;
+}
+
+#ucqhqyesnf .gt_font_bold {
+  font-weight: bold;
+}
+
+#ucqhqyesnf .gt_font_italic {
+  font-style: italic;
+}
+
+#ucqhqyesnf .gt_super {
+  font-size: 65%;
+}
+
+#ucqhqyesnf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ucqhqyesnf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ucqhqyesnf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ucqhqyesnf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ucqhqyesnf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ucqhqyesnf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ucqhqyesnf .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ucqhqyesnf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ucqhqyesnf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>PERCEPCION</td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>15 rows x 6 cols</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">Column</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="value">Plot Overview</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_missing">Missing</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mean">Mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Median">Median</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="SD">SD</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">FIABILIDAD</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="22.63" width="21.17" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="28.52" y="13.97" width="21.17" height="8.65" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="49.69" y="13.97" width="21.17" height="8.65" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="70.87" y="1.00" width="21.17" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="92.04" y="5.32" width="21.17" height="17.30" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="113.21" y="13.97" width="21.17" height="8.65" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="27.74" cy="18.30" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="27.74" cy="18.30" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="87.80" y1="22.63" x2="87.80" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="28.69,25.46 28.69,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="124.06,25.46 124.06,22.63 " style="stroke-width: 0.75;"></polyline><text x="28.69" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">3.8 auto</text><text x="124.06" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">6.4 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">5.3</td>
+<td headers="Median" class="gt_row gt_right">5.4</td>
+<td headers="SD" class="gt_row gt_right">0.7</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;">PUNTUALIDAD</td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="18.30" width="25.41" height="4.33" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="32.76" y="1.00" width="25.41" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="58.16" y="1.00" width="25.41" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="83.57" y="13.97" width="25.41" height="8.65" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="108.98" y="13.97" width="25.41" height="8.65" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="26.96" cy="18.30" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="26.96" cy="18.30" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="67.56" y1="22.63" x2="67.56" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="27.93,25.46 27.93,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="125.27,25.46 125.27,22.63 " style="stroke-width: 0.75;"></polyline><text x="27.93" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">2.4 auto</text><text x="125.27" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">6.3 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">4.1</td>
+<td headers="Median" class="gt_row gt_right gt_striped">4.0</td>
+<td headers="SD" class="gt_row gt_right gt_striped">1.1</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">SEGURIDAD</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="1.00" width="63.52" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="70.87" y="8.21" width="63.52" height="14.42" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="7.43" cy="20.22" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="7.43" cy="20.22" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="45.17" y1="22.63" x2="45.17" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="8.65,25.46 8.65,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="131.52,25.46 131.52,22.63 " style="stroke-width: 0.75;"></polyline><text x="8.65" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">2.8 auto</text><text x="131.52" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">6.4 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">4.5</td>
+<td headers="Median" class="gt_row gt_right">3.9</td>
+<td headers="SD" class="gt_row gt_right">1.3</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;">PRECIO</td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="17.82" width="31.76" height="4.81" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="39.11" y="15.42" width="31.76" height="7.21" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="70.87" y="1.00" width="31.76" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="102.63" y="20.22" width="31.76" height="2.40" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="24.63" cy="20.22" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="24.63" cy="20.22" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="93.63" y1="22.63" x2="93.63" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="25.52,25.46 25.52,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="114.44,25.46 114.44,22.63 " style="stroke-width: 0.75;"></polyline><text x="25.52" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">1.8 auto</text><text x="114.44" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">6.5 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">4.7</td>
+<td headers="Median" class="gt_row gt_right gt_striped">5.4</td>
+<td headers="SD" class="gt_row gt_right gt_striped">1.5</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">ATENCION</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="18.30" width="12.70" height="4.33" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="20.05" y="22.63" width="12.70" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="32.76" y="1.00" width="12.70" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="45.46" y="1.00" width="12.70" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="58.16" y="18.30" width="12.70" height="4.33" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="70.87" y="22.63" width="12.70" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="83.57" y="18.30" width="12.70" height="4.33" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="96.27" y="18.30" width="12.70" height="4.33" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="108.98" y="22.63" width="12.70" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="121.68" y="18.30" width="12.70" height="4.33" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="18.33" cy="18.30" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="18.33" cy="18.30" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="46.84" y1="22.63" x2="46.84" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="19.36,25.46 19.36,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="121.92,25.46 121.92,22.63 " style="stroke-width: 0.75;"></polyline><text x="19.36" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">3.2 auto</text><text x="121.92" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">6.7 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">4.5</td>
+<td headers="Median" class="gt_row gt_right">4.1</td>
+<td headers="SD" class="gt_row gt_right">0.9</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;">INNOVACION</td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="1.00" width="42.35" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="49.69" y="1.00" width="42.35" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="92.04" y="11.81" width="42.35" height="10.82" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="28.70" cy="19.02" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="28.70" cy="19.02" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="52.59" y1="22.63" x2="52.59" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="29.69,25.46 29.69,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="128.17,25.46 128.17,22.63 " style="stroke-width: 0.75;"></polyline><text x="29.69" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">1.9 auto</text><text x="128.17" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="21.73px" lengthadjust="spacingAndGlyphs">6.2 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">3.4</td>
+<td headers="Median" class="gt_row gt_right gt_striped">2.9</td>
+<td headers="SD" class="gt_row gt_right gt_striped">1.5</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.2</strong></p>
+</div>
+<p>El <em>data frame</em> resultante tiene 15 filas (una por empresa) y 6 columnas (una por atributo), con los nombres de las empresas como nombres de fila. Las valoraciones oscilan entre 1 y 7, como corresponde a la escala Likert utilizada en la encuesta.</p>
+</div>
+<div id="c08-exploracion-y-numero-de-dimensiones" class="section level3" number="8.4.3">
+<h3>
+<span class="header-section-number">8.4.3</span> <img src="figuras/pie-chart.svg"> Exploración y número de dimensiones.<a class="anchor" aria-label="anchor" href="#c08-exploracion-y-numero-de-dimensiones"><i class="fas fa-link"></i></a>
+</h3>
+<p>La función <code><span>lite_emd_dimensiones()</span></code> realiza toda la fase exploratoria: muestra los perfiles de valoración, calcula la matriz de proximidades (distancias euclídeas entre los perfiles de cada par de empresas) y estima el EMD no métrico con 1 a 6 dimensiones para ayudarnos a elegir cuántas utilizar. Si no indicamos el argumento <code>variables</code>, utiliza todas las columnas del <em>data frame</em>:</p>
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_emd_dimensiones</span></span><span class="op">(</span><span class="va">PERCEPCION</span><span class="op">)</span></span></code></pre></div>
+<p>Antes de calcular proximidades, conviene examinar los perfiles de valoración de las compañías. La tabla de perfiles recoge los datos de partida:</p>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span><span class="op">$</span><span class="va">tabla_perfiles</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+FIABILIDAD
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+PUNTUALIDAD
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+SEGURIDAD
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+PRECIO
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+ATENCION
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+INNOVACION
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+arrakis freight
+</td>
+<td style="text-align:right;text-align: center;">
+5.43
+</td>
+<td style="text-align:right;text-align: center;">
+6.30
+</td>
+<td style="text-align:right;text-align: center;">
+5.70
+</td>
+<td style="text-align:right;text-align: center;">
+1.80
+</td>
+<td style="text-align:right;text-align: center;">
+5.77
+</td>
+<td style="text-align:right;text-align: center;">
+6.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+excalibur freight systems
+</td>
+<td style="text-align:right;text-align: center;">
+6.43
+</td>
+<td style="text-align:right;text-align: center;">
+5.53
+</td>
+<td style="text-align:right;text-align: center;">
+6.40
+</td>
+<td style="text-align:right;text-align: center;">
+2.20
+</td>
+<td style="text-align:right;text-align: center;">
+6.67
+</td>
+<td style="text-align:right;text-align: center;">
+5.27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+kaiju haulage co.
+</td>
+<td style="text-align:right;text-align: center;">
+5.63
+</td>
+<td style="text-align:right;text-align: center;">
+5.90
+</td>
+<td style="text-align:right;text-align: center;">
+6.43
+</td>
+<td style="text-align:right;text-align: center;">
+2.70
+</td>
+<td style="text-align:right;text-align: center;">
+5.97
+</td>
+<td style="text-align:right;text-align: center;">
+5.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+mothership movers
+</td>
+<td style="text-align:right;text-align: center;">
+5.83
+</td>
+<td style="text-align:right;text-align: center;">
+4.53
+</td>
+<td style="text-align:right;text-align: center;">
+6.03
+</td>
+<td style="text-align:right;text-align: center;">
+3.53
+</td>
+<td style="text-align:right;text-align: center;">
+4.73
+</td>
+<td style="text-align:right;text-align: center;">
+4.10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+corellian freightworks
+</td>
+<td style="text-align:right;text-align: center;">
+6.40
+</td>
+<td style="text-align:right;text-align: center;">
+4.70
+</td>
+<td style="text-align:right;text-align: center;">
+6.20
+</td>
+<td style="text-align:right;text-align: center;">
+3.70
+</td>
+<td style="text-align:right;text-align: center;">
+4.37
+</td>
+<td style="text-align:right;text-align: center;">
+4.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+shuttlepod movers
+</td>
+<td style="text-align:right;text-align: center;">
+5.67
+</td>
+<td style="text-align:right;text-align: center;">
+3.97
+</td>
+<td style="text-align:right;text-align: center;">
+3.90
+</td>
+<td style="text-align:right;text-align: center;">
+5.13
+</td>
+<td style="text-align:right;text-align: center;">
+4.20
+</td>
+<td style="text-align:right;text-align: center;">
+3.43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+defiant cargo
+</td>
+<td style="text-align:right;text-align: center;">
+5.67
+</td>
+<td style="text-align:right;text-align: center;">
+3.83
+</td>
+<td style="text-align:right;text-align: center;">
+3.87
+</td>
+<td style="text-align:right;text-align: center;">
+5.03
+</td>
+<td style="text-align:right;text-align: center;">
+4.13
+</td>
+<td style="text-align:right;text-align: center;">
+2.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+ragnar freight lines
+</td>
+<td style="text-align:right;text-align: center;">
+5.10
+</td>
+<td style="text-align:right;text-align: center;">
+4.10
+</td>
+<td style="text-align:right;text-align: center;">
+4.83
+</td>
+<td style="text-align:right;text-align: center;">
+5.57
+</td>
+<td style="text-align:right;text-align: center;">
+4.27
+</td>
+<td style="text-align:right;text-align: center;">
+3.17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+rebel alliance transport
+</td>
+<td style="text-align:right;text-align: center;">
+4.17
+</td>
+<td style="text-align:right;text-align: center;">
+4.10
+</td>
+<td style="text-align:right;text-align: center;">
+3.47
+</td>
+<td style="text-align:right;text-align: center;">
+5.67
+</td>
+<td style="text-align:right;text-align: center;">
+4.13
+</td>
+<td style="text-align:right;text-align: center;">
+2.87
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+prometheus transport
+</td>
+<td style="text-align:right;text-align: center;">
+5.20
+</td>
+<td style="text-align:right;text-align: center;">
+3.53
+</td>
+<td style="text-align:right;text-align: center;">
+3.93
+</td>
+<td style="text-align:right;text-align: center;">
+5.40
+</td>
+<td style="text-align:right;text-align: center;">
+3.70
+</td>
+<td style="text-align:right;text-align: center;">
+2.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+dark star haulage
+</td>
+<td style="text-align:right;text-align: center;">
+4.83
+</td>
+<td style="text-align:right;text-align: center;">
+3.47
+</td>
+<td style="text-align:right;text-align: center;">
+2.83
+</td>
+<td style="text-align:right;text-align: center;">
+5.83
+</td>
+<td style="text-align:right;text-align: center;">
+3.90
+</td>
+<td style="text-align:right;text-align: center;">
+1.97
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+starfighter logistics
+</td>
+<td style="text-align:right;text-align: center;">
+5.00
+</td>
+<td style="text-align:right;text-align: center;">
+3.23
+</td>
+<td style="text-align:right;text-align: center;">
+3.33
+</td>
+<td style="text-align:right;text-align: center;">
+5.87
+</td>
+<td style="text-align:right;text-align: center;">
+4.07
+</td>
+<td style="text-align:right;text-align: center;">
+1.93
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+endor express
+</td>
+<td style="text-align:right;text-align: center;">
+5.47
+</td>
+<td style="text-align:right;text-align: center;">
+3.13
+</td>
+<td style="text-align:right;text-align: center;">
+3.67
+</td>
+<td style="text-align:right;text-align: center;">
+5.53
+</td>
+<td style="text-align:right;text-align: center;">
+4.07
+</td>
+<td style="text-align:right;text-align: center;">
+1.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+first order cargo
+</td>
+<td style="text-align:right;text-align: center;">
+4.90
+</td>
+<td style="text-align:right;text-align: center;">
+2.90
+</td>
+<td style="text-align:right;text-align: center;">
+2.90
+</td>
+<td style="text-align:right;text-align: center;">
+5.70
+</td>
+<td style="text-align:right;text-align: center;">
+3.97
+</td>
+<td style="text-align:right;text-align: center;">
+1.97
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+sandworm freight
+</td>
+<td style="text-align:right;text-align: center;">
+3.80
+</td>
+<td style="text-align:right;text-align: center;">
+2.37
+</td>
+<td style="text-align:right;text-align: center;">
+3.77
+</td>
+<td style="text-align:right;text-align: center;">
+6.50
+</td>
+<td style="text-align:right;text-align: center;">
+3.20
+</td>
+<td style="text-align:right;text-align: center;">
+1.93
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.3</strong></p>
+</div>
+<p>Un gráfico de <strong>coordenadas paralelas</strong> permite visualizar simultáneamente los seis atributos para cada empresa, revelando patrones de similitud a simple vista:</p>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span><span class="op">$</span><span class="va">perfiles</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-143-1.png" alt="" width="100%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 8.2</strong></p>
+</div>
+<p>El gráfico ya permite intuir la existencia de grupos de empresas con perfiles similares. Se aprecia, por ejemplo, que las compañías con flota renovada (<em>Arrakis Freight</em>, <em>Excalibur Freight Systems</em>, <em>Kaiju Haulage Co.</em>) comparten un perfil característico: valoraciones altas en atención, fiabilidad, innovación y seguridad, pero bajas en precio (son percibidas como caras). En el extremo opuesto, compañías como <em>Sandworm Freight</em> o <em>First Order Cargo</em> muestran el patrón inverso. Sin embargo, la maraña de líneas resulta difícil de interpretar con 15 compañías. Precisamente para eso sirve el mapa perceptual.</p>
+<p>La <strong>matriz de proximidades</strong> contiene las <span class="math inline">\(15 \times 14 / 2 = 105\)</span> distancias entre todos los pares de empresas, y se visualiza como un <strong>mapa de calor</strong>, donde los tonos anaranjados indican proximidad (empresas percibidas como similares) y los tonos azulados indican distancia:</p>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span><span class="op">$</span><span class="va">distancias</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-144-1.png" alt="" width="85%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 8.3</strong></p>
+</div>
+<p>El mapa de calor revela patrones interesantes. Compañías como <em>Shuttlepod Movers</em> y <em>Defiant Cargo</em> presentan tonos anaranjados muy intensos entre sí, lo que indica que los clientes las perciben de manera muy similar. Lo mismo ocurre entre <em>Starfighter Logistics</em> y <em>Endor Express</em>. En el extremo opuesto, <em>Sandworm Freight</em> destaca por su fila y columna dominadas por tonos azulados: es la compañía más «peculiar» del grupo. También se aprecian bloques de color anaranjado entre las grandes empresas de flota renovada, confirmando que los clientes las perciben como un grupo homogéneo.</p>
+<p>Pasamos a decidir <strong>cuántas dimensiones</strong> utilizar. Aunque nuestro objetivo final es un mapa bidimensional (el más fácil de interpretar), necesitamos verificar que dos dimensiones son suficientes. La pieza <code>stress</code> recoge el Stress de cada solución, con su calificación según la escala de Kruskal, y la pieza <code>codo</code>, el gráfico de codo:</p>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span><span class="op">$</span><span class="va">stress</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Dimensiones
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Stress
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Calidad
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+0.0422
+</td>
+<td style="text-align:left;text-align: center;">
+Excelente
+</td>
+</tr>
+<tr>
+<td style="text-align:right;text-align: center;">
+2
+</td>
+<td style="text-align:right;text-align: center;">
+0.0196
+</td>
+<td style="text-align:left;text-align: center;">
+Perfecta
+</td>
+</tr>
+<tr>
+<td style="text-align:right;text-align: center;">
+3
+</td>
+<td style="text-align:right;text-align: center;">
+0.0038
+</td>
+<td style="text-align:left;text-align: center;">
+Perfecta
+</td>
+</tr>
+<tr>
+<td style="text-align:right;text-align: center;">
+4
+</td>
+<td style="text-align:right;text-align: center;">
+0.0024
+</td>
+<td style="text-align:left;text-align: center;">
+Perfecta
+</td>
+</tr>
+<tr>
+<td style="text-align:right;text-align: center;">
+5
+</td>
+<td style="text-align:right;text-align: center;">
+0.0010
+</td>
+<td style="text-align:left;text-align: center;">
+Perfecta
+</td>
+</tr>
+<tr>
+<td style="text-align:right;text-align: center;">
+6
+</td>
+<td style="text-align:right;text-align: center;">
+0.0000
+</td>
+<td style="text-align:left;text-align: center;">
+Perfecta
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.4</strong></p>
+</div>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span><span class="op">$</span><span class="va">codo</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-146-1.png" alt="" width="80%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 8.4</strong></p>
+</div>
+<p>El Stress desciende marcadamente al pasar de una a dos dimensiones, y a partir de dos dimensiones la mejora es progresivamente menor. Con dos dimensiones, el Stress (0,0196) se sitúa ya en el rango de calidad <strong>perfecta</strong> de la escala de Kruskal, lo que confirma que <strong>dos dimensiones son suficientes</strong> para representar adecuadamente las proximidades perceptuales.</p>
+</div>
+<div id="c08-la-solucion-en-dos-dimensiones" class="section level3" number="8.4.4">
+<h3>
+<span class="header-section-number">8.4.4</span> <img src="figuras/pie-chart.svg"> La solución en dos dimensiones.<a class="anchor" aria-label="anchor" href="#c08-la-solucion-en-dos-dimensiones"><i class="fas fa-link"></i></a>
+</h3>
+<p>Ajustamos el EMD no métrico con dos dimensiones mediante la función <code><span>lite_emd()</span></code>. El argumento <code>ndim</code> fija el número de dimensiones, y <code>titulo</code> y <code>subtitulo</code> rotulan los mapas:</p>
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_emd</span></span><span class="op">(</span><span class="va">PERCEPCION</span>, ndim <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                 titulo    <span class="op">=</span> <span class="st">"SECTOR INTERESTELAR DE TRANSPORTE DE MERCANCÍAS"</span>,</span>
+<span>                 subtitulo <span class="op">=</span> <span class="st">"Mapa perceptual - Configuración de opiniones de clientes"</span><span class="op">)</span></span></code></pre></div>
+<p>La pieza <code>ajuste</code> muestra el valor del Stress y el número de iteraciones que ha necesitado el algoritmo SMACOF para converger:</p>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa</span><span class="op">$</span><span class="va">ajuste</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Dimensiones
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Stress
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Calidad
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Iteraciones
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;text-align: center;">
+2
+</td>
+<td style="text-align:right;text-align: center;">
+0.0196
+</td>
+<td style="text-align:left;text-align: center;">
+Perfecta
+</td>
+<td style="text-align:right;text-align: center;">
+20
+</td>
+</tr></tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.5</strong></p>
+</div>
+<p>Las coordenadas de las 15 empresas en las dos dimensiones son:</p>
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa</span><span class="op">$</span><span class="va">coordenadas</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+D1
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+D2
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+arrakis freight
+</td>
+<td style="text-align:right;text-align: center;">
+-1.1718
+</td>
+<td style="text-align:right;text-align: center;">
+-0.2889
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+excalibur freight systems
+</td>
+<td style="text-align:right;text-align: center;">
+-1.1296
+</td>
+<td style="text-align:right;text-align: center;">
+0.0797
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+kaiju haulage co.
+</td>
+<td style="text-align:right;text-align: center;">
+-1.0581
+</td>
+<td style="text-align:right;text-align: center;">
+-0.1057
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+mothership movers
+</td>
+<td style="text-align:right;text-align: center;">
+-0.4822
+</td>
+<td style="text-align:right;text-align: center;">
+0.1825
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+corellian freightworks
+</td>
+<td style="text-align:right;text-align: center;">
+-0.5177
+</td>
+<td style="text-align:right;text-align: center;">
+0.2925
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+shuttlepod movers
+</td>
+<td style="text-align:right;text-align: center;">
+0.1442
+</td>
+<td style="text-align:right;text-align: center;">
+-0.0251
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+defiant cargo
+</td>
+<td style="text-align:right;text-align: center;">
+0.2253
+</td>
+<td style="text-align:right;text-align: center;">
+0.0121
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+ragnar freight lines
+</td>
+<td style="text-align:right;text-align: center;">
+0.1302
+</td>
+<td style="text-align:right;text-align: center;">
+0.1224
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+rebel alliance transport
+</td>
+<td style="text-align:right;text-align: center;">
+0.3663
+</td>
+<td style="text-align:right;text-align: center;">
+-0.2313
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+prometheus transport
+</td>
+<td style="text-align:right;text-align: center;">
+0.3642
+</td>
+<td style="text-align:right;text-align: center;">
+0.0202
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+dark star haulage
+</td>
+<td style="text-align:right;text-align: center;">
+0.5826
+</td>
+<td style="text-align:right;text-align: center;">
+-0.1160
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+starfighter logistics
+</td>
+<td style="text-align:right;text-align: center;">
+0.5496
+</td>
+<td style="text-align:right;text-align: center;">
+-0.0130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+endor express
+</td>
+<td style="text-align:right;text-align: center;">
+0.4842
+</td>
+<td style="text-align:right;text-align: center;">
+0.0661
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+first order cargo
+</td>
+<td style="text-align:right;text-align: center;">
+0.6190
+</td>
+<td style="text-align:right;text-align: center;">
+-0.0582
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+sandworm freight
+</td>
+<td style="text-align:right;text-align: center;">
+0.8937
+</td>
+<td style="text-align:right;text-align: center;">
+0.0626
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.6</strong></p>
+</div>
+</div>
+<div id="c08-diagrama-de-shepard" class="section level3" number="8.4.5">
+<h3>
+<span class="header-section-number">8.4.5</span> <img src="figuras/pie-chart.svg"> Diagrama de Shepard.<a class="anchor" aria-label="anchor" href="#c08-diagrama-de-shepard"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para evaluar visualmente la calidad del ajuste, examinamos el <strong>diagrama de Shepard</strong>, que enfrenta las proximidades originales (eje horizontal) con las distancias obtenidas en la configuración bidimensional (eje vertical):</p>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa</span><span class="op">$</span><span class="va">shepard</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-150-1.png" alt="" width="75%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 8.5</strong></p>
+</div>
+<p>La línea escalonada es la <strong>función de transformación monótona</strong> que el algoritmo ha encontrado para relacionar las proximidades con las distancias. En el EMD no métrico, esta función no necesita ser lineal: solo necesita ser no decreciente. Los puntos representan los 105 pares de empresas: cuanto más cerca estén de la línea, mejor es el ajuste para ese par concreto. En nuestro caso, todos siguen de cerca la tendencia, en coherencia con el reducido valor del Stress.</p>
+</div>
+<div id="c08-el-mapa-perceptual" class="section level3" number="8.4.6">
+<h3>
+<span class="header-section-number">8.4.6</span> <img src="figuras/pie-chart.svg"> El mapa perceptual.<a class="anchor" aria-label="anchor" href="#c08-el-mapa-perceptual"><i class="fas fa-link"></i></a>
+</h3>
+<p>Estamos en condiciones de examinar el mapa perceptual. Las empresas cercanas en el mapa son percibidas de forma similar por los clientes; las lejanas, de forma diferente:</p>
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa</span><span class="op">$</span><span class="va">mapa</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-151-1.png" alt="" width="100%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 8.6</strong></p>
+</div>
+<p>El mapa confirma y enriquece lo que el mapa de calor ya apuntaba. Las grandes compañías con flota renovada (<em>Arrakis Freight</em>, <em>Excalibur Freight Systems</em>, <em>Kaiju Haulage Co.</em>) se agrupan en la zona izquierda del mapa, claramente separadas del resto. Las compañías con flota antigua (<em>Sandworm Freight</em>, <em>First Order Cargo</em>, <em>Dark Star Haulage</em>, <em>Endor Express</em>, <em>Starfighter Logistics</em>) ocupan la zona derecha. Entre ambos grupos, las compañías con flota madura (<em>Shuttlepod Movers</em>, <em>Defiant Cargo</em>, <em>Ragnar Freight Lines</em>, <em>Prometheus Transport</em>, <em>Rebel Alliance Transport</em>) se sitúan en posiciones intermedias. Nótese también cómo las empresas que en el mapa de calor aparecían con tonos anaranjados intensos entre sí (<em>Shuttlepod Movers</em> y <em>Defiant Cargo</em>, por ejemplo) están ahora efectivamente muy próximas en el mapa, y cómo <em>Sandworm Freight</em> ocupa el extremo derecho, aislada de las demás.</p>
+<p>Pero las dimensiones en sí mismas no tienen un significado predeterminado: el EMD nos dice <em>dónde</em> se sitúan las empresas, pero no <em>por qué</em> están ahí. Para responder a esta segunda pregunta, necesitamos interpretar las dimensiones.</p>
+</div>
+<div id="c08-interpretacion-de-las-dimensiones" class="section level3" number="8.4.7">
+<h3>
+<span class="header-section-number">8.4.7</span> <img src="figuras/pie-chart.svg"> Interpretación de las dimensiones.<a class="anchor" aria-label="anchor" href="#c08-interpretacion-de-las-dimensiones"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para averiguar qué representan las dos dimensiones, se calcula la <strong>correlación</strong> entre cada atributo original y las coordenadas de las empresas en cada dimensión. Los atributos con mayor correlación (en valor absoluto) con una dimensión nos indican qué está midiendo ese eje:</p>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa</span><span class="op">$</span><span class="va">correlaciones</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Dim.1
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Dim.2
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+FIABILIDAD
+</td>
+<td style="text-align:right;text-align: center;">
+-0.702
+</td>
+<td style="text-align:right;text-align: center;">
+0.441
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+PUNTUALIDAD
+</td>
+<td style="text-align:right;text-align: center;">
+-0.969
+</td>
+<td style="text-align:right;text-align: center;">
+-0.207
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+SEGURIDAD
+</td>
+<td style="text-align:right;text-align: center;">
+-0.916
+</td>
+<td style="text-align:right;text-align: center;">
+0.309
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+PRECIO
+</td>
+<td style="text-align:right;text-align: center;">
+0.986
+</td>
+<td style="text-align:right;text-align: center;">
+0.063
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+ATENCION
+</td>
+<td style="text-align:right;text-align: center;">
+-0.927
+</td>
+<td style="text-align:right;text-align: center;">
+-0.155
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+INNOVACION
+</td>
+<td style="text-align:right;text-align: center;">
+-0.980
+</td>
+<td style="text-align:right;text-align: center;">
+-0.112
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.7</strong></p>
+</div>
+<p>Para facilitar la lectura, la pieza <code>biplot</code> superpone los atributos como <strong>vectores</strong> sobre el mapa perceptual. La dirección del vector indica con qué dimensiones se asocia el atributo; su longitud, la intensidad de esa asociación:</p>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa</span><span class="op">$</span><span class="va">biplot</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-153-1.png" alt="" width="100%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 8.7</strong></p>
+</div>
+<p>Este es el gráfico central del análisis, y su lectura permite al equipo de <em>Data-Evidence</em> interpretar las dimensiones latentes y extraer conclusiones sobre la estructura competitiva del sector.</p>
+<p>La <strong>Dimensión 1</strong> (eje horizontal) es la que mayor variabilidad recoge, y separa las compañías esencialmente por un eje de <strong>calidad percibida frente a precio</strong>. Los vectores de INNOVACION, PUNTUALIDAD, ATENCION, SEGURIDAD y FIABILIDAD apuntan hacia la izquierda, donde se sitúan las compañías mejor valoradas en estos atributos (<em>Arrakis Freight</em>, <em>Excalibur Freight Systems</em>, <em>Kaiju Haulage Co.</em>). El vector de PRECIO (correlación de 0,986 con la dimensión) apunta en la dirección opuesta, hacia la derecha, donde están las compañías percibidas como más económicas pero con peor servicio (<em>Sandworm Freight</em>, <em>First Order Cargo</em>). Esta dimensión refleja, por tanto, un continuo que va de «caro pero excelente» a «económico pero deficiente».</p>
+<p>La <strong>Dimensión 2</strong> (eje vertical) introduce un matiz adicional: FIABILIDAD y SEGURIDAD apuntan hacia arriba, mientras que PUNTUALIDAD y ATENCION lo hacen ligeramente hacia abajo. Esto distingue, dentro de las compañías de calidad similar, entre aquellas que destacan por la seguridad e integridad de la carga (zona superior: <em>Corellian Freightworks</em>, <em>Mothership Movers</em>) y las que destacan más por la puntualidad y la atención al cliente (zona inferior: <em>Arrakis Freight</em>, <em>Kaiju Haulage Co.</em>).</p>
+</div>
+<div id="c08-ampliacion-la-solucion-en-tres-dimensiones" class="section level3" number="8.4.8">
+<h3>
+<span class="header-section-number">8.4.8</span> <img src="figuras/pie-chart.svg"> Ampliación: la solución en tres dimensiones.<a class="anchor" aria-label="anchor" href="#c08-ampliacion-la-solucion-en-tres-dimensiones"><i class="fas fa-link"></i></a>
+</h3>
+<p>El gráfico de codo mostró que dos dimensiones proporcionan un ajuste satisfactorio. Sin embargo, puede resultar instructivo explorar qué aporta una <strong>tercera dimensión</strong> al análisis. Basta con cambiar el argumento <code>ndim</code>:</p>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa3</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_emd</span></span><span class="op">(</span><span class="va">PERCEPCION</span>, ndim <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa3</span><span class="op">$</span><span class="va">ajuste</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Dimensiones
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Stress
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Calidad
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Iteraciones
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;text-align: center;">
+3
+</td>
+<td style="text-align:right;text-align: center;">
+0.0038
+</td>
+<td style="text-align:left;text-align: center;">
+Perfecta
+</td>
+<td style="text-align:right;text-align: center;">
+12
+</td>
+</tr></tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.8</strong></p>
+</div>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa3</span><span class="op">$</span><span class="va">correlaciones</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Dim.1
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Dim.2
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Dim.3
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+FIABILIDAD
+</td>
+<td style="text-align:right;text-align: center;">
+-0.696
+</td>
+<td style="text-align:right;text-align: center;">
+0.491
+</td>
+<td style="text-align:right;text-align: center;">
+0.490
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+PUNTUALIDAD
+</td>
+<td style="text-align:right;text-align: center;">
+-0.966
+</td>
+<td style="text-align:right;text-align: center;">
+-0.196
+</td>
+<td style="text-align:right;text-align: center;">
+-0.008
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+SEGURIDAD
+</td>
+<td style="text-align:right;text-align: center;">
+-0.924
+</td>
+<td style="text-align:right;text-align: center;">
+0.308
+</td>
+<td style="text-align:right;text-align: center;">
+-0.201
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+PRECIO
+</td>
+<td style="text-align:right;text-align: center;">
+0.984
+</td>
+<td style="text-align:right;text-align: center;">
+0.047
+</td>
+<td style="text-align:right;text-align: center;">
+-0.099
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+ATENCION
+</td>
+<td style="text-align:right;text-align: center;">
+-0.920
+</td>
+<td style="text-align:right;text-align: center;">
+-0.152
+</td>
+<td style="text-align:right;text-align: center;">
+0.211
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+INNOVACION
+</td>
+<td style="text-align:right;text-align: center;">
+-0.984
+</td>
+<td style="text-align:right;text-align: center;">
+-0.104
+</td>
+<td style="text-align:right;text-align: center;">
+-0.101
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 8.9</strong></p>
+</div>
+<p>El Stress baja hasta 0,0038, y las correlaciones de las dos primeras dimensiones apenas cambian. La tercera dimensión recoge, sobre todo, la <strong>FIABILIDAD</strong> (correlación de 0,49) y, en menor medida, la ATENCION: un aspecto de la percepción que no quedaba del todo representado con solo dos ejes.</p>
+<p>Con tres dimensiones existen tres combinaciones posibles de pares de ejes: D1-D2, D1-D3 y D2-D3. Cada combinación genera un mapa perceptual que muestra una proyección distinta de las posiciones de las compañías. La pieza <code>mapas</code> los reúne en una sola composición:</p>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa3</span><span class="op">$</span><span class="va">mapas</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-157-1.png" alt="" width="100%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 8.8</strong></p>
+</div>
+<p>La lectura conjunta de los tres paneles revela información que el mapa bidimensional no podía mostrar por sí solo:</p>
+<ul>
+<li><p><strong>Panel D1–D2</strong> (arriba a la izquierda): reproduce la estructura principal del análisis bidimensional. Los grupos de compañías (RENOVADA a la izquierda, ANTIGUA a la derecha, MADURA en el centro) se mantienen estables, lo que indica que las dos primeras dimensiones son robustas.</p></li>
+<li><p><strong>Panel D1–D3</strong> (arriba a la derecha): la tercera dimensión reorganiza verticalmente a las compañías. El cambio más llamativo afecta a las compañías de flota antigua: <em>Endor Express</em>, <em>First Order Cargo</em>, <em>Starfighter Logistics</em> y <em>Dark Star Haulage</em>, que en el plano D1-D2 aparecían como un grupo relativamente compacto, se separan ahora en el eje D3. Esto indica que, aunque todas sean percibidas como «económicas», los clientes detectan diferencias entre ellas, relacionadas sobre todo con la fiabilidad.</p></li>
+<li><p><strong>Panel D2–D3</strong> (abajo a la izquierda): al prescindir de la primera dimensión (la de mayor variabilidad), este plano aísla los matices más finos de la percepción. Aquí se aprecia cómo compañías que en los otros paneles se solapaban (por compartir valores similares en D1) se diferencian en las dimensiones secundarias.</p></li>
+</ul>
+</div>
+</div>
+<div id="c08-cierre-el-informe-de-data-evidence" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> <img src="figuras/star.svg" class="hicon"> Cierre: el informe de <em>Data-Evidence</em>.<a class="anchor" aria-label="anchor" href="#c08-cierre-el-informe-de-data-evidence"><i class="fas fa-link"></i></a>
+</h2>
+<p>El equipo de <em>Data-Evidence</em> presenta su mapa perceptual ante la Asamblea General de la ASTI —por boca de la propia <strong>Li Ti-Oh</strong>, directora ejecutiva de la consultora, que para la ocasión solo tuvo que cruzar el desierto de Tatooine— con tres conclusiones principales:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>El sector no es percibido como homogéneo: existen grupos de posicionamiento claramente diferenciados.</strong> Lejos de la percepción generalizada de que «todas las navieras son iguales», el mapa revela al menos tres perfiles perceptuales distintos, organizados en torno a dos dimensiones latentes que los clientes utilizan intuitivamente para evaluar a las compañías. Las grandes corporaciones con flota renovada se agrupan en una zona del mapa claramente diferenciada de las compañías de flota antigua, y a su vez de las empresas con flota madura que ocupan posiciones intermedias.</p></li>
+<li><p><strong>Las dimensiones latentes del mapa perceptual revelan los ejes de diferenciación que el sector debería comunicar.</strong> La calidad del servicio frente al precio es el eje principal; la seguridad y fiabilidad frente a la puntualidad y la atención, el secundario. Las compañías que deseen reposicionarse deben trabajar sobre los atributos que definen estas dimensiones.</p></li>
+<li><p><strong>El mapa identifica oportunidades de nicho.</strong> Las zonas del espacio perceptual con baja densidad de competidores representan posiciones de mercado no cubiertas. Una compañía que logre ubicarse en una de estas zonas tendría una ventaja competitiva perceptual sobre las demás.</p></li>
+</ol>
+<p>Cuentan las crónicas que, tras la presentación, varias compañías del sector solicitaron a <em>Data-Evidence</em> estudios de reposicionamiento individuales. Que <em>Tasha Tachybaptus</em>, CEO de <em>Shuttlepod Movers</em>, tomó nota de la posición de su empresa en el mapa y comentó que «ahora entiendo por qué nos comparan con <em>Defiant Cargo</em>, y también por qué no nos comparan con <em>Arrakis</em>». Y que <em>Arg-us Korp</em>, que no aparecía en el estudio pero había leído con atención el informe, murmuró: <em>«Interesante… si yo estuviera en ese mapa, ¿dónde me colocaría?»</em>. Li Ti-Oh, que alcanzó a oírle, se limitó a responder: <em>«En la zona de baja densidad, señor Korp. Siempre en la zona de baja densidad.»</em></p>
+</div>
+<div id="c08-materiales-para-realizar-las-practicas-del" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> <img src="figuras/arrow-down-circle.svg" class="hicon"> Materiales para realizar las prácticas del capítulo.<a class="anchor" aria-label="anchor" href="#c08-materiales-para-realizar-las-practicas-del"><i class="fas fa-link"></i></a>
+</h2>
+<p>En esta sección se muestran los links de acceso a los diferentes materiales (<em>scripts</em>, datos…) necesarios para llevar a cabo los contenidos prácticos del capítulo.</p>
+<p><strong>Datos (en formato Microsoft® Excel®):</strong></p>
+<ul>
+<li>percepcion_interestelar.xlsx (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/percepcion_interestelar.xlsx">obtener aquí</a>), o bien, desde R: <code>lite_datos("percepcion_interestelar")</code>.</li>
+</ul>
+<p><strong>Script:</strong></p>
+<ul>
+<li>emd_lite.R (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/emd_lite.R">obtener aquí</a>)</li>
+</ul>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></div>
 <div class="next"><a href="bibliograf%C3%ADa.html">Bibliografía</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#escalado-multidimensional."><span class="header-section-number">8</span> Escalado multidimensional.</a></li></ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#escalado-multidimensional."><span class="header-section-number">8</span> Escalado multidimensional.</a></li>
+<li><a class="nav-link" href="#c08-introduccion-los-mapas-perceptuales"><span class="header-section-number">8.1</span>  Introducción: los mapas perceptuales.</a></li>
+<li>
+<a class="nav-link" href="#c08-escalado-multidimensional-concepto-y-tipos"><span class="header-section-number">8.2</span>  Escalado Multidimensional: concepto y tipos.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c08-proximidades-y-distancias"><span class="header-section-number">8.2.1</span> Proximidades y distancias.</a></li>
+<li><a class="nav-link" href="#c08-emd-metrico-y-no-metrico"><span class="header-section-number">8.2.2</span> EMD métrico y no métrico.</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c08-el-algoritmo-smacof-y-el-stress"><span class="header-section-number">8.3</span>  El algoritmo SMACOF y el Stress.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c08-smacof"><span class="header-section-number">8.3.1</span> SMACOF.</a></li>
+<li><a class="nav-link" href="#c08-el-stress-como-medida-de-bondad-del-ajuste"><span class="header-section-number">8.3.2</span> El Stress como medida de bondad del ajuste.</a></li>
+<li><a class="nav-link" href="#c08-el-diagrama-de-shepard"><span class="header-section-number">8.3.3</span> El diagrama de Shepard.</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c08-practica-el-mapa-perceptual-del-sector"><span class="header-section-number">8.4</span>  Práctica: el mapa perceptual del sector interestelar.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c08-la-imagen-del-sector"><span class="header-section-number">8.4.1</span>  La imagen del sector.</a></li>
+<li><a class="nav-link" href="#c08-preparacion-de-los-datos"><span class="header-section-number">8.4.2</span>  Preparación de los datos.</a></li>
+<li><a class="nav-link" href="#c08-exploracion-y-numero-de-dimensiones"><span class="header-section-number">8.4.3</span>  Exploración y número de dimensiones.</a></li>
+<li><a class="nav-link" href="#c08-la-solucion-en-dos-dimensiones"><span class="header-section-number">8.4.4</span>  La solución en dos dimensiones.</a></li>
+<li><a class="nav-link" href="#c08-diagrama-de-shepard"><span class="header-section-number">8.4.5</span>  Diagrama de Shepard.</a></li>
+<li><a class="nav-link" href="#c08-el-mapa-perceptual"><span class="header-section-number">8.4.6</span>  El mapa perceptual.</a></li>
+<li><a class="nav-link" href="#c08-interpretacion-de-las-dimensiones"><span class="header-section-number">8.4.7</span>  Interpretación de las dimensiones.</a></li>
+<li><a class="nav-link" href="#c08-ampliacion-la-solucion-en-tres-dimensiones"><span class="header-section-number">8.4.8</span>  Ampliación: la solución en tres dimensiones.</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#c08-cierre-el-informe-de-data-evidence"><span class="header-section-number">8.5</span>  Cierre: el informe de Data-Evidence.</a></li>
+<li><a class="nav-link" href="#c08-materiales-para-realizar-las-practicas-del"><span class="header-section-number">8.6</span>  Materiales para realizar las prácticas del capítulo.</a></li>
+</ul>
+<div class="book-extra">
+        <ul class="list-unstyled"></ul>
 </div>
     </nav>
 </div>
@@ -121,7 +1869,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R, paso a paso y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
+    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

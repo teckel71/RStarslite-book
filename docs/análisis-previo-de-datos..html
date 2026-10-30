@@ -61,8 +61,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Análisis de datos con R, paso a paso y sin vértigo">R-Stars Lite</a>:
-        <small class="text-muted">Análisis de datos con R, paso a paso y sin vértigo</small>
+        <a href="index.html" title="Análisis de datos con R y sin vértigo">R-Stars Lite</a>:
+        <small class="text-muted">Análisis de datos con R y sin vértigo</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -85,6 +85,7 @@
 <li><a class="" href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></li>
 <li><a class="" href="escalado-multidimensional..html"><span class="header-section-number">8</span> Escalado multidimensional.</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+<li><a class="" href="ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite..html">Apéndice: Guía de uso de MATlite.</a></li>
 <li><a class="" href="licencia.html">Licencia</a></li>
 </ul>
 <div class="book-extra">
@@ -133,7 +134,7 @@
 </h3>
 <p>Supongamos que trabajamos dentro del <strong>proyecto</strong> “explora” que creamos anteriormente. En su carpeta guardaremos el <em>script</em> de la práctica, “previo_lite.R”, y el archivo de Microsoft® Excel® “interestelar_100.xlsx”, cuyos enlaces de descarga figuran en la sección final del capítulo. Si preferimos no descargar los datos a mano, <code>lite_datos("interestelar_100")</code> los guarda directamente en la carpeta del proyecto.</p>
 <p>Abramos el <em>script</em> con <code>File → Open File…</code> (o haciendo clic sobre él en la ventana inferior derecha, pestaña “Files”). Sus primeras instrucciones son:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tratamiento y análisis previo de datos.</span></span>
 <span></span>
 <span><span class="co"># Limpiando el Global Environment</span></span>
@@ -160,7 +161,7 @@
 <p>Si abrimos “interestelar_100.xlsx”, comprobaremos que consta de tres hojas: la primera recoge un aviso sobre el uso exclusivo que debe darse a los datos; la segunda describe las variables consideradas; y la tercera (hoja “Datos”) contiene la información que vamos a <strong>importar</strong> desde RStudio. Se trata de variables económico-financieras y de otra índole, referidas a una muestra de empresas dedicadas al transporte interestelar de mercancías.</p>
 <p>Merece la pena fijarse en un detalle: la hoja de cálculo contiene variables con datos faltantes (<em>missing values</em>). Unos se reconocen por la presencia de celdas en blanco, pero otros aparecen como celdas con el texto “n.d.” (no disponible). Identificar cómo se anota cada ausencia resulta clave, porque <strong>R debe registrar ambas como <em>NAs</em></strong> (<em>not available</em>).</p>
 <p>Cerremos el archivo “interestelar_100.xlsx” y volvamos a RStudio. Para importar los datos alojados en la hoja “Datos” y echar un primer vistazo a las variables que contiene, ejecutaremos:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## DATOS</span></span>
 <span></span>
 <span><span class="co"># Importando datos desde Excel</span></span>
@@ -168,24 +169,24 @@
 <span></span>
 <span><span class="co"># Resumen visual de las variables</span></span>
 <span><span class="fu"><span>lite_resumen</span></span><span class="op">(</span><span class="va">interestelar_100</span><span class="op">)</span></span></code></pre></div>
-<div id="qandsbdqzg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ldjyauqqrv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#qandsbdqzg table {
+#ldjyauqqrv table {
   font-family: Lato, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qandsbdqzg thead, #qandsbdqzg tbody, #qandsbdqzg tfoot, #qandsbdqzg tr, #qandsbdqzg td, #qandsbdqzg th {
+#ldjyauqqrv thead, #ldjyauqqrv tbody, #ldjyauqqrv tfoot, #ldjyauqqrv tr, #ldjyauqqrv td, #ldjyauqqrv th {
   border-style: none;
 }
 
-#qandsbdqzg p {
+#ldjyauqqrv p {
   margin: 0;
   padding: 0;
 }
 
-#qandsbdqzg .gt_table {
+#ldjyauqqrv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -211,12 +212,12 @@
   border-left-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_caption {
+#ldjyauqqrv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qandsbdqzg .gt_title {
+#ldjyauqqrv .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -228,7 +229,7 @@
   border-bottom-width: 0;
 }
 
-#qandsbdqzg .gt_subtitle {
+#ldjyauqqrv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -240,7 +241,7 @@
   border-top-width: 0;
 }
 
-#qandsbdqzg .gt_heading {
+#ldjyauqqrv .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -252,13 +253,13 @@
   border-right-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_bottom_border {
+#ldjyauqqrv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_col_headings {
+#ldjyauqqrv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -273,7 +274,7 @@
   border-right-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_col_heading {
+#ldjyauqqrv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -293,7 +294,7 @@
   overflow-x: hidden;
 }
 
-#qandsbdqzg .gt_column_spanner_outer {
+#ldjyauqqrv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -305,15 +306,15 @@
   padding-right: 4px;
 }
 
-#qandsbdqzg .gt_column_spanner_outer:first-child {
+#ldjyauqqrv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qandsbdqzg .gt_column_spanner_outer:last-child {
+#ldjyauqqrv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qandsbdqzg .gt_column_spanner {
+#ldjyauqqrv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -325,11 +326,11 @@
   width: 100%;
 }
 
-#qandsbdqzg .gt_spanner_row {
+#ldjyauqqrv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qandsbdqzg .gt_group_heading {
+#ldjyauqqrv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -355,7 +356,7 @@
   text-align: left;
 }
 
-#qandsbdqzg .gt_empty_group_heading {
+#ldjyauqqrv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -370,15 +371,15 @@
   vertical-align: middle;
 }
 
-#qandsbdqzg .gt_from_md > :first-child {
+#ldjyauqqrv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qandsbdqzg .gt_from_md > :last-child {
+#ldjyauqqrv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qandsbdqzg .gt_row {
+#ldjyauqqrv .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -397,7 +398,7 @@
   overflow-x: hidden;
 }
 
-#qandsbdqzg .gt_stub {
+#ldjyauqqrv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -410,7 +411,7 @@
   padding-right: 5px;
 }
 
-#qandsbdqzg .gt_stub_row_group {
+#ldjyauqqrv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -424,15 +425,15 @@
   vertical-align: top;
 }
 
-#qandsbdqzg .gt_row_group_first td {
+#ldjyauqqrv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qandsbdqzg .gt_row_group_first th {
+#ldjyauqqrv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qandsbdqzg .gt_summary_row {
+#ldjyauqqrv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -442,16 +443,16 @@
   padding-right: 5px;
 }
 
-#qandsbdqzg .gt_first_summary_row {
+#ldjyauqqrv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_first_summary_row.thick {
+#ldjyauqqrv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qandsbdqzg .gt_last_summary_row {
+#ldjyauqqrv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -461,7 +462,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_grand_summary_row {
+#ldjyauqqrv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -471,7 +472,7 @@
   padding-right: 5px;
 }
 
-#qandsbdqzg .gt_first_grand_summary_row {
+#ldjyauqqrv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -481,7 +482,7 @@
   border-top-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_last_grand_summary_row_top {
+#ldjyauqqrv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -491,11 +492,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_striped {
+#ldjyauqqrv .gt_striped {
   background-color: #FAFAFA;
 }
 
-#qandsbdqzg .gt_table_body {
+#ldjyauqqrv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -504,7 +505,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_footnotes {
+#ldjyauqqrv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -518,7 +519,7 @@
   border-right-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_footnote {
+#ldjyauqqrv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -527,7 +528,7 @@
   padding-right: 5px;
 }
 
-#qandsbdqzg .gt_sourcenotes {
+#ldjyauqqrv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -541,7 +542,7 @@
   border-right-color: #D3D3D3;
 }
 
-#qandsbdqzg .gt_sourcenote {
+#ldjyauqqrv .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -549,72 +550,72 @@
   padding-right: 5px;
 }
 
-#qandsbdqzg .gt_left {
+#ldjyauqqrv .gt_left {
   text-align: left;
 }
 
-#qandsbdqzg .gt_center {
+#ldjyauqqrv .gt_center {
   text-align: center;
 }
 
-#qandsbdqzg .gt_right {
+#ldjyauqqrv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qandsbdqzg .gt_font_normal {
+#ldjyauqqrv .gt_font_normal {
   font-weight: normal;
 }
 
-#qandsbdqzg .gt_font_bold {
+#ldjyauqqrv .gt_font_bold {
   font-weight: bold;
 }
 
-#qandsbdqzg .gt_font_italic {
+#ldjyauqqrv .gt_font_italic {
   font-style: italic;
 }
 
-#qandsbdqzg .gt_super {
+#ldjyauqqrv .gt_super {
   font-size: 65%;
 }
 
-#qandsbdqzg .gt_footnote_marks {
+#ldjyauqqrv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qandsbdqzg .gt_asterisk {
+#ldjyauqqrv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qandsbdqzg .gt_indent_1 {
+#ldjyauqqrv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qandsbdqzg .gt_indent_2 {
+#ldjyauqqrv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qandsbdqzg .gt_indent_3 {
+#ldjyauqqrv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qandsbdqzg .gt_indent_4 {
+#ldjyauqqrv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qandsbdqzg .gt_indent_5 {
+#ldjyauqqrv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qandsbdqzg .katex-display {
+#ldjyauqqrv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qandsbdqzg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ldjyauqqrv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -982,7 +983,7 @@ ANTIGUA, MADURA and RENOVADA
 </h3>
 <p>Centrémonos en la <em>Rentabilidad Económica</em> (RENECO), la variable que nos permitirá responder a la primera pregunta de Mara Qyà. Lo primero es comprobar que todas las empresas tienen su correspondiente valor de RENECO, es decir, que no existen <strong>valores perdidos o <em>missing values</em></strong>.</p>
 <p>El diagnóstico exige siempre los mismos tres pasos: <strong>representar</strong> gráficamente dónde están las ausencias, <strong>identificar</strong> los casos concretos que las padecen y <strong>decidir</strong> qué hacer con ellos. La función <code><span>lite_na()</span></code> reúne los tres. Le indicamos el <em>data frame</em>, la variable o variables que deben examinarse, la acción a realizar y los títulos del gráfico. El resultado lo guardamos en un nuevo <em>data frame</em>, “muestra”, para preservar la integridad del original:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Análisis de una variable.</span></span>
 <span></span>
 <span><span class="co"># Localizando y eliminando missing values.</span></span>
@@ -990,7 +991,7 @@ ANTIGUA, MADURA and RENOVADA
 <span>                   accion    <span class="op">=</span> <span class="st">"eliminar"</span>,</span>
 <span>                   titulo    <span class="op">=</span> <span class="st">"Rentabilidad Económica: valores ausentes"</span>,</span>
 <span>                   subtitulo <span class="op">=</span> <span class="st">"Transporte de mercancías interestelar"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-42-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.2</strong></p>
 </div>
@@ -1030,13 +1031,13 @@ NA
 </ul>
 <p>En nuestro ejemplo, dado que los <em>missing values</em> representan un porcentaje muy reducido respecto al total (apenas 1 caso de 104 para RENECO), <strong>optaremos por la eliminación del caso</strong>, que es la vía más directa y no introduce distorsión apreciable en este contexto. En situaciones con mayor proporción de datos faltantes, o cuando se sospeche que la ausencia no es aleatoria, convendría considerar las técnicas de imputación mencionadas. De ahí el <code>accion = "eliminar"</code> del código anterior. En el <em>Global Environment</em> podemos comprobar que el <em>data frame</em> “muestra” tiene un caso menos que “interestelar_100”: 103.</p>
 <p>Resueltos los valores perdidos, <strong>conviene rastrear la posible presencia de <em>outliers</em></strong> o casos atípicos, capaces de desvirtuar los resultados de ciertos análisis. Como trabajamos con una sola variable métrica, la rentabilidad económica, nos basta con representarla mediante un <strong><em>box-plot</em></strong> o gráfico de caja, localizar los casos que quedan fuera de los bigotes y decidir qué hacer con ellos. De nuevo son tres pasos, y de nuevo <a href="https://github.com/teckel71/MATlite">MATlite</a> los reúne en una sola llamada, esta vez con <code><span>lite_outliers()</span></code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Localizando y eliminando outliers</span></span>
 <span><span class="va">muestra_so</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_outliers</span></span><span class="op">(</span><span class="va">muestra</span>, <span class="va">RENECO</span>,</span>
 <span>                            accion    <span class="op">=</span> <span class="st">"eliminar"</span>,</span>
 <span>                            titulo    <span class="op">=</span> <span class="st">"Rentabilidad Económica"</span>,</span>
 <span>                            subtitulo <span class="op">=</span> <span class="st">"Empresas de transporte interestelar"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-43-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.3</strong></p>
 </div>
@@ -1089,7 +1090,7 @@ jovian logistics
 </h3>
 <p>Con la base de datos ya depurada de <em>missing values</em> y <em>outliers</em>, y <strong>antes</strong> de aplicar la técnica que corresponda a los objetivos del estudio, se acostumbra a presentar una batería de <strong>gráficos</strong> básicos y <strong>medidas</strong> descriptivas que ofrecen una <strong>idea inicial de la estructura</strong> del sector en la variable analizada. Hablamos de medidas y gráficos de posición, de dispersión y de forma, esto es, de asimetría y curtosis.</p>
 <p>Toda esa batería la obtiene, de una vez, la función <code><span>lite_describe()</span></code>. Le indicamos el <em>data frame</em>, la variable y, si queremos, el texto con que se rotularán los ejes de los gráficos y el título del resumen final:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Descripción completa de la variable</span></span>
 <span><span class="va">rentabilidad</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_describe</span></span><span class="op">(</span><span class="va">muestra_so</span>, <span class="va">RENECO</span>,</span>
 <span>                              etiqueta  <span class="op">=</span> <span class="st">"Rentabilidad Económica (%)"</span>,</span>
@@ -1101,7 +1102,7 @@ jovian logistics
 <li><p>Si escribimos el nombre del objeto seguido de <code>$</code> y el nombre de una de sus piezas, R muestra solo esa pieza. Al teclear <code>rentabilidad$</code>, RStudio despliega la lista de piezas disponibles.</p></li>
 </ul>
 <p>Iremos pieza a pieza. Conviene abrir el recorrido con una tabla que recoja la <strong>distribución de frecuencias</strong> de la variable. Cuando los casos son numerosos —101 en nuestro ejemplo—, lo razonable es agruparlos en intervalos, tal como aprendimos en el capítulo 4 de <em>La Guía</em>. <code><span>lite_describe()</span></code> fija el número de intervalos con el método de <em>Sturges</em>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rentabilidad</span><span class="op">$</span><span class="va">frecuencias</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -1265,31 +1266,31 @@ F(i)
 </div>
 <p>La lectura de la tabla es clara: la <strong>rentabilidad económica</strong> de estas empresas se concentra en valores <strong>medios-altos</strong>, en torno al 50-60%, y son los dos intervalos centrales (47,4-53,9 y 53,9-60,3) los que reúnen la mayor parte de los casos. Alrededor de ocho de cada diez compañías quedan entre el 41% y el 66,8%, lo que apunta a un sector relativamente estable, con resultados parecidos entre sí. Los extremos están poco poblados: apenas un 5% presenta rentabilidades por debajo del 34,5% y solo un 2% supera el 73,2%. En términos económicos, la competencia y la eficiencia operativa parecen empujar a las empresas hacia un rendimiento <strong>razonable y sostenido</strong>, de modo que tanto el fracaso como el éxito excepcional resultan <strong>minoritarios</strong>. <strong>Primera respuesta parcial para Mara Qyà:</strong> el sector exhibe una rentabilidad bastante homogénea, si bien aún debemos confirmar esta impresión con las medidas descriptivas y descartar la presencia de anomalías.</p>
 <p>El <strong>análisis gráfico</strong>, por su parte, ofrece una imagen mucho más intuitiva de cómo se distribuyen nuestros casos en la variable estudiada. Un gráfico fundamental es el <strong>histograma</strong>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rentabilidad</span><span class="op">$</span><span class="va">histograma</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-46-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.4</strong></p>
 </div>
 <p>El gráfico muestra con nitidez cómo se reparten las empresas según su rentabilidad económica. La línea vertical azul señala la rentabilidad media. A simple vista, la distribución resulta acampanada y prácticamente simétrica.</p>
 <p>Como complemento del histograma, <code><span>lite_describe()</span></code> dibuja un <strong>gráfico de densidad</strong> de RENECO, que no es sino una versión “suavizada” de aquel y que representa la distribución de probabilidad empírica de la muestra. Sobre él superpone una curva normal con la misma media y desviación típica que nuestros datos. La comparación entre ambas curvas permite confirmar de un vistazo los rasgos que el histograma solo dejaba intuir, como una ligera asimetría:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rentabilidad</span><span class="op">$</span><span class="va">densidad</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-10-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-47-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.5</strong></p>
 </div>
 <p>La curva naranja muestra cómo se distribuye la <strong>rentabilidad económica</strong>: tiene forma de “campana”, con la mayoría de empresas concentradas alrededor del 50–60%. La línea vertical azul marca el valor central (media), en torno al 52%. Comparada con la curva azul de referencia (la normal), la distribución real es muy parecida, aunque algo más ancha y con un ligero peso extra en rentabilidades algo por debajo del centro; en el extremo alto hay menos casos de lo que predeciría una campana perfecta. En términos económicos: el sector muestra un rendimiento <strong>bastante estable</strong> y similar entre compañías, con <strong>pocas</strong> muy rezagadas o extraordinariamente rentables.</p>
 <p>Un tercer gráfico útil es el <strong><em>box-plot</em></strong>, construido ya sobre la muestra sin <em>outliers</em> y enriquecido con los valores individuales de cada empresa (los puntos rojos):</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rentabilidad</span><span class="op">$</span><span class="va">boxplot</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-48-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.6</strong></p>
 </div>
 <p>El <em>box-plot</em> confirma que la rentabilidad económica se concentra en la zona central. La <strong>mediana</strong> ronda el <strong>50%</strong> —la línea que atraviesa la caja— y la mitad de las empresas se sitúa aproximadamente entre el 46% y el 59%, altura de la caja o rango intercuartílico, lo que denota una variabilidad moderada. El punto azul, que marca la media, queda muy próximo a la mediana, señal de una distribución casi simétrica. Los bigotes se extienden hasta valores en torno al 28% y al 80%, y ya no aparece ningún caso atípico, puesto que los dos detectados se eliminaron previamente. La nube de puntos rojos confirma lo esencial: la mayoría de las compañías rinde de forma parecida y estable en el entorno del 50-60%.</p>
 <p>Conviene, además, conocer el valor de las principales <strong>medidas descriptivas</strong> —de posición, dispersión y forma— que caracterizan la distribución: la media, la desviación típica, el valor mínimo, la mediana, el valor máximo, el coeficiente de asimetría de <em>Fisher</em> y el coeficiente de apuntamiento o curtosis de <em>Fisher</em>. Este último está calculado de modo que la distribución perfectamente mesocúrtica (la normal) tome el valor 0:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rentabilidad</span><span class="op">$</span><span class="va">estadisticos</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -1358,15 +1359,15 @@ C. Curtosis Fisher
 </h3>
 <p>Numerosas técnicas multivariantes de corte inferencial —el análisis de la varianza o la regresión lineal, por citar dos— exigen que las variables sigan una <strong>distribución normal</strong>. Para comprobarlo disponemos de dos caminos: el análisis gráfico y el análisis formal, este último basado en contrastar la hipótesis nula de normalidad.</p>
 <p>Empecemos por el <strong>método gráfico</strong> más extendido: el <strong><em>gráfico qq</em></strong> o cuantil-cuantil, que enfrenta los cuantiles de nuestra muestra con los de una distribución normal teórica de idéntica media y desviación típica. Si los puntos se alinean sobre la diagonal, asumiremos un comportamiento aproximadamente normal:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rentabilidad</span><span class="op">$</span><span class="va">qq</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-50-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.7</strong></p>
 </div>
 <p>No siempre resulta fácil extraer una conclusión firme de un gráfico <em>qq</em>. En nuestro ejemplo, sin embargo, los puntos se ciñen a la diagonal con bastante fidelidad, lo que invita a pensar que RENECO podría seguir una distribución normal.</p>
 <p>Si queremos ser más precisos, al análisis gráfico podemos añadir uno formal, apoyado en un <strong>contraste de hipótesis</strong>. La prueba más habitual es la <strong>de normalidad de <em>Shapiro y Wilk</em></strong>, que se comporta bien en muestras relativamente reducidas. Su hipótesis nula es, justamente, el supuesto de normalidad; así que, para una significación del 5%, un p-valor superior a 0,05 nos llevará a no rechazarla. <code><span>lite_describe()</span></code> ya la ha realizado:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rentabilidad</span><span class="op">$</span><span class="va">normalidad</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -1408,9 +1409,9 @@ No se rechaza H0 (normalidad) al 5 %
 <span class="header-section-number">3.3.4</span> <img src="figuras/paperclip.svg" class="hicon"> Resumen: 4 gráficos básicos en la descripción de una variable.<a class="anchor" aria-label="anchor" href="#c03-resumen-4-graficos-basicos-en-la-descripcion"><i class="fas fa-link"></i></a>
 </h3>
 <p>En definitiva, para describir inicialmente la distribución de frecuencias de una variable métrica basta con los cuatro gráficos que acabamos de recorrer. Y como en un informe el espacio siempre escasea, <code><span>lite_describe()</span></code> los reúne también en una sola imagen, con el título y el subtítulo que le indicamos:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rentabilidad</span><span class="op">$</span><span class="va">resumen</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-15-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-52-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.8</strong></p>
 </div>
@@ -1431,7 +1432,7 @@ No se rechaza H0 (normalidad) al 5 %
 <p>También aquí el primer paso consiste en localizar los casos con <strong>valores perdidos o <em>missing values</em></strong>, para decidir después cómo tratarlos: eliminar el caso, estimar el valor ausente, etc.</p>
 <p>Imaginemos un análisis que tenga en cuenta cuatro variables: RENECO (rentabilidad económica), ACTIVO (volumen de activos de la empresa), MARGEN (margen de beneficio) y RES (resultado del ejercicio). Son, precisamente, las cuatro dimensiones por las que pregunta Mara Qyà.</p>
 <p>Aplicaremos <code><span>lite_na()</span></code> al <em>data frame</em> original, indicando esta vez las cuatro variables del análisis, y guardaremos el resultado en un nuevo <em>data frame</em>, “muestra2”:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Trabajando con múltiples variables.</span></span>
 <span></span>
 <span><span class="co"># Diagnóstico y filtrado de missing values.</span></span>
@@ -1439,7 +1440,7 @@ No se rechaza H0 (normalidad) al 5 %
 <span>                    accion    <span class="op">=</span> <span class="st">"eliminar"</span>,</span>
 <span>                    titulo    <span class="op">=</span> <span class="st">"Variables económico-financieras: valores ausentes"</span>,</span>
 <span>                    subtitulo <span class="op">=</span> <span class="st">"Transporte de mercancías interestelar"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-16-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-53-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.9</strong></p>
 </div>
@@ -1521,7 +1522,7 @@ NA
 <p>En cuanto a la <strong>detección de <em>outliers</em></strong>, examinar las variables de una en una no es solo poco operativo cuando son numerosas: es, sobre todo, <strong>incompleto</strong>. Y conviene detenerse en este punto, porque es la razón de fondo por la que hace falta un procedimiento distinto.</p>
 <p>Una empresa puede presentar valores <strong>perfectamente normales en cada variable por separado</strong> y ser, sin embargo, un caso atípico <strong>en el conjunto</strong>: lo raro no es ninguno de sus valores, sino la <strong>combinación</strong> de todos ellos. El <em>box-plot</em> aplicado variable a variable nunca detectará algo así, porque mira cada dimensión por separado y es ciego a cómo se relacionan entre sí.</p>
 <p>Podemos comprobarlo con nuestros propios datos. El gráfico siguiente enfrenta RENECO con MARGEN. La banda sombreada delimita el rango que la regla de 1,5·IQR considera normal <strong>en cada una de las dos variables</strong>, y la elipse roja recoge el 95 % de la nube atendiendo a su forma, es decir, a la relación que existe entre ambas:</p>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-17-1.png" alt="" width="614.4"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-54-1.png" alt="" width="614.4"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.10</strong></p>
 </div>
@@ -1547,13 +1548,13 @@ D_M(\mathbf{x})
 = \sqrt{(\mathbf{x}-\boldsymbol{\mu})^{\top}\,\mathbf{\Sigma}^{-1}\,(\mathbf{x}-\boldsymbol{\mu})}.
 \]</span></p>
 <p>Una vez calculada esa distancia para cada empresa, el procedimiento es exactamente el mismo que en el caso univariante: se representa mediante un <em>box-plot</em> y se consideran atípicos los casos que superan el umbral de 1,5·IQR. Por eso <strong>no necesitamos una función nueva</strong>: cuando a <code><span>lite_outliers()</span></code> se le pasan varias variables, reconoce automáticamente que estamos ante un caso multivariante, calcula por su cuenta la distancia de Mahalanobis y le aplica la regla de 1,5·IQR. Dicho de otro modo, <strong>una misma función resuelve ambos escenarios</strong>: con una sola variable trabaja directamente sobre ella; con varias, sintetiza su comportamiento mediante Mahalanobis.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Identificando y descartando outliers con distancia de Mahalanobis.</span></span>
 <span><span class="va">muestra2_so</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_outliers</span></span><span class="op">(</span><span class="va">muestra2</span>, <span class="fu"><span>c</span></span><span class="op">(</span><span class="va">RENECO</span>, <span class="va">ACTIVO</span>, <span class="va">MARGEN</span>, <span class="va">RES</span><span class="op">)</span>,</span>
 <span>                             accion    <span class="op">=</span> <span class="st">"eliminar"</span>,</span>
 <span>                             titulo    <span class="op">=</span> <span class="st">"DISTANCIA DE MAHALANOBIS"</span>,</span>
 <span>                             subtitulo <span class="op">=</span> <span class="st">"RENECO, ACTIVO, MARGEN, RES. Empresas TMI."</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-18-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-55-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.11</strong></p>
 </div>
@@ -1790,14 +1791,14 @@ moya cargo systems
 <span class="header-section-number">3.4.2</span> <img src="figuras/key.svg" class="hicon"> Correlación entre variables.<a class="anchor" aria-label="anchor" href="#c03-correlacion-entre-variables"><i class="fas fa-link"></i></a>
 </h3>
 <p>Cuando manejamos más de una variable, un rasgo de primer orden es la intensidad con que esas variables se relacionan estadísticamente entre sí: el estudio de las correlaciones. La función <code><span>lite_correlaciones()</span></code> dibuja la <strong>matriz de correlaciones</strong> de las variables que le indiquemos. Si además le pasamos, con el argumento <code>comparar_con</code>, el <em>data frame</em> que todavía conserva los <em>outliers</em>, prepara también la matriz con ellos para poder comparar ambas:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Correlaciones entre variables.</span></span>
 <span><span class="va">correlaciones</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_correlaciones</span></span><span class="op">(</span><span class="va">muestra2_so</span>, <span class="fu"><span>c</span></span><span class="op">(</span><span class="va">RENECO</span>, <span class="va">ACTIVO</span>, <span class="va">MARGEN</span>, <span class="va">RES</span><span class="op">)</span>,</span>
 <span>                                    comparar_con <span class="op">=</span> <span class="va">muestra2</span><span class="op">)</span></span></code></pre></div>
 <p>Veamos primero la matriz calculada sin los <em>outliers</em>:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">correlaciones</span><span class="op">$</span><span class="va">grafico</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-20-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-57-1.png" alt="" width="672"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.12</strong></p>
 </div>
@@ -1808,9 +1809,9 @@ moya cargo systems
 </ul>
 <p>Un coeficiente de correlación se mueve entre <strong>-1</strong>, que indica una relación intensa en sentido opuesto, y <strong>+1</strong>, que señala una relación igualmente intensa pero en el mismo sentido. El gráfico muestra que ACTIVO y RES mantienen una relación muy fuerte y positiva, y que entre MARGEN y RENECO existe también un vínculo apreciable. En cambio, ACTIVO y MARGEN, por un lado, y RENECO y ACTIVO, por otro, apenas guardan relación estadística.</p>
 <p>Para terminar, comparemos las correlaciones anteriores con las que resultan si mantenemos en la muestra los casos <em>outliers</em>:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">correlaciones</span><span class="op">$</span><span class="va">comparacion</span></span></code></pre></div>
-<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-21-1.png" alt="" width="100%"></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-58-1.png" alt="" width="100%"></div>
 <div style="text-align: center;">
 <p><strong>Figura 3.13</strong></p>
 </div>
@@ -1875,7 +1876,7 @@ moya cargo systems
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R, paso a paso y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
+    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

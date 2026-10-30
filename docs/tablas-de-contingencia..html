@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>7 Tablas de contingencia. | R-Stars Lite</title>
 <meta name="author" content="Miguel-Ángel Tarancón Morán">
-<meta name="description" content="Capítulo en preparación.">
+<meta name="description" content="Figura 7.1. Galaxias que recorrer…  7.1 Introducción. En numerosas ocasiones los datos con los que el analista debe enfrentarse son de naturaleza cualitativa, esto es, la información se recoge en...">
 <meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="7 Tablas de contingencia. | R-Stars Lite">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://teckel71.github.io/RStarslite-book/tablas-de-contingencia..html">
 <meta property="og:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
-<meta property="og:description" content="Capítulo en preparación.">
+<meta property="og:description" content="Figura 7.1. Galaxias que recorrer…  7.1 Introducción. En numerosas ocasiones los datos con los que el analista debe enfrentarse son de naturaleza cualitativa, esto es, la información se recoge en...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7 Tablas de contingencia. | R-Stars Lite">
-<meta name="twitter:description" content="Capítulo en preparación.">
+<meta name="twitter:description" content="Figura 7.1. Galaxias que recorrer…  7.1 Introducción. En numerosas ocasiones los datos con los que el analista debe enfrentarse son de naturaleza cualitativa, esto es, la información se recoge en...">
 <meta name="twitter:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,8 +61,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Análisis de datos con R, paso a paso y sin vértigo">R-Stars Lite</a>:
-        <small class="text-muted">Análisis de datos con R, paso a paso y sin vértigo</small>
+        <a href="index.html" title="Análisis de datos con R y sin vértigo">R-Stars Lite</a>:
+        <small class="text-muted">Análisis de datos con R y sin vértigo</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -85,10 +85,10 @@
 <li><a class="active" href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></li>
 <li><a class="" href="escalado-multidimensional..html"><span class="header-section-number">8</span> Escalado multidimensional.</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+<li><a class="" href="ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite..html">Apéndice: Guía de uso de MATlite.</a></li>
 <li><a class="" href="licencia.html">Licencia</a></li>
 </ul>
-
-        <div class="book-extra">
+<div class="book-extra">
           
         </div>
       </nav>
@@ -97,20 +97,1277 @@
 <h1>
 <span class="header-section-number">7</span> Tablas de contingencia.<a class="anchor" aria-label="anchor" href="#tablas-de-contingencia."><i class="fas fa-link"></i></a>
 </h1>
-<p><em>Capítulo en preparación.</em></p>
+<div class="inline-figure"><img src="figuras/10%20galaxias.jpg" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 7.1.</strong> <span class="smallcaps">Galaxias que recorrer…</span></p>
+</div>
+<div id="c07-introduccion" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> <img src="figuras/book.svg" class="hicon"> Introducción.<a class="anchor" aria-label="anchor" href="#c07-introduccion"><i class="fas fa-link"></i></a>
+</h2>
+<p>En numerosas ocasiones los datos con los que el analista debe enfrentarse son de naturaleza <strong>cualitativa</strong>, esto es, la información se recoge en características de los individuos no numéricas o <strong>atributos</strong> (o factores o variables categóricas o cualitativas). Cuando ocurre esto, es necesario recurrir a técnicas de explotación específicas para este tipo de datos.</p>
+<p>En estos casos, la información suele sintetizarse y presentarse mediante las denominadas <strong>tablas de contingencia</strong>. En este tipo de tablas, se muestran las frecuencias conjuntas, es decir, el número de casos que comparten los distintos niveles o categorías de los diferentes factores.</p>
+<p>Cuando se trabaja con varios factores o atributos, representados en su correspondiente tabla de contingencia, uno de los análisis más interesantes es determinar si existe <strong>asociación</strong> entre los factores o atributos, es decir, si se aprecia algún tipo de relación estadística entre estas variables categóricas, en el sentido de si se puede afirmar que el hecho de que los casos de la muestra tomen ciertos niveles o categorías en unos factores hace que estos mismos casos tiendan a tomar ciertos niveles o categorías de otro u otros factores.</p>
+</div>
+<div id="c07-asociacion-entre-dos-atributos" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> <img src="figuras/book.svg" class="hicon"> Asociación entre dos atributos: la prueba ji-cuadrado.<a class="anchor" aria-label="anchor" href="#c07-asociacion-entre-dos-atributos"><i class="fas fa-link"></i></a>
+</h2>
+<p>Existen diferentes pruebas para verificar la posible existencia de asociación entre dos factores. La más habitual es el <strong>contraste o prueba de asociación de Pearson</strong>. Este contraste se basa en un estadístico que, bajo la hipótesis nula de que no existe asociación, sigue una distribución ji-cuadrado. El estadístico es, en realidad, una medida global de <strong>lo distante que está la tabla de contingencia observada (sus frecuencias conjuntas) respecto a la estructura “ideal” que tendría que tener si existiera independencia</strong> “total” entre ambos atributos:</p>
+<p><span class="math display">\[
+\chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(n_{ij} - E_{ij})^2}{E_{ij}}
+\]</span></p>
+<p>donde:</p>
+<ul>
+<li><p><span class="math inline">\(n_{ij}\)</span> es la frecuencia observada en la celda <span class="math inline">\((i, j)\)</span>.</p></li>
+<li><p><span class="math inline">\(E_{ij}\)</span> es la frecuencia esperada en la celda <span class="math inline">\((i, j)\)</span> bajo independencia, calculada como <span class="math inline">\(E_{ij} = \frac{R_i \cdot C_j}{N}\)</span>.</p></li>
+<li><p><span class="math inline">\(R_i\)</span> es el total de la fila <span class="math inline">\(i\)</span>, <span class="math inline">\(C_j\)</span> el total de la columna <span class="math inline">\(j\)</span>, y <span class="math inline">\(N\)</span> el total general de observaciones.</p></li>
+</ul>
+<p>En este contraste, la hipótesis nula <span class="math inline">\((H_0)\)</span> establece que <strong>no existe asociación entre las dos variables categóricas</strong>, es decir, que son estadísticamente <strong>independientes</strong>. La hipótesis alternativa <span class="math inline">\((H_1)\)</span> plantea que <strong>sí existe asociación</strong>, de modo que la distribución conjunta difiere significativamente de la esperada. El estadístico tiene <span class="math inline">\((r-1)(c-1)\)</span> grados de libertad, siendo <span class="math inline">\(r\)</span> y <span class="math inline">\(c\)</span> el número de filas y columnas de la tabla.</p>
+<p>Si se rechaza la independencia, conviene saber <strong>qué celdas</strong> son las responsables. Para ello se emplean los <strong>residuos estandarizados ajustados</strong>, que miden la desviación de cada frecuencia observada respecto a la esperada:</p>
+<p><span class="math display">\[
+r_{ij} = \frac{n_{ij} - E_{ij}}{\sqrt{E_{ij} \left(1 - \frac{R_i}{N}\right) \left(1 - \frac{C_j}{N}\right)}}
+\]</span></p>
+<p>Como se distribuyen aproximadamente según una normal estándar, los residuos con valor absoluto superior a 1,96 indican celdas que se desvían significativamente (al 5 %) de lo esperado bajo independencia: un residuo positivo señala que esa combinación de categorías aparece <strong>más</strong> de lo esperado, y uno negativo, <strong>menos</strong>.</p>
+</div>
+<div id="c07-medidas-de-asociacion" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> <img src="figuras/book.svg" class="hicon"> Medidas de asociación.<a class="anchor" aria-label="anchor" href="#c07-medidas-de-asociacion"><i class="fas fa-link"></i></a>
+</h2>
+<p>La prueba ji-cuadrado responde a la pregunta de <strong>si</strong> existe asociación, pero no a la de <strong>cuán intensa</strong> es. El valor del estadístico <span class="math inline">\(\chi^2\)</span> no sirve para medir la intensidad, porque crece con el tamaño de la muestra: con muchos casos, asociaciones muy débiles resultan significativas. Para medir la intensidad se utilizan los <strong>coeficientes de asociación</strong>, que relativizan el <span class="math inline">\(\chi^2\)</span> y toman valores entre 0 (independencia) y, como máximo, 1:</p>
+<ul>
+<li>
+<strong>Coeficiente de contingencia de Pearson (<em>C</em>)</strong>:</li>
+</ul>
+<p><span class="math display">\[
+C = \sqrt{\frac{\chi^2}{\chi^2 + N}}
+\]</span></p>
+<p>Su inconveniente es que no alcanza el valor 1 ni siquiera con asociación perfecta: su máximo depende del tamaño de la tabla, <span class="math inline">\(C_{\max} = \sqrt{\frac{k-1}{k}}\)</span>, siendo <span class="math inline">\(k\)</span> el menor entre el número de filas y de columnas. Por eso suele calcularse también el <strong>coeficiente de contingencia corregido</strong>, <span class="math inline">\(C / C_{\max}\)</span>, que sí puede llegar a 1.</p>
+<ul>
+<li>
+<strong>V de Cramér</strong>:</li>
+</ul>
+<p><span class="math display">\[
+V = \sqrt{\frac{\chi^2}{N\,(k-1)}}
+\]</span></p>
+<p>Es la medida más utilizada, porque varía entre 0 y 1 con independencia del tamaño de la tabla, lo que permite comparar tablas distintas. Como orientación, valores de <em>V</em> por debajo de 0,1 suelen considerarse una asociación despreciable; entre 0,1 y 0,3, débil; entre 0,3 y 0,5, moderada; y por encima de 0,5, fuerte.</p>
+<ul>
+<li>
+<strong>Coeficiente Phi</strong> (<span class="math inline">\(\phi = \sqrt{\chi^2 / N}\)</span>): solo tiene sentido en tablas de 2 × 2, en las que coincide con la <em>V</em> de Cramér.</li>
+</ul>
+<p>Conviene leer siempre conjuntamente el contraste y las medidas: el contraste dice si la asociación es estadísticamente distinguible del azar; las medidas, si es relevante en la práctica.</p>
+</div>
+<div id="c07-practica-el-entramado-comercial-del-cosmos" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> <img src="figuras/pie-chart.svg"> Práctica: el entramado comercial del cosmos.<a class="anchor" aria-label="anchor" href="#c07-practica-el-entramado-comercial-del-cosmos"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c07-el-encargo" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> <img src="figuras/star.svg" class="hicon"> El encargo.<a class="anchor" aria-label="anchor" href="#c07-el-encargo"><i class="fas fa-link"></i></a>
+</h3>
+<p>En el inmenso mapa del espacio conocido, las distintas galaxias no solo se distinguen por la luz de sus estrellas, sino también por la forma en que sus habitantes organizan el comercio, la política y la vida empresarial. Las naves que surcan los corredores hiperespaciales transportan minerales, piezas de ingeniería cuántica, alimentos sintéticos y cualquier cosa que pueda venderse entre sistemas planetarios. Pero detrás de cada nave hay una empresa, y detrás de cada empresa, una historia.</p>
+<p>El presente análisis forma parte de un informe solicitado por la <em>Agencia Interplanetaria de Transporte de Mercancías</em>, preocupada por comprender cómo ciertos factores estructurales influyen en la operativa y organización de las empresas de transporte interestelar. En concreto, se plantean dos cuestiones:</p>
+<ol style="list-style-type: decimal">
+<li><p>Si la galaxia donde opera la sede de las empresas (GALAXIA) influye en su forma jurídica (FJUR).</p></li>
+<li><p>Si el estado de renovación de la flota (EFLO) depende de la forma jurídica.</p></li>
+</ol>
+</div>
+<div id="c07-preparacion-de-los-datos" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> <img src="figuras/pie-chart.svg"> Preparación de los datos.<a class="anchor" aria-label="anchor" href="#c07-preparacion-de-los-datos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Necesitamos en la carpeta del proyecto el archivo de datos <strong>interestelar_300.xlsx</strong>, con información de 300 empresas dedicadas a los servicios de transporte interestelar de mercancías, y el <em>script</em> <strong>contingencia_lite.R</strong>. Importamos los datos y seleccionamos los tres atributos del análisis:</p>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Limpiando el Global Environment</span></span>
+<span><span class="fu"><span>rm</span></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><span>ls</span></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Cargando el paquete de la asignatura</span></span>
+<span><span class="kw"><span>library</span></span><span class="op">(</span><span class="va"><a href="https://github.com/teckel71/MATlite">MATlite</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Importando datos y seleccionando los atributos del análisis</span></span>
+<span><span class="va">interestelar_300</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_importa</span></span><span class="op">(</span><span class="st">"interestelar_300.xlsx"</span><span class="op">)</span></span>
+<span><span class="va">seleccion</span> <span class="op">&lt;-</span> <span class="va">interestelar_300</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">GALAXIA</span>, <span class="va">FJUR</span>, <span class="va">EFLO</span><span class="op">)</span></span>
+<span><span class="fu"><span>lite_resumen</span></span><span class="op">(</span><span class="va">seleccion</span><span class="op">)</span></span></code></pre></div>
+<div id="lnqdpzicam" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#lnqdpzicam table {
+  font-family: Lato, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+#lnqdpzicam thead, #lnqdpzicam tbody, #lnqdpzicam tfoot, #lnqdpzicam tr, #lnqdpzicam td, #lnqdpzicam th {
+  border-style: none;
+}
+
+#lnqdpzicam p {
+  margin: 0;
+  padding: 0;
+}
+
+#lnqdpzicam .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #FFFFFF;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#lnqdpzicam .gt_title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lnqdpzicam .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lnqdpzicam .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lnqdpzicam .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lnqdpzicam .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lnqdpzicam .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lnqdpzicam .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lnqdpzicam .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#lnqdpzicam .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#lnqdpzicam .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lnqdpzicam .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lnqdpzicam .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lnqdpzicam .gt_row {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #F6F7F7;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lnqdpzicam .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lnqdpzicam .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lnqdpzicam .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lnqdpzicam .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#lnqdpzicam .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lnqdpzicam .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lnqdpzicam .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lnqdpzicam .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_striped {
+  background-color: #FAFAFA;
+}
+
+#lnqdpzicam .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lnqdpzicam .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lnqdpzicam .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lnqdpzicam .gt_left {
+  text-align: left;
+}
+
+#lnqdpzicam .gt_center {
+  text-align: center;
+}
+
+#lnqdpzicam .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lnqdpzicam .gt_font_normal {
+  font-weight: normal;
+}
+
+#lnqdpzicam .gt_font_bold {
+  font-weight: bold;
+}
+
+#lnqdpzicam .gt_font_italic {
+  font-style: italic;
+}
+
+#lnqdpzicam .gt_super {
+  font-size: 65%;
+}
+
+#lnqdpzicam .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#lnqdpzicam .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lnqdpzicam .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#lnqdpzicam .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#lnqdpzicam .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lnqdpzicam .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lnqdpzicam .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#lnqdpzicam .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#lnqdpzicam div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>seleccion</td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>300 rows x 3 cols</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">Column</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="value">Plot Overview</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_missing">Missing</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Mean">Mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Median">Median</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="SD">SD</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:20px;width:20px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#4e79a7;overflow:visible;position:relative;"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;"><div style="max-width: 150px;">
+    <details style="font-weight: normal !important;"><summary style="font-weight: bold !important;">GALAXIA</summary>
+Galaxia de Andrómeda, Vía Láctea, Gran Nube de Magallanes, Galaxia del Triángulo and Pequeña Nube de Magallanes
+</details>
+</div></td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ=="><rect x="1.00" y="2.99" width="139.74" height="20.62"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ==)"><rect x="125.36" y="3.93" width="15.37" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #DDEAF7;"></rect><rect x="103.47" y="3.93" width="21.89" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #B7CFE9;"></rect><rect x="79.25" y="3.93" width="24.22" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #91B4DA;"></rect><rect x="40.12" y="3.93" width="39.13" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #679ACC;"></rect><rect x="1.00" y="3.93" width="39.13" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3181BD;"></rect></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><text x="1.00" y="30.18" style='font-size: 8.00px; font-family: "Arial";' textlength="43.61px" lengthadjust="spacingAndGlyphs">5 categories</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_center">—</td>
+<td headers="Median" class="gt_row gt_center">—</td>
+<td headers="SD" class="gt_row gt_center">—</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:20px;width:20px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#4e79a7;overflow:visible;position:relative;"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;"><div style="max-width: 150px;">
+    <details style="font-weight: normal !important;"><summary style="font-weight: bold !important;">FJUR</summary>
+SLG, SAG and CG
+</details>
+</div></td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ=="><rect x="1.00" y="2.99" width="139.74" height="20.62"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ==)"><rect x="102.54" y="3.93" width="38.20" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #DDEAF7;"></rect><rect x="62.02" y="3.93" width="40.52" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #91B4DA;"></rect><rect x="1.00" y="3.93" width="61.02" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3181BD;"></rect></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><text x="1.00" y="30.18" style='font-size: 8.00px; font-family: "Arial";' textlength="43.61px" lengthadjust="spacingAndGlyphs">3 categories</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_center gt_striped">—</td>
+<td headers="Median" class="gt_row gt_center gt_striped">—</td>
+<td headers="SD" class="gt_row gt_center gt_striped">—</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:20px;width:20px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#4e79a7;overflow:visible;position:relative;"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;"><div style="max-width: 150px;">
+    <details style="font-weight: normal !important;"><summary style="font-weight: bold !important;">EFLO</summary>
+ANTIGUA, MADURA and RENOVADA
+</details>
+</div></td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ=="><rect x="1.00" y="2.99" width="139.74" height="20.62"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ==)"><rect x="111.86" y="3.93" width="28.88" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #DDEAF7;"></rect><rect x="69.93" y="3.93" width="41.92" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #91B4DA;"></rect><rect x="1.00" y="3.93" width="68.94" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3181BD;"></rect></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><text x="1.00" y="30.18" style='font-size: 8.00px; font-family: "Arial";' textlength="43.61px" lengthadjust="spacingAndGlyphs">3 categories</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_center">—</td>
+<td headers="Median" class="gt_row gt_center">—</td>
+<td headers="SD" class="gt_row gt_center">—</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div style="text-align: center;">
+<p><strong>Tabla 7.1</strong></p>
+</div>
+<p>Comprobamos la existencia de <em>missing values</em> y, como los nombres de las galaxias son muy largos (lo que dificultaría la lectura de tablas y gráficos), los abreviamos con la función <code><span>lite_recodifica()</span></code>. Basta con indicarle la variable y una lista de cambios con la forma <code>"nombre antiguo" = "nombre nuevo"</code>; las categorías que no se mencionan (aquí, “Vía Láctea”) se mantienen tal cual:</p>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">seleccion</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_na</span></span><span class="op">(</span><span class="va">seleccion</span>, accion <span class="op">=</span> <span class="st">"eliminar"</span>,</span>
+<span>                     titulo    <span class="op">=</span> <span class="st">"Tablas de contingencia."</span>,</span>
+<span>                     subtitulo <span class="op">=</span> <span class="st">"Transporte de mercancías interestelar"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">seleccion</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_recodifica</span></span><span class="op">(</span><span class="va">seleccion</span>, <span class="va">GALAXIA</span>,</span>
+<span>  <span class="fu"><span>c</span></span><span class="op">(</span><span class="st">"Gran Nube de Magallanes"</span>    <span class="op">=</span> <span class="st">"GN Magallanes"</span>,</span>
+<span>    <span class="st">"Pequeña Nube de Magallanes"</span> <span class="op">=</span> <span class="st">"PN Magallanes"</span>,</span>
+<span>    <span class="st">"Galaxia de Andrómeda"</span>       <span class="op">=</span> <span class="st">"Andrómeda"</span>,</span>
+<span>    <span class="st">"Galaxia del Triángulo"</span>      <span class="op">=</span> <span class="st">"Triángulo"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## GALAXIA: 216 casos recodificados. Categorías: Andrómeda, GN Magallanes, PN Magallanes, Triángulo, Vía Láctea.</code></pre>
+<p>No se ha localizado ninguna observación con <em>missing values</em>, luego no se ha de realizar ningún tipo de tratamiento.</p>
+</div>
+<div id="c07-la-sospecha-institucional-galaxia-fjur" class="section level3" number="7.4.3">
+<h3>
+<span class="header-section-number">7.4.3</span> <img src="figuras/star.svg" class="hicon"><img src="figuras/pie-chart.svg" class="hicon"> La sospecha institucional (GALAXIA × FJUR).<a class="anchor" aria-label="anchor" href="#c07-la-sospecha-institucional-galaxia-fjur"><i class="fas fa-link"></i></a>
+</h3>
+<p>En el sector del transporte interestelar existe la percepción generalizada de que las condiciones institucionales y regulatorias de cada galaxia influyen en la forma en que las empresas se constituyen jurídicamente. La Vía Láctea, con un marco fiscal estable y maduro, tiende a favorecer sociedades mercantiles de gran tamaño, mientras que otras galaxias, como la Gran y la Pequeña Nube de Magallanes, han desarrollado sistemas legales más flexibles o con incentivos específicos para determinadas estructuras empresariales. Esta heterogeneidad normativa sugiere que la elección de la forma jurídica (FJUR) podría estar condicionada por la galaxia de operación (GALAXIA), lo cual justifica el análisis estadístico de su posible asociación.</p>
+<p>Todo el análisis lo realiza la función <code><span>lite_contingencia()</span></code>, a la que indicamos el <em>data frame</em>, el atributo que irá en las filas, el que irá en las columnas y, opcionalmente, un título y subtítulo para los gráficos:</p>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_contingencia</span></span><span class="op">(</span><span class="va">seleccion</span>, <span class="va">GALAXIA</span>, <span class="va">FJUR</span>,</span>
+<span>                                  titulo    <span class="op">=</span> <span class="st">"Galaxia y Forma Jurídica"</span>,</span>
+<span>                                  subtitulo <span class="op">=</span> <span class="st">"Empresas TMI"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Contraste ji-cuadrado: χ² = 18.209, g.l. = 8, p-valor = 0.01971. Se rechaza H0 (independencia) al 5 %.</code></pre>
+<p>La función adelanta en la consola el resultado del contraste. Vamos a examinar sus piezas una a una, comenzando por la <strong>tabla de contingencia</strong>, con las frecuencias marginales (sumas de filas y columnas):</p>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span><span class="op">$</span><span class="va">tabla</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+GALAXIA
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+FJUR
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+CG
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+SAG
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+SLG
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Sum
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+Andrómeda
+</td>
+<td style="text-align:right;text-align: center;">
+20
+</td>
+<td style="text-align:right;text-align: center;">
+29
+</td>
+<td style="text-align:right;text-align: center;">
+35
+</td>
+<td style="text-align:right;text-align: center;">
+84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+GN Magallanes
+</td>
+<td style="text-align:right;text-align: center;">
+23
+</td>
+<td style="text-align:right;text-align: center;">
+12
+</td>
+<td style="text-align:right;text-align: center;">
+17
+</td>
+<td style="text-align:right;text-align: center;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+PN Magallanes
+</td>
+<td style="text-align:right;text-align: center;">
+4
+</td>
+<td style="text-align:right;text-align: center;">
+7
+</td>
+<td style="text-align:right;text-align: center;">
+22
+</td>
+<td style="text-align:right;text-align: center;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+Triángulo
+</td>
+<td style="text-align:right;text-align: center;">
+10
+</td>
+<td style="text-align:right;text-align: center;">
+17
+</td>
+<td style="text-align:right;text-align: center;">
+20
+</td>
+<td style="text-align:right;text-align: center;">
+47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+Vía Láctea
+</td>
+<td style="text-align:right;text-align: center;">
+25
+</td>
+<td style="text-align:right;text-align: center;">
+22
+</td>
+<td style="text-align:right;text-align: center;">
+37
+</td>
+<td style="text-align:right;text-align: center;">
+84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+Sum
+</td>
+<td style="text-align:right;text-align: center;">
+82
+</td>
+<td style="text-align:right;text-align: center;">
+87
+</td>
+<td style="text-align:right;text-align: center;">
+131
+</td>
+<td style="text-align:right;text-align: center;">
+300
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 7.2</strong></p>
+</div>
+<p>La tabla de contingencia muestra cómo se distribuyen las formas jurídicas de las empresas (CG, SAG y SLG) en cada galaxia del estudio. Se observa que <strong>Andrómeda</strong> y <strong>Vía Láctea</strong> son las que concentran el mayor número de compañías (84 cada una), mientras que <strong>PN Magallanes</strong> es la menos representada. La forma jurídica <strong>SLG</strong> es la más frecuente en el conjunto del sector y también dentro de cada galaxia, con una excepción llamativa: en <strong>GN Magallanes</strong> la forma dominante es <strong>CG</strong> (23 empresas, frente a 17 SLG). El predominio de las SLG es, en cambio, especialmente acusado en <strong>PN Magallanes</strong>, donde representa dos tercios de las empresas. En conjunto, la tabla sugiere posibles diferencias estructurales entre galaxias, lo que motiva la necesidad de un análisis formal de asociación.</p>
+<p>La tabla también se puede representar gráficamente mediante un <strong>gráfico de mosaico</strong>, con lo que se percibirá mejor la magnitud de las frecuencias conjuntas. A mayor frecuencia, mayor área del rectángulo correspondiente:</p>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span><span class="op">$</span><span class="va">mosaico</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-128-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 7.2</strong></p>
+</div>
+<p>Cada fila del mosaico corresponde a una galaxia y su anchura refleja el número total de empresas que operan en ella; dentro de cada fila, las columnas representan las formas jurídicas (CG, SAG y SLG) en proporción a su frecuencia dentro de esa galaxia. Puede verse, por ejemplo, que Andrómeda y la Vía Láctea albergan un mayor número total de empresas, y que en la mayoría de galaxias predominan las SLG. La disposición y el tamaño de los rectángulos facilitan comparar visualmente cómo varía la composición jurídica entre galaxias.</p>
+<p>Otro modo de visualizar la estructura de la tabla es mediante gráficos de barras que muestren las <strong>frecuencias marginales</strong> de cada atributo, diferenciando en cada barra los casos que pertenecen a las categorías del otro:</p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span><span class="op">$</span><span class="va">barras</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-129-1.png" alt="" width="100%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 7.3</strong></p>
+</div>
+<p>En el gráfico de la izquierda se observa cuántas empresas operan en cada <strong>galaxia</strong>, con las barras apiladas según su <strong>forma jurídica</strong>. En el de la derecha se muestra la distribución inversa: las frecuencias de cada <strong>forma jurídica</strong>, apiladas según la galaxia. Las SLG son la forma jurídica más habitual en el conjunto del sector, y las galaxias contribuyen en proporciones diferentes a cada forma, lo que refuerza visualmente la idea de posibles diferencias estructurales.</p>
+<p>Pasamos ahora a la cuestión central: <strong>¿existe asociación entre ambos atributos?</strong> La pieza <code>chi2</code> recoge la prueba de asociación de Pearson:</p>
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span><span class="op">$</span><span class="va">chi2</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Contraste
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+χ²
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+g.l.
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+p-valor
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Decisión
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;text-align: center;">
+Ji-cuadrado de Pearson
+</td>
+<td style="text-align:right;text-align: center;">
+18.209
+</td>
+<td style="text-align:right;text-align: center;">
+8
+</td>
+<td style="text-align:right;text-align: center;">
+0.0197
+</td>
+<td style="text-align:left;text-align: center;">
+Se rechaza H0 (independencia) al 5 %
+</td>
+</tr></tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 7.3</strong></p>
+</div>
+<p>El resultado de la prueba ofrece un estadístico <span class="math inline">\(\chi^2\)</span> = 18,209 con 8 grados de libertad y un <strong>p-valor de 0,0197</strong>, inferior al nivel habitual de significación del 5 %. Esto implica que <strong>rechazamos la hipótesis nula de independencia</strong> entre GALAXIA y FJUR. En consecuencia, concluimos que <strong>sí existe evidencia estadística de asociación</strong> entre la galaxia donde se sitúa la sede de la empresa y su forma jurídica.</p>
+<p>Si tenemos curiosidad por saber cuáles serían las frecuencias de la tabla en caso de independencia total, <code>galaxia_fjur$esperadas</code> las muestra. Para saber <strong>qué celdas son responsables</strong> de la asociación, examinamos los residuos estandarizados ajustados; las celdas significativas aparecen resaltadas en naranja:</p>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span><span class="op">$</span><span class="va">residuos</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+CG
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+SAG
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+SLG
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+Andrómeda
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;-0.85&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;1.31&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;-0.44&lt;/span&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+GN Magallanes
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“font-weight: bold; border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: orange !important;” &gt;3.01&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;-1.04&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;-1.75&lt;/span&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+PN Magallanes
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“font-weight: bold; border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: orange !important;” &gt;-2.08&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;-1.05&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“font-weight: bold; border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: orange !important;” &gt;2.82&lt;/span&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+Triángulo
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;-1.01&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;1.18&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;-0.17&lt;/span&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+Vía Láctea
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;0.59&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;-0.67&lt;/span&gt;
+</td>
+<td style="text-align:left;text-align: center;">
+&lt;span style=“border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: white !important;” &gt;0.08&lt;/span&gt;
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 7.4</strong></p>
+</div>
+<p>La misma información se ofrece de forma gráfica en el <strong>gráfico de asociación</strong>, en el que cada barra representa el residuo de una celda: hacia arriba si la combinación aparece más de lo esperado, hacia abajo si aparece menos, y coloreada en naranja si la desviación es significativa:</p>
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span><span class="op">$</span><span class="va">asociacion</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-132-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 7.4</strong></p>
+</div>
+<p>Solo unas pocas celdas muestran desviaciones significativas: <strong>CG en la Gran Nube de Magallanes</strong> (más compañías de las esperadas), y <strong>CG</strong> (menos de las esperadas) y <strong>SLG</strong> (más) en la <strong>Pequeña Nube de Magallanes</strong>. Estos resultados confirman que <strong>la distribución de formas jurídicas no es uniforme entre galaxias</strong>, tal como apuntaba la prueba ji-cuadrado: ciertas galaxias albergan un número inusualmente alto o bajo de determinadas formas jurídicas, lo que sugiere <strong>diferencias reales en los entornos institucionales, normativos o económicos</strong> de cada galaxia.</p>
+<p>Por último, ¿<strong>es intensa</strong> esta asociación? Lo dicen las <strong>medidas de asociación</strong>:</p>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span><span class="op">$</span><span class="va">medidas</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Medida
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Valor
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+Coeficiente de contingencia C
+</td>
+<td style="text-align:right;text-align: center;">
+0.239
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+C máximo posible en esta tabla
+</td>
+<td style="text-align:right;text-align: center;">
+0.816
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+C corregido (C / C máximo)
+</td>
+<td style="text-align:right;text-align: center;">
+0.293
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+V de Cramér
+</td>
+<td style="text-align:right;text-align: center;">
+0.174
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 7.5</strong></p>
+</div>
+<p>El coeficiente de contingencia vale 0,239. Como la tabla tiene 3 columnas, su valor máximo posible es 0,816, de modo que el coeficiente corregido es 0,293. La <em>V</em> de Cramér, de 0,174, indica una <strong>asociación débil</strong>. La lectura conjunta es, pues, que la galaxia y la forma jurídica están asociadas de forma estadísticamente significativa, pero que esa asociación es de intensidad modesta: se concentra en unas pocas combinaciones de categorías (las dos Nubes de Magallanes), mientras que en el resto de galaxias la composición jurídica es bastante parecida.</p>
+</div>
+<div id="c07-se-refleja-la-estructura-juridica-en-la" class="section level3" number="7.4.4">
+<h3>
+<span class="header-section-number">7.4.4</span> <img src="figuras/star.svg" class="hicon"><img src="figuras/pie-chart.svg" class="hicon"> ¿Se refleja la estructura jurídica en la renovación de la flota? (FJUR × EFLO).<a class="anchor" aria-label="anchor" href="#c07-se-refleja-la-estructura-juridica-en-la"><i class="fas fa-link"></i></a>
+</h3>
+<p>En la segunda fase de la investigación se examina si el <strong>estado de la flota de las empresas (EFLO)</strong> —renovada, madura o antigua— presenta alguna relación sistemática con su <strong>forma jurídica (FJUR)</strong>. Aunque las estructuras legales pueden variar entre empresas, el mantenimiento y renovación de las flotas suele estar condicionado por <strong>normativas técnicas y ciclos de actualización comunes</strong> en todo el sector del transporte interestelar. Por ello, resulta razonable plantear que el estado de la flota no dependa de la forma jurídica de la empresa, sino de factores operativos y tecnológicos homogéneos.</p>
+<p>El código es el mismo que en la fase anterior, cambiando únicamente los atributos:</p>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fjur_eflo</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_contingencia</span></span><span class="op">(</span><span class="va">seleccion</span>, <span class="va">FJUR</span>, <span class="va">EFLO</span>,</span>
+<span>                               titulo    <span class="op">=</span> <span class="st">"Forma Jurídica y Estado de la Flota"</span>,</span>
+<span>                               subtitulo <span class="op">=</span> <span class="st">"Empresas TMI"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Contraste ji-cuadrado: χ² = 3.859, g.l. = 4, p-valor = 0.4255. No se rechaza H0 (independencia) al 5 %.</code></pre>
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fjur_eflo</span><span class="op">$</span><span class="va">tabla</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+FJUR
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+EFLO
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+ANTIGUA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+MADURA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+RENOVADA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Sum
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+CG
+</td>
+<td style="text-align:right;text-align: center;">
+34
+</td>
+<td style="text-align:right;text-align: center;">
+28
+</td>
+<td style="text-align:right;text-align: center;">
+20
+</td>
+<td style="text-align:right;text-align: center;">
+82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+SAG
+</td>
+<td style="text-align:right;text-align: center;">
+42
+</td>
+<td style="text-align:right;text-align: center;">
+26
+</td>
+<td style="text-align:right;text-align: center;">
+19
+</td>
+<td style="text-align:right;text-align: center;">
+87
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+SLG
+</td>
+<td style="text-align:right;text-align: center;">
+72
+</td>
+<td style="text-align:right;text-align: center;">
+36
+</td>
+<td style="text-align:right;text-align: center;">
+23
+</td>
+<td style="text-align:right;text-align: center;">
+131
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;font-weight: bold;">
+Sum
+</td>
+<td style="text-align:right;text-align: center;">
+148
+</td>
+<td style="text-align:right;text-align: center;">
+90
+</td>
+<td style="text-align:right;text-align: center;">
+62
+</td>
+<td style="text-align:right;text-align: center;">
+300
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 7.6</strong></p>
+</div>
+<p>A primera vista, las diferencias entre categorías son relativamente proporcionales: tanto CG como SAG y SLG presentan una mayor concentración de empresas con flotas <strong>antiguas</strong>, seguidas de <strong>maduras</strong> y, en menor medida, <strong>renovadas</strong>. Aunque las SLG muestran valores absolutos más altos debido a su mayor presencia total, la proporción interna entre estados de flota es muy similar a la observada en CG y SAG. El mosaico lo muestra con claridad:</p>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fjur_eflo</span><span class="op">$</span><span class="va">mosaico</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-136-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 7.5</strong></p>
+</div>
+<p>La estructura de las barras es prácticamente paralela en CG, SAG y SLG, lo que indica que la composición de estados de flota apenas varía entre tipos de empresa, anticipando un escenario de <strong>independencia</strong>. El contraste lo confirma:</p>
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fjur_eflo</span><span class="op">$</span><span class="va">chi2</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Contraste
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+χ²
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+g.l.
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+p-valor
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Decisión
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;text-align: center;">
+Ji-cuadrado de Pearson
+</td>
+<td style="text-align:right;text-align: center;">
+3.859
+</td>
+<td style="text-align:right;text-align: center;">
+4
+</td>
+<td style="text-align:right;text-align: center;">
+0.4255
+</td>
+<td style="text-align:left;text-align: center;">
+No se rechaza H0 (independencia) al 5 %
+</td>
+</tr></tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 7.7</strong></p>
+</div>
+<p>El contraste ji-cuadrado de Pearson arroja un estadístico <span class="math inline">\(\chi^2\)</span> = 3,859 con 4 grados de libertad y un <strong>p-valor de 0,4255</strong>, muy superior al nivel de significación habitual del 5 %. Esto implica que <strong>no podemos rechazar la hipótesis nula de independencia entre la forma jurídica de las empresas (FJUR) y el estado de su flota (EFLO)</strong>. En otras palabras, las diferencias observadas en la tabla de contingencia pueden explicarse por el azar.</p>
+<p>El gráfico de asociación lo ratifica visualmente: todas las barras aparecen en <strong>gris</strong>, de modo que <strong>ningún residuo es estadísticamente significativo</strong>:</p>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fjur_eflo</span><span class="op">$</span><span class="va">asociacion</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-138-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 7.6</strong></p>
+</div>
+<p>Y las medidas de asociación, con una <em>V</em> de Cramér de 0,080, se sitúan en la zona de asociación despreciable:</p>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fjur_eflo</span><span class="op">$</span><span class="va">medidas</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Medida
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Valor
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+Coeficiente de contingencia C
+</td>
+<td style="text-align:right;text-align: center;">
+0.113
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+C máximo posible en esta tabla
+</td>
+<td style="text-align:right;text-align: center;">
+0.816
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+C corregido (C / C máximo)
+</td>
+<td style="text-align:right;text-align: center;">
+0.138
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+V de Cramér
+</td>
+<td style="text-align:right;text-align: center;">
+0.080
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 7.8</strong></p>
+</div>
+<p>Así, <strong>no existe un patrón sistemático que vincule la forma jurídica de las empresas con el estado de sus flotas</strong>. Esta segunda fase ofrece un ejemplo claro de ausencia de relación entre variables categóricas, y sirve como contrapunto a la primera.</p>
+</div>
+<div id="c07-conclusiones-del-informe" class="section level3" number="7.4.5">
+<h3>
+<span class="header-section-number">7.4.5</span> <img src="figuras/star.svg" class="hicon"> Conclusiones del informe.<a class="anchor" aria-label="anchor" href="#c07-conclusiones-del-informe"><i class="fas fa-link"></i></a>
+</h3>
+<p>El informe para la <em>Agencia Interplanetaria de Transporte de Mercancías</em> puede resumirse en dos conclusiones:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>La galaxia de la sede y la forma jurídica están asociadas</strong>, aunque de forma débil. La asociación se debe sobre todo a las dos Nubes de Magallanes: en la Gran Nube abundan más de lo esperado las CG, y en la Pequeña Nube, las SLG. Es razonable pensar que los marcos normativos de esas galaxias favorecen determinadas formas de organización empresarial.</p></li>
+<li><p><strong>El estado de la flota no depende de la forma jurídica.</strong> Las empresas de todo tipo presentan perfiles de renovación de flota muy similares, coherentes con unas normas técnicas y unos ciclos de actualización comunes en todo el sector.</p></li>
+</ol>
+</div>
+</div>
+<div id="c07-materiales-para-realizar-las-practicas-del" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> <img src="figuras/arrow-down-circle.svg" class="hicon"> Materiales para realizar las prácticas del capítulo.<a class="anchor" aria-label="anchor" href="#c07-materiales-para-realizar-las-practicas-del"><i class="fas fa-link"></i></a>
+</h2>
+<p>En esta sección se muestran los links de acceso a los diferentes materiales (<em>scripts</em>, datos…) necesarios para llevar a cabo los contenidos prácticos del capítulo.</p>
+<p><strong>Datos (en formato Microsoft® Excel®):</strong></p>
+<ul>
+<li>interestelar_300.xlsx (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/interestelar_300.xlsx">obtener aquí</a>), o bien, desde R: <code>lite_datos("interestelar_300")</code>.</li>
+</ul>
+<p><strong>Script:</strong></p>
+<ul>
+<li>contingencia_lite.R (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/contingencia_lite.R">obtener aquí</a>)</li>
+</ul>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="modelos-de-elecci%C3%B3n-discreta..html"><span class="header-section-number">6</span> Modelos de elección discreta.</a></div>
 <div class="next"><a href="escalado-multidimensional..html"><span class="header-section-number">8</span> Escalado multidimensional.</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#tablas-de-contingencia."><span class="header-section-number">7</span> Tablas de contingencia.</a></li></ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#tablas-de-contingencia."><span class="header-section-number">7</span> Tablas de contingencia.</a></li>
+<li><a class="nav-link" href="#c07-introduccion"><span class="header-section-number">7.1</span>  Introducción.</a></li>
+<li><a class="nav-link" href="#c07-asociacion-entre-dos-atributos"><span class="header-section-number">7.2</span>  Asociación entre dos atributos: la prueba ji-cuadrado.</a></li>
+<li><a class="nav-link" href="#c07-medidas-de-asociacion"><span class="header-section-number">7.3</span>  Medidas de asociación.</a></li>
+<li>
+<a class="nav-link" href="#c07-practica-el-entramado-comercial-del-cosmos"><span class="header-section-number">7.4</span>  Práctica: el entramado comercial del cosmos.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c07-el-encargo"><span class="header-section-number">7.4.1</span>  El encargo.</a></li>
+<li><a class="nav-link" href="#c07-preparacion-de-los-datos"><span class="header-section-number">7.4.2</span>  Preparación de los datos.</a></li>
+<li><a class="nav-link" href="#c07-la-sospecha-institucional-galaxia-fjur"><span class="header-section-number">7.4.3</span>  La sospecha institucional (GALAXIA × FJUR).</a></li>
+<li><a class="nav-link" href="#c07-se-refleja-la-estructura-juridica-en-la"><span class="header-section-number">7.4.4</span>  ¿Se refleja la estructura jurídica en la renovación de la flota? (FJUR × EFLO).</a></li>
+<li><a class="nav-link" href="#c07-conclusiones-del-informe"><span class="header-section-number">7.4.5</span>  Conclusiones del informe.</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#c07-materiales-para-realizar-las-practicas-del"><span class="header-section-number">7.5</span>  Materiales para realizar las prácticas del capítulo.</a></li>
+</ul>
+<div class="book-extra">
+        <ul class="list-unstyled"></ul>
 </div>
     </nav>
 </div>
@@ -121,7 +1378,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R, paso a paso y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
+    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>5 Análisis clúster jerárquico. | R-Stars Lite</title>
 <meta name="author" content="Miguel-Ángel Tarancón Morán">
-<meta name="description" content="Capítulo en preparación.">
+<meta name="description" content="Figura 5.1. Grupos de cargueros en travesía.  5.1 Introducción. El análisis de conglomerados —o análisis de clústeres (AC)— agrupa casos con características similares en función de un conjunto de...">
 <meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="5 Análisis clúster jerárquico. | R-Stars Lite">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://teckel71.github.io/RStarslite-book/análisis-clúster-jerárquico..html">
 <meta property="og:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
-<meta property="og:description" content="Capítulo en preparación.">
+<meta property="og:description" content="Figura 5.1. Grupos de cargueros en travesía.  5.1 Introducción. El análisis de conglomerados —o análisis de clústeres (AC)— agrupa casos con características similares en función de un conjunto de...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="5 Análisis clúster jerárquico. | R-Stars Lite">
-<meta name="twitter:description" content="Capítulo en preparación.">
+<meta name="twitter:description" content="Figura 5.1. Grupos de cargueros en travesía.  5.1 Introducción. El análisis de conglomerados —o análisis de clústeres (AC)— agrupa casos con características similares en función de un conjunto de...">
 <meta name="twitter:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,8 +61,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Análisis de datos con R, paso a paso y sin vértigo">R-Stars Lite</a>:
-        <small class="text-muted">Análisis de datos con R, paso a paso y sin vértigo</small>
+        <a href="index.html" title="Análisis de datos con R y sin vértigo">R-Stars Lite</a>:
+        <small class="text-muted">Análisis de datos con R y sin vértigo</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -85,10 +85,10 @@
 <li><a class="" href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></li>
 <li><a class="" href="escalado-multidimensional..html"><span class="header-section-number">8</span> Escalado multidimensional.</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+<li><a class="" href="ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite..html">Apéndice: Guía de uso de MATlite.</a></li>
 <li><a class="" href="licencia.html">Licencia</a></li>
 </ul>
-
-        <div class="book-extra">
+<div class="book-extra">
           
         </div>
       </nav>
@@ -97,20 +97,1456 @@
 <h1>
 <span class="header-section-number">5</span> Análisis clúster jerárquico.<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-cl%C3%BAster-jer%C3%A1rquico."><i class="fas fa-link"></i></a>
 </h1>
-<p><em>Capítulo en preparación.</em></p>
+<div class="inline-figure"><img src="figuras/07%20naves%20en%20cluster.jpg" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.1.</strong> <span class="smallcaps">Grupos de cargueros en travesía.</span></p>
+</div>
+<div id="c05-introduccion" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> <img src="figuras/book.svg" class="hicon"> Introducción.<a class="anchor" aria-label="anchor" href="#c05-introduccion"><i class="fas fa-link"></i></a>
+</h2>
+<p>El análisis de conglomerados —o análisis de clústeres (AC)— agrupa casos con características similares en función de un conjunto de variables clasificadoras. El objetivo es que:</p>
+<ul>
+<li>Los casos de un mismo clúster sean lo más homogéneos posible entre sí.</li>
+<li>Los clústeres entre sí sean lo más heterogéneos posible, de acuerdo con las variables consideradas.</li>
+</ul>
+<p>En general, el proceso de determinación de los grupos, conglomerados o clústeres de casos es el siguiente:</p>
+<ul>
+<li>Se parte de un conjunto de <strong>n</strong> casos, y para cada uno de ellos se cuenta con el valor de <strong>m</strong> variables clasificadoras.</li>
+<li>Se establece una <strong>medida de distancia</strong> que cuantifica lo que dos casos se parecen, <strong>considerando en conjunto</strong> los valores que poseen para las variables clasificadoras.</li>
+<li>Se crean los grupos, conglomerados o clústeres con los casos que poseen entre sí una <strong>menor distancia</strong>.</li>
+<li>Finalmente, se <strong>caracterizan</strong> los grupos, conglomerados o clústeres obtenidos, y se comparan unos con otros para extraer conclusiones.</li>
+</ul>
+<p>En lo que respecta a la medida de <strong>distancia</strong> entre los casos, la medida más habitual es la <strong>distancia euclídea</strong>. Así, la distancia euclídea entre dos casos, i e i’, para las m variables clasificadoras x, será:</p>
+<p><span class="math display">\[
+d(i, i') = \sqrt{\sum_{j=1}^{m} (x_{ij} - x_{i'j})^2}
+\]</span></p>
+<p>Esta distancia es muy sensible a la escala de las variables clasificadoras. Para evitar este inconveniente, se trabaja con las variables previamente <strong>tipificadas</strong>.</p>
+<div id="c05-clasificacion-de-los-metodos-de-analisis" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> <img src="figuras/key.svg" class="hicon"> Clasificación de los métodos de análisis clúster.<a class="anchor" aria-label="anchor" href="#c05-clasificacion-de-los-metodos-de-analisis"><i class="fas fa-link"></i></a>
+</h3>
+<p>En la literatura actual <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-Kaufman&amp;Rousseeuw1990">Kaufman and Rousseeuw 1990</a>; <a href="bibliograf%C3%ADa.html#ref-Xu&amp;Wunsch2005">Xu and Wunsch 2005</a>; <a href="bibliograf%C3%ADa.html#ref-Jain2010">Jain 2010</a>; <a href="bibliograf%C3%ADa.html#ref-Aggarwal2015">Aggarwal 2015</a>)</span>, los métodos de análisis clúster se clasifican en cinco grandes familias:</p>
+<ul>
+<li><p><strong>Métodos jerárquicos.</strong> Van formando sucesivamente grupos como agrupación de otros grupos precedentes (métodos aglomerativos: <em>Ward</em>, <em>single linkage</em>, <em>complete linkage</em>…) o dividen recursivamente un único grupo inicial (métodos divisivos). Producen una estructura piramidal (dendrograma).</p></li>
+<li><p><strong>Métodos de partición o basados en centroides.</strong> Asignan los casos a un número prefijado de grupos, minimizando la varianza intra-clúster. El más representativo es <strong><em>k-medias</em></strong>.</p></li>
+<li><p><strong>Métodos basados en densidad.</strong> Detectan regiones densamente pobladas del espacio de variables y las declaran clústeres, dejando fuera los casos aislados como ruido. El más representativo es <strong><em>DBSCAN</em></strong>.</p></li>
+<li><p><strong>Métodos basados en modelos.</strong> Suponen que los datos provienen de una mezcla de distribuciones (típicamente gaussianas).</p></li>
+<li><p><strong>Métodos basados en cuadrículas o en grafos.</strong> Discretizan el espacio en celdas o construyen grafos de similitud.</p></li>
+</ul>
+<p>En este capítulo abordaremos el primero de ellos, los <strong>métodos jerárquicos</strong>, en concreto el <strong>método de Ward</strong>, muy adecuado cuando el número de casos es reducido y se quiere clasificar a <strong>todos</strong> ellos. Los métodos de <em>k-medias</em> y DBSCAN se desarrollan en el capítulo 7 de <a href="https://teckel71.github.io/RStars-book/"><em>R-Stars: La Guía</em></a>.</p>
+</div>
+</div>
+<div id="c05-el-informe-bluebird" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> <img src="figuras/star.svg" class="hicon"> El Informe <em>Bluebird</em>.<a class="anchor" aria-label="anchor" href="#c05-el-informe-bluebird"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-figure"><img src="figuras/aitm.jpg" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.2.</strong> <span class="smallcaps">Agencia Interplanetaria del Transporte de Mercancías.</span></p>
+</div>
+<p>La <em>Agencia Interplanetaria de Transporte de Mercancías</em> (AITM) tiene entre sus cometidos el estudio del sector desde una perspectiva de segmentación. La doctora <strong><em>Xelia Bluebird</em></strong> (en la imagen), investigadora sénior de la agencia, es la responsable del informe anual de segmentación empresarial que lleva su nombre.</p>
+<div class="inline-figure"><img src="figuras/Bluebird.jpg" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.3.</strong> <span class="smallcaps">Xelia Bluebird, investigadora de la AITM.</span></p>
+</div>
+<p>Este año, el primer encargo del <strong><em>Informe Bluebird</em></strong> es un <strong>panel de candidatas premium</strong>. Tras la reciente compra de <em>Home One Cargo</em> por <em>Arg-us Korp</em>, la AITM ha seleccionado un panel de <strong>25 empresas top</strong> para ofrecerles un programa de consultoría personalizada. Bluebird debe agrupar estas 25 candidatas en un número reducido de perfiles y ubicar en qué grupo queda encuadrada <em>Home One Cargo</em> junto a otras empresas de referencia. Al ser una muestra pequeña, donde nos interesa clasificar <strong>todos los casos</strong> —incluidos los eventuales <em>outliers</em>—, se aplicará un <strong>método jerárquico</strong> (algoritmo de Ward).</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1em 0;">
+<p><iframe src="https://www.youtube.com/embed/I-lKgEEJUUk" title="Preparando el Informe Bluebird." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+</iframe></p>
+</div>
+<p>Las variables clasificadoras son los índices de <strong>fidelización de clientes (IFIDE)</strong>, <strong>diversificación del negocio (IDIVERSE)</strong> y <strong>digitalización de la compañía (IDIG)</strong>.</p>
+</div>
+<div id="c05-analisis-jerarquico-metodo-de-ward" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> <img src="figuras/book.svg" class="hicon"><img src="figuras/pie-chart.svg" class="hicon"> Análisis jerárquico: el método de Ward.<a class="anchor" aria-label="anchor" href="#c05-analisis-jerarquico-metodo-de-ward"><i class="fas fa-link"></i></a>
+</h2>
+<p>En los <strong>métodos jerárquicos aglomerativos</strong>, se van formando sucesivamente grupos como agrupación de otros grupos precedentes, hasta llegar a un único grupo que recoge a todos los individuos; tomando el proceso una <strong>estructura piramidal</strong>. Estos métodos son especialmente adecuados cuando hay un número reducido de casos y se quieren clasificar <strong>todos los casos</strong> —incluidos los <em>outliers</em>—, así como cuando se desconoce a priori el número de grupos a formar.</p>
+<p>Entre los métodos jerárquicos aglomerativos más extendidos figuran:</p>
+<ul>
+<li>
+<strong>Vecino más cercano (single linkage):</strong> distancia entre grupos = distancia entre sus elementos más próximos.</li>
+<li>
+<strong>Vecino más lejano (complete linkage):</strong> distancia entre grupos = distancia entre sus elementos más lejanos.</li>
+<li>
+<strong>Método de Ward:</strong> se unen los grupos que dan lugar a otro grupo con menor varianza intra-clúster (menor suma de cuadrados respecto al centroide).</li>
+</ul>
+<p>En la práctica, el <strong>método de Ward</strong> es uno de los más utilizados porque proporciona grupos muy homogéneos. Será el que apliquemos al panel de 25 candidatas premium.</p>
+<div id="c05-preparacion-de-los-datos" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> <img src="figuras/pie-chart.svg"> Preparación de los datos.<a class="anchor" aria-label="anchor" href="#c05-preparacion-de-los-datos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Vamos a suponer que trabajamos dentro de un <strong>proyecto</strong> que hemos creado previamente, de nombre <strong>“cluster”</strong>. Dentro de la carpeta del proyecto guardaremos el <em>script</em> “cluster_lite.R” y el archivo de Microsoft® Excel® “interestelar_25.xlsx”, con diferentes variables económicas y financieras de las 25 empresas del panel.</p>
+<p>Comenzaremos con los pasos habituales: limpiar el <em>Global Environment</em>, cargar <a href="https://github.com/teckel71/MATlite">MATlite</a>, importar los datos y seleccionar las variables clasificadoras:</p>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### CLUSTER jerárquico 25 empresas TMI.###</span></span>
+<span></span>
+<span><span class="co"># Limpiando el Global Environment</span></span>
+<span><span class="fu"><span>rm</span></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><span>ls</span></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Cargando el paquete de la asignatura</span></span>
+<span><span class="kw"><span>library</span></span><span class="op">(</span><span class="va"><a href="https://github.com/teckel71/MATlite">MATlite</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## DATOS</span></span>
+<span><span class="va">interestelar_25</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_importa</span></span><span class="op">(</span><span class="st">"interestelar_25.xlsx"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Seleccionando las variables clasificadoras</span></span>
+<span><span class="va">seleccion</span> <span class="op">&lt;-</span> <span class="va">interestelar_25</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">IDIVERSE</span>, <span class="va">IFIDE</span>, <span class="va">IDIG</span><span class="op">)</span></span>
+<span><span class="fu"><span>lite_resumen</span></span><span class="op">(</span><span class="va">seleccion</span><span class="op">)</span></span></code></pre></div>
+<div id="ypnmacivoz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#ypnmacivoz table {
+  font-family: Lato, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+#ypnmacivoz thead, #ypnmacivoz tbody, #ypnmacivoz tfoot, #ypnmacivoz tr, #ypnmacivoz td, #ypnmacivoz th {
+  border-style: none;
+}
+
+#ypnmacivoz p {
+  margin: 0;
+  padding: 0;
+}
+
+#ypnmacivoz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #FFFFFF;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ypnmacivoz .gt_title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ypnmacivoz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ypnmacivoz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ypnmacivoz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ypnmacivoz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ypnmacivoz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ypnmacivoz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ypnmacivoz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ypnmacivoz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ypnmacivoz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ypnmacivoz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ypnmacivoz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ypnmacivoz .gt_row {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #F6F7F7;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ypnmacivoz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ypnmacivoz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ypnmacivoz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ypnmacivoz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ypnmacivoz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ypnmacivoz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ypnmacivoz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ypnmacivoz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_striped {
+  background-color: #FAFAFA;
+}
+
+#ypnmacivoz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ypnmacivoz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ypnmacivoz .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ypnmacivoz .gt_left {
+  text-align: left;
+}
+
+#ypnmacivoz .gt_center {
+  text-align: center;
+}
+
+#ypnmacivoz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ypnmacivoz .gt_font_normal {
+  font-weight: normal;
+}
+
+#ypnmacivoz .gt_font_bold {
+  font-weight: bold;
+}
+
+#ypnmacivoz .gt_font_italic {
+  font-style: italic;
+}
+
+#ypnmacivoz .gt_super {
+  font-size: 65%;
+}
+
+#ypnmacivoz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ypnmacivoz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ypnmacivoz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ypnmacivoz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ypnmacivoz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ypnmacivoz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ypnmacivoz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ypnmacivoz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ypnmacivoz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>seleccion</td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>25 rows x 3 cols</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">Column</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="value">Plot Overview</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_missing">Missing</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mean">Mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Median">Median</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="SD">SD</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">IDIVERSE</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="1.00" width="31.76" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="39.11" y="9.32" width="31.76" height="13.31" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="70.87" y="17.64" width="31.76" height="4.99" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="102.63" y="20.96" width="31.76" height="1.66" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="9.11" cy="20.96" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="9.11" cy="20.96" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="38.02" y1="22.63" x2="38.02" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="10.06,25.46 10.06,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="105.59,25.46 105.59,22.63 " style="stroke-width: 0.75;"></polyline><text x="10.06" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="16.72px" lengthadjust="spacingAndGlyphs">9 auto</text><text x="105.59" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">54 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">24.8</td>
+<td headers="Median" class="gt_row gt_right">22.2</td>
+<td headers="SD" class="gt_row gt_right">13.0</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;">IFIDE</td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="20.46" width="8.47" height="2.16" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="15.82" y="20.46" width="8.47" height="2.16" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="24.29" y="22.63" width="8.47" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="32.76" y="20.46" width="8.47" height="2.16" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="41.22" y="11.81" width="8.47" height="10.82" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="49.69" y="1.00" width="8.47" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="58.16" y="13.97" width="8.47" height="8.65" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="66.63" y="20.46" width="8.47" height="2.16" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="75.10" y="20.46" width="8.47" height="2.16" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="83.57" y="22.63" width="8.47" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="92.04" y="22.63" width="8.47" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="100.51" y="22.63" width="8.47" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="108.98" y="22.63" width="8.47" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="117.45" y="22.63" width="8.47" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="125.92" y="20.46" width="8.47" height="2.16" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="10.42" cy="20.46" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="10.42" cy="20.46" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="53.77" y1="22.63" x2="53.77" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="11.63,25.46 11.63,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="132.81,25.46 132.81,22.63 " style="stroke-width: 0.75;"></polyline><text x="11.63" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">26 auto</text><text x="132.81" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">64 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">39.8</td>
+<td headers="Median" class="gt_row gt_right gt_striped">39.6</td>
+<td headers="SD" class="gt_row gt_right gt_striped">6.6</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">IDIG</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="22.63" width="18.15" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="25.50" y="1.00" width="18.15" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="43.64" y="17.99" width="18.15" height="4.64" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="61.79" y="13.36" width="18.15" height="9.27" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="79.94" y="21.08" width="18.15" height="1.55" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="98.09" y="22.63" width="18.15" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="116.24" y="21.08" width="18.15" height="1.55" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="24.92" cy="21.08" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="24.92" cy="21.08" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="42.70" y1="22.63" x2="42.70" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="25.88,25.46 25.88,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="121.97,25.46 121.97,22.63 " style="stroke-width: 0.75;"></polyline><text x="25.88" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="16.72px" lengthadjust="spacingAndGlyphs">5 auto</text><text x="121.97" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">61 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">19.4</td>
+<td headers="Median" class="gt_row gt_right">15.1</td>
+<td headers="SD" class="gt_row gt_right">13.1</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div style="text-align: center;">
+<p><strong>Tabla 5.1</strong></p>
+</div>
+<p>Para el diagnóstico de los <em>missing values</em> aplicamos la función <code><span>lite_na()</span></code>:</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Diagnóstico y filtrado de missing values.</span></span>
+<span><span class="va">seleccion</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_na</span></span><span class="op">(</span><span class="va">seleccion</span>, accion <span class="op">=</span> <span class="st">"eliminar"</span><span class="op">)</span></span></code></pre></div>
+<p>No se ha localizado ninguna observación con <em>missing values</em> (la función lo indica con un mensaje en la consola), luego no se ha de realizar ningún tipo de tratamiento.</p>
+<p>El siguiente paso es la <strong>identificación de <em>outliers</em></strong>. Como contamos con 3 variables métricas, <code><span>lite_outliers()</span></code> calculará la <strong><em>distancia de Mahalanobis</em></strong> de cada caso y le aplicará la regla de 1,5 veces el rango intercuartílico. En esta ocasión <strong>no</strong> indicamos <code>accion = "eliminar"</code>, porque no queremos eliminar los <em>outliers</em>, sino solo identificarlos:</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Diagnóstico de outliers (sin eliminarlos).</span></span>
+<span><span class="fu"><span>lite_outliers</span></span><span class="op">(</span><span class="va">seleccion</span>,</span>
+<span>              titulo    <span class="op">=</span> <span class="st">"DISTANCIA DE MAHALANOBIS"</span>,</span>
+<span>              subtitulo <span class="op">=</span> <span class="st">"IDIVERSE, IFIDE, IDIG. Empresas TMI."</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-79-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.4</strong></p>
+</div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+MAHALANOBIS
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIVERSE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIG
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+chakotay cargo systems
+</td>
+<td style="text-align:right;text-align: center;">
+13.930441
+</td>
+<td style="text-align:right;text-align: center;">
+54.36815
+</td>
+<td style="text-align:right;text-align: center;">
+64.26013
+</td>
+<td style="text-align:right;text-align: center;">
+42.719724
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+home one cargo
+</td>
+<td style="text-align:right;text-align: center;">
+13.818423
+</td>
+<td style="text-align:right;text-align: center;">
+22.17602
+</td>
+<td style="text-align:right;text-align: center;">
+46.77635
+</td>
+<td style="text-align:right;text-align: center;">
+60.832514
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+tannhäuser freight
+</td>
+<td style="text-align:right;text-align: center;">
+6.791335
+</td>
+<td style="text-align:right;text-align: center;">
+47.88846
+</td>
+<td style="text-align:right;text-align: center;">
+42.64052
+</td>
+<td style="text-align:right;text-align: center;">
+8.209292
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+io star transport
+</td>
+<td style="text-align:right;text-align: center;">
+6.088895
+</td>
+<td style="text-align:right;text-align: center;">
+38.02063
+</td>
+<td style="text-align:right;text-align: center;">
+33.82858
+</td>
+<td style="text-align:right;text-align: center;">
+35.117771
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 5.2</strong></p>
+</div>
+<p>De la tabla anterior se desprende que los <em>outliers</em> identificados son las empresas <em>Chakotay Cargo Systems</em>, <em>Home One Cargo</em>, y de modo más moderado, <em>Tannhäuser Freight</em> e <em>Io Star Transport</em>. Estos son, en definitiva, los 4 casos en los que nos fijaremos específicamente más adelante, al analizar los resultados del análisis clúster.</p>
+<p>Estas empresas cuentan con un valor atípico en la distancia de Mahalanobis, lo que, a su vez, implica que muestren valores atípicos en una o varias de las variables originales (IDIVERSE, IFIDE, IDIG). En el desarrollo de otras técnicas, en este punto localizaríamos y eliminaríamos los <em>outliers</em>. En este caso <strong>no</strong> lo vamos a hacer, ya que queremos agrupar <strong>todos los casos</strong> que tenemos en el análisis. Precisamente, si hay algún caso que permanece aislado, sin agruparse con otros en el proceso de agrupación hasta las últimas etapas, quizá se trate de un candidato a <em>outlier</em>, por lo que el análisis clúster <strong>también puede considerarse una técnica de localización de casos atípicos</strong>.</p>
+</div>
+<div id="c05-el-criterio-del-metodo-de-ward" class="section level3" number="5.3.2">
+<h3>
+<span class="header-section-number">5.3.2</span> <img src="figuras/pie-chart.svg"> El criterio del método de <em>Ward</em>.<a class="anchor" aria-label="anchor" href="#c05-el-criterio-del-metodo-de-ward"><i class="fas fa-link"></i></a>
+</h3>
+<p>Antes de aplicarlo, conviene detenerse en <strong>cómo decide</strong> el método de Ward qué grupos fusionar en cada etapa, porque es lo que explica que produzca conglomerados tan compactos.</p>
+<p>En cada paso del proceso hay varias fusiones posibles. Ward las evalúa <strong>todas</strong> y se queda con la que da lugar al grupo resultante <strong>más compacto</strong>: aquel cuyos casos presentan la <strong>menor suma de los cuadrados de sus distancias al centroide</strong> del grupo. Dicho de otro modo, en cada etapa se escoge la unión que menos aumenta la varianza interna.</p>
+<p>Veámoslo con un ejemplo mínimo. Supongamos que, en una etapa intermedia, el proceso ha formado ya <strong>tres grupos</strong> (A, B y C) y debe fusionar dos de ellos, dejando el tercero suelto. Hay, por tanto, tres opciones:</p>
+<div class="inline-figure"><img src="figuras/ward_opciones.png" style="width:48.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.5.</strong> <span class="smallcaps">Criterio del método de Ward: las tres fusiones posibles de tres grupos previos y la suma de cuadrados de cada una. Se elige la de menor suma (opción 1).</span></p>
+</div>
+<p>En los tres paneles los <strong>casos son los mismos y ocupan las mismas posiciones</strong>; lo único que cambia es qué dos grupos quedan envueltos juntos por la línea discontinua. Los <strong>rombos</strong> son los centroides —el oscuro, el del grupo fusionado; el gris, el del grupo que queda aparte— y los radios finos unen cada caso con el centroide de su grupo: la suma de sus cuadrados es justamente la cifra del subtítulo.</p>
+<p>El algoritmo elige la <strong>Opción 1</strong>, con diferencia la de menor suma. Y el resultado es intuitivo: A y B están próximos entre sí, de modo que fusionarlos produce un grupo apretado, mientras que arrastrar a C —que está lejos— a cualquiera de los otros dos generaría un conglomerado enorme y disperso.</p>
+</div>
+<div id="c05-aplicacion-del-metodo-de-ward" class="section level3" number="5.3.3">
+<h3>
+<span class="header-section-number">5.3.3</span> <img src="figuras/pie-chart.svg"> Aplicación del método de <em>Ward</em>: exploración.<a class="anchor" aria-label="anchor" href="#c05-aplicacion-del-metodo-de-ward"><i class="fas fa-link"></i></a>
+</h3>
+<p>Todo el análisis se realiza con la función <code><span>lite_cluster_ward()</span></code>, en <strong>dos fases</strong>. En la primera, de <strong>exploración</strong>, la llamamos sin indicar el número de grupos. La función:</p>
+<ul>
+<li>
+<strong>tipifica</strong> las variables, ya que la distancia euclídea es sensible a sus unidades de medida;</li>
+<li>calcula la <strong>matriz de distancias</strong> entre los casos;</li>
+<li>aplica el <strong>método de Ward</strong> y dibuja el <strong>dendrograma</strong>;</li>
+<li>y sugiere un número de grupos mediante el <strong>método de la silueta</strong>, que explicaremos enseguida.</li>
+</ul>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Fase 1. Exploración</span></span>
+<span><span class="va">exploracion</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_cluster_ward</span></span><span class="op">(</span><span class="va">seleccion</span><span class="op">)</span></span></code></pre></div>
+<p>Veamos primero la matriz de distancias, representada como un <em>gráfico de temperatura</em>:</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span><span class="op">$</span><span class="va">distancias</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-81-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.6</strong></p>
+</div>
+<p>Los casos con intersecciones en tonos anaranjados tenderán a agruparse con mayor facilidad (o a agruparse antes); mientras que los casos cuyas intersecciones están en tonos azulados tenderán a pertenecer a grupos diferentes (o a agruparse más tarde). Cabe destacar los colores azulados asociados a las empresas <em>Chakotay Cargo Systems</em>, <em>Home One Cargo</em>, que precisamente eran las dos compañías identificadas más claramente como <em>outliers</em>.</p>
+<p>El resultado del método de Ward se resume en el <strong><em>dendrograma</em></strong>:</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span><span class="op">$</span><span class="va">dendrograma</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-82-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.7</strong></p>
+</div>
+<p>El eje vertical del <em>dendrograma</em> recoge las distancias entre casos y grupos que se van agrupando sucesivamente. En el método de Ward, esta escala refleja la suma de cuadrados de la distancia de los casos dentro del clúster.</p>
+<p>Cabe observar que las empresas <em>Chakotay Cargo Systems</em> y <em>Home One Cargo</em> —los <em>outliers</em> identificados antes— permanecen sin agruparse hasta el final del proceso, lo que confirma su perfil diferenciado. En cambio, empresas como <em>Betazoid Transport</em> y <em>Skywalker Freight Co.</em> se unen muy pronto, indicando su gran similitud.</p>
+<p>Una cuestión importante consiste en determinar con <strong>cuántos grupos</strong> hemos de quedarnos. Aunque existen algoritmos que aconsejan un número, a veces puede ser preferible que el propio investigador decida el número de grupos a crear, mediante la observación del dendrograma, y de acuerdo a los objetivos de su propia investigación.</p>
+<p>Dentro de los métodos <em>objetivos</em>, uno muy extendido es el del <em>método de la anchura media de silueta</em>. Para cada observación <span class="math inline">\(i\)</span>, la <strong>anchura de la silueta</strong> <span class="math inline">\(s_i\)</span> se calcula como:</p>
+<p><span class="math display">\[
+s_i = \frac{b_i - a_i}{\max(a_i, b_i)}
+\]</span></p>
+<p>Donde:</p>
+<ul>
+<li>
+<span class="math inline">\(a_i\)</span> es la distancia promedio de la observación <span class="math inline">\(i\)</span> a todas las demás observaciones dentro de su propio clúster.</li>
+<li>
+<span class="math inline">\(b_i\)</span> es la distancia promedio de la observación <span class="math inline">\(i\)</span> al clúster más cercano.</li>
+</ul>
+<p>Conviene visualizar estas dos distancias, porque de su comparación sale todo lo demás. En el ejemplo siguiente hay dos grupos, A (en azul) y B (en rojo), y se han destacado en negro <strong>tres casos asignados al grupo A</strong> de naturaleza muy distinta. Las líneas discontinuas azules son las distancias que promedia <span class="math inline">\(a_i\)</span>; las rojas, las que promedia <span class="math inline">\(b_i\)</span>:</p>
+<div class="inline-figure"><img src="figuras/silueta_casos.png" style="width:55.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.8.</strong> <span class="smallcaps">Cálculo del ancho de silueta para tres casos de distinta naturaleza: bien agrupado, en la frontera y mal clasificado.</span></p>
+</div>
+<p>La lectura de los tres paneles resume el significado del indicador:</p>
+<ul>
+<li>En el <strong>primer caso</strong>, <span class="math inline">\(a\)</span> es pequeña y <span class="math inline">\(b\)</span> es grande: el caso está rodeado de los suyos y lejos del grupo vecino. El numerador <span class="math inline">\(b-a\)</span> es casi tan grande como el propio <span class="math inline">\(b\)</span>, de modo que <span class="math inline">\(s\)</span> se aproxima a 1.</li>
+<li>En el <strong>segundo</strong>, <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> son prácticamente iguales: el caso está a medio camino entre los dos grupos y le resulta indiferente pertenecer a uno o a otro. El numerador se anula y <span class="math inline">\(s\)</span> ronda el 0.</li>
+<li>En el <strong>tercero</strong>, <span class="math inline">\(b\)</span> es mucho menor que <span class="math inline">\(a\)</span>: el caso está de lleno dentro del grupo vecino, pese a haber sido asignado al propio. El numerador se vuelve negativo y <span class="math inline">\(s\)</span> también.</li>
+</ul>
+<p>La anchura de la silueta varía entre <strong>-1 y 1.</strong> Un valor cercano a 1 indica que la observación está bien agrupada dentro de su clúster; un valor cercano a 0 quiere decir que la observación está en el límite entre dos clústeres; y un valor negativo implica que la observación podría estar mal clasificada en su clúster actual. De este modo, para evaluar cuál es el mejor número de conglomerados a retener:</p>
+<ol style="list-style-type: decimal">
+<li><p>Se prueban diferentes valores de <span class="math inline">\(k\)</span> (número de clústeres).</p></li>
+<li><p>Se calcula el promedio de los valores de silueta para cada <span class="math inline">\(k\)</span>.</p></li>
+<li><p>Se selecciona el <span class="math inline">\(k\)</span> que maximiza el <strong>promedio de la silueta</strong>, lo que indica que la partición es más adecuada.</p></li>
+</ol>
+<p>De todos modos, es necesario insistir en que estos métodos no llevan a una conclusión única ni irrevocable; por lo que puede ser preferible que el <strong>propio investigador</strong> decida el número de grupos a crear, tomando los métodos cuantitativos solo como <strong>orientación</strong>. En nuestro caso, el gráfico del <em>método de la silueta</em> es:</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span><span class="op">$</span><span class="va">silueta</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-83-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.9</strong></p>
+</div>
+<p>El método aconseja una división de los casos en 8 grupos o conglomerados diferentes (la función lo indica también con un mensaje en la consola). Sin embargo, parece un número excesivo si se quieren caracterizar posteriormente los grupos e incidir en sus diferencias. Un segundo número de grupos apropiado según el método es 2; pero podría ocurrir lo contrario que el caso anterior: sería un valor demasiado bajo, lo que provocaría que tan solo se distinguiese un grupo con los dos outliers de otro con los 23 casos restantes. Así, el investigador puede decidir qué número de grupos parece equilibrado y se ajusta a sus intereses. En este ejemplo, <strong>un número de grupos razonable podría ser 5</strong>, que contaría con el aval de mantener individualizadas a 2 de las empresas etiquetadas como <em>outliers</em>.</p>
+</div>
+<div id="c05-aplicacion-del-metodo-de-ward-resultados" class="section level3" number="5.3.4">
+<h3>
+<span class="header-section-number">5.3.4</span> <img src="figuras/pie-chart.svg"> Aplicación del método de <em>Ward</em>: resultados.<a class="anchor" aria-label="anchor" href="#c05-aplicacion-del-metodo-de-ward-resultados"><i class="fas fa-link"></i></a>
+</h3>
+<p>Decidido el número de grupos, llamamos de nuevo a <code><span>lite_cluster_ward()</span></code>, indicándolo ahora con el argumento <code>k</code>:</p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Fase 2. Resultados con el número de grupos decidido</span></span>
+<span><span class="va">grupos</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_cluster_ward</span></span><span class="op">(</span><span class="va">seleccion</span>, k <span class="op">=</span> <span class="fl">5</span>, subtitulo_graficos <span class="op">=</span> <span class="st">"Empresas TMI."</span><span class="op">)</span></span></code></pre></div>
+<p>El dendrograma muestra ahora los grupos formados:</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">dendrograma</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-85-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.10</strong></p>
+</div>
+<p>Del gráfico se pueden extraer varios conglomerados: dos empresas destacadas (<em>Hyperion Star Haulage</em> y <em>Event Horizon Haulage</em>) forman un grupo con perfil claramente diferenciado; un grupo central numeroso agrupa compañías con comportamientos homogéneos, que representan el segmento “medio” del sector; un tercer grupo reúne empresas ligeramente más avanzadas; y, finalmente, las dos empresas más singulares (<em>Chakotay Cargo Systems</em> y <em>Home One Cargo</em>), identificadas como <em>outliers</em> en el análisis previo, quedan aisladas cada una en su propio clúster.</p>
+<p>Los grupos se numeran de izquierda a derecha, en el mismo orden en que aparecen en el dendrograma.</p>
+</div>
+<div id="c05-caracterizacion-de-los-grupos-o-conglomerados" class="section level3" number="5.3.5">
+<h3>
+<span class="header-section-number">5.3.5</span> <img src="figuras/pie-chart.svg"> Caracterización de los grupos o conglomerados.<a class="anchor" aria-label="anchor" href="#c05-caracterizacion-de-los-grupos-o-conglomerados"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para <strong>caracterizar</strong> los grupos, <code><span>lite_cluster_ward()</span></code> calcula el número de empresas de cada uno y las medias de cada variable original (sin tipificar), es decir, sus <strong>centroides</strong>:</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">centroides</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Clúster
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Observaciones
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIVERSE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIG
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+2
+</td>
+<td style="text-align:right;text-align: center;">
+10.877
+</td>
+<td style="text-align:right;text-align: center;">
+28.039
+</td>
+<td style="text-align:right;text-align: center;">
+13.206
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+2
+</td>
+<td style="text-align:right;text-align: center;">
+14
+</td>
+<td style="text-align:right;text-align: center;">
+17.945
+</td>
+<td style="text-align:right;text-align: center;">
+39.253
+</td>
+<td style="text-align:right;text-align: center;">
+13.301
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+3
+</td>
+<td style="text-align:right;text-align: center;">
+7
+</td>
+<td style="text-align:right;text-align: center;">
+38.788
+</td>
+<td style="text-align:right;text-align: center;">
+39.712
+</td>
+<td style="text-align:right;text-align: center;">
+24.083
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+4
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+54.368
+</td>
+<td style="text-align:right;text-align: center;">
+64.260
+</td>
+<td style="text-align:right;text-align: center;">
+42.720
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+5
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+22.176
+</td>
+<td style="text-align:right;text-align: center;">
+46.776
+</td>
+<td style="text-align:right;text-align: center;">
+60.833
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 5.3</strong></p>
+</div>
+<p>Las medias de cada variable se comparan también en gráficos de barras:</p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">graficos_centroides</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-87-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.11</strong></p>
+</div>
+<p>Hablando siempre en términos de la media (centroides), puede comprobarse cómo el grupo 4 (compañía <em>Chakotay Cargo Systems</em>) destaca por su alto valor en el índice de diversificación y en el Fidelización, quedando en segunda posición en el índice de digitalización. El otro grupo de una única compañía, el grupo 5, que contiene a la empresa <em>Home One Cargo</em>, destaca por poseer el mayor índice de digitalización. En adición, ocupa la segunda posición en el índice de fidelización. Por último, en cuanto al índice de diversificación, ocupa una posición media. En cuanto al grupo 3, en promedio es un conglomerado formado por empresas con índices de fidelización y digitalización medios, mientras que en cuando a la diversificación ocupa una destacada segunda posición, solo por detrás del grupo 4. Por su parte, las empresas del grupo 2, en promedio, presentan un índice de fidelización medio, mientras que los índices de diversificación y digitalización son más bien bajos. Por último, el grupo 1, compuesto por las compañías <em>Hyperion Star Haulage</em> y <em>Event Horizon Haulage</em>, se caracteriza por mostrar los menores valores medios en los tres indicadores.</p>
+<p>La <strong>composición</strong> de cada grupo, con los valores de sus empresas, está en la pieza <code>composicion</code>, que contiene una tabla por grupo. Escribiendo <code>grupos$composicion</code> las veríamos todas seguidas; para ver la de un grupo concreto, añadiremos su número entre dobles corchetes:</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">composicion</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>   <span class="co"># Grupo 1</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIVERSE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIG
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+hyperion star haulage
+</td>
+<td style="text-align:right;text-align: center;">
+11.715
+</td>
+<td style="text-align:right;text-align: center;">
+26.444
+</td>
+<td style="text-align:right;text-align: center;">
+13.741
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+event horizon haulage
+</td>
+<td style="text-align:right;text-align: center;">
+10.039
+</td>
+<td style="text-align:right;text-align: center;">
+29.634
+</td>
+<td style="text-align:right;text-align: center;">
+12.671
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 5.4</strong></p>
+</div>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">composicion</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>   <span class="co"># Grupo 2</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIVERSE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIG
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+assimilator haulage
+</td>
+<td style="text-align:right;text-align: center;">
+23.746
+</td>
+<td style="text-align:right;text-align: center;">
+44.533
+</td>
+<td style="text-align:right;text-align: center;">
+26.489
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+harkonnen heavy haul
+</td>
+<td style="text-align:right;text-align: center;">
+15.384
+</td>
+<td style="text-align:right;text-align: center;">
+37.327
+</td>
+<td style="text-align:right;text-align: center;">
+26.764
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+raddus logistics
+</td>
+<td style="text-align:right;text-align: center;">
+8.859
+</td>
+<td style="text-align:right;text-align: center;">
+41.290
+</td>
+<td style="text-align:right;text-align: center;">
+11.198
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+bib fortuna haulage
+</td>
+<td style="text-align:right;text-align: center;">
+11.699
+</td>
+<td style="text-align:right;text-align: center;">
+41.293
+</td>
+<td style="text-align:right;text-align: center;">
+12.653
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+kashyyyk freight lines
+</td>
+<td style="text-align:right;text-align: center;">
+20.016
+</td>
+<td style="text-align:right;text-align: center;">
+37.426
+</td>
+<td style="text-align:right;text-align: center;">
+16.311
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+solar flare logistics
+</td>
+<td style="text-align:right;text-align: center;">
+14.649
+</td>
+<td style="text-align:right;text-align: center;">
+39.952
+</td>
+<td style="text-align:right;text-align: center;">
+7.764
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+dagobah deliveries
+</td>
+<td style="text-align:right;text-align: center;">
+28.546
+</td>
+<td style="text-align:right;text-align: center;">
+39.594
+</td>
+<td style="text-align:right;text-align: center;">
+15.146
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+tatooine movers
+</td>
+<td style="text-align:right;text-align: center;">
+26.202
+</td>
+<td style="text-align:right;text-align: center;">
+38.074
+</td>
+<td style="text-align:right;text-align: center;">
+14.075
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+orion intergalactic freight
+</td>
+<td style="text-align:right;text-align: center;">
+15.535
+</td>
+<td style="text-align:right;text-align: center;">
+38.370
+</td>
+<td style="text-align:right;text-align: center;">
+8.449
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+andor cargo lines
+</td>
+<td style="text-align:right;text-align: center;">
+12.282
+</td>
+<td style="text-align:right;text-align: center;">
+36.643
+</td>
+<td style="text-align:right;text-align: center;">
+7.138
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+sy snootles haulage
+</td>
+<td style="text-align:right;text-align: center;">
+22.086
+</td>
+<td style="text-align:right;text-align: center;">
+38.396
+</td>
+<td style="text-align:right;text-align: center;">
+12.017
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+sdf-1 freightworks
+</td>
+<td style="text-align:right;text-align: center;">
+29.387
+</td>
+<td style="text-align:right;text-align: center;">
+39.361
+</td>
+<td style="text-align:right;text-align: center;">
+15.577
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+borg freight lines
+</td>
+<td style="text-align:right;text-align: center;">
+9.758
+</td>
+<td style="text-align:right;text-align: center;">
+40.071
+</td>
+<td style="text-align:right;text-align: center;">
+5.452
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+razor star freight
+</td>
+<td style="text-align:right;text-align: center;">
+13.079
+</td>
+<td style="text-align:right;text-align: center;">
+37.215
+</td>
+<td style="text-align:right;text-align: center;">
+7.178
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 5.5</strong></p>
+</div>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">composicion</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span>   <span class="co"># Grupo 3</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIVERSE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIG
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+io star transport
+</td>
+<td style="text-align:right;text-align: center;">
+38.021
+</td>
+<td style="text-align:right;text-align: center;">
+33.829
+</td>
+<td style="text-align:right;text-align: center;">
+35.118
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+icarus star transport
+</td>
+<td style="text-align:right;text-align: center;">
+35.055
+</td>
+<td style="text-align:right;text-align: center;">
+41.709
+</td>
+<td style="text-align:right;text-align: center;">
+32.762
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+rebel alliance transport
+</td>
+<td style="text-align:right;text-align: center;">
+35.200
+</td>
+<td style="text-align:right;text-align: center;">
+39.025
+</td>
+<td style="text-align:right;text-align: center;">
+26.189
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+adama transport
+</td>
+<td style="text-align:right;text-align: center;">
+42.547
+</td>
+<td style="text-align:right;text-align: center;">
+40.666
+</td>
+<td style="text-align:right;text-align: center;">
+27.549
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+tannhäuser freight
+</td>
+<td style="text-align:right;text-align: center;">
+47.888
+</td>
+<td style="text-align:right;text-align: center;">
+42.641
+</td>
+<td style="text-align:right;text-align: center;">
+8.209
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+betazoid transport
+</td>
+<td style="text-align:right;text-align: center;">
+36.825
+</td>
+<td style="text-align:right;text-align: center;">
+40.267
+</td>
+<td style="text-align:right;text-align: center;">
+19.507
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+skywalker freight co.
+</td>
+<td style="text-align:right;text-align: center;">
+35.983
+</td>
+<td style="text-align:right;text-align: center;">
+39.847
+</td>
+<td style="text-align:right;text-align: center;">
+19.243
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 5.6</strong></p>
+</div>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">composicion</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span>   <span class="co"># Grupo 4</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIVERSE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIG
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;text-align: center;">
+chakotay cargo systems
+</td>
+<td style="text-align:right;text-align: center;">
+54.368
+</td>
+<td style="text-align:right;text-align: center;">
+64.26
+</td>
+<td style="text-align:right;text-align: center;">
+42.72
+</td>
+</tr></tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 5.7</strong></p>
+</div>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">composicion</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span>   <span class="co"># Grupo 5</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIVERSE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IDIG
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;text-align: center;">
+home one cargo
+</td>
+<td style="text-align:right;text-align: center;">
+22.176
+</td>
+<td style="text-align:right;text-align: center;">
+46.776
+</td>
+<td style="text-align:right;text-align: center;">
+60.833
+</td>
+</tr></tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 5.8</strong></p>
+</div>
+<p>Para representar los grupos gráficamente, tenemos la dificultad de contar con más de dos variables clasificadoras. Una idea es dibujar los <strong>gráficos de dispersión de todos los pares de variables</strong>, con los casos coloreados de modo diferente según el grupo de pertenencia:</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">grupos</span><span class="op">$</span><span class="va">dispersion</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-93-1.png" alt="" width="672"></div>
+<div style="text-align: center;">
+<p><strong>Figura 5.12</strong></p>
+</div>
+<p>Los gráficos de dispersión ratifican los perfiles: los clústeres 1 y 2 se sitúan en la parte baja del eje de diversificación, con las empresas más tradicionales; el clúster 3 reúne a las compañías equilibradas y en fase de modernización; y los clústeres 4 (<em>Chakotay Cargo Systems</em>) y 5 (<em>Home One Cargo</em>), pese a formar cada uno una empresa aislada, muestran comportamientos muy distintos entre sí: la primera es una empresa muy diversificada y con alta fidelidad; la segunda destaca por su altísima digitalización. En cuanto a las relaciones entre las variables, se aprecia una correlación positiva leve entre diversificación y fidelidad, algo más marcada en los grupos avanzados; la digitalización no siempre acompaña a la diversificación, salvo en los perfiles más maduros; y la fidelidad no depende directamente del grado de digitalización, sino que refleja otros factores como la calidad del servicio y la trayectoria de la empresa.</p>
+<p>Por último, la pieza <code>datos</code> contiene el <em>data frame</em> original con una nueva columna, “grupo”, que indica el conglomerado al que pertenece cada empresa. Podemos guardarlo para utilizarlo en análisis posteriores:</p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Data frame con el grupo de cada empresa</span></span>
+<span><span class="va">seleccion_grupos</span> <span class="op">&lt;-</span> <span class="va">grupos</span><span class="op">$</span><span class="va">datos</span></span></code></pre></div>
+<p><strong>Cierre del Informe Bluebird.</strong> El panel de 25 candidatas premium queda encuadrado en cinco perfiles nítidos. <em>Home One Cargo</em> ha resultado ser una empresa singular: un perfil altamente digitalizado, pero de diversificación moderada. La AITM concluye que la reciente adquisición por parte de <em>Arg-us Korp</em> aporta al grupo del magnate una compañía de perfil tecnológicamente avanzado y especializado, que difícilmente hubiera podido encontrarse dentro del segmento medio del sector.</p>
+</div>
+</div>
+<div id="c05-materiales-para-realizar-las-practicas-del" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> <img src="figuras/arrow-down-circle.svg" class="hicon"> Materiales para realizar las prácticas del capítulo.<a class="anchor" aria-label="anchor" href="#c05-materiales-para-realizar-las-practicas-del"><i class="fas fa-link"></i></a>
+</h2>
+<p>En esta sección se muestran los links de acceso a los diferentes materiales (<em>scripts</em>, datos…) necesarios para llevar a cabo los contenidos prácticos del capítulo.</p>
+<p><strong>Datos (en formato Microsoft® Excel®):</strong></p>
+<ul>
+<li>interestelar_25.xlsx (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/interestelar_25.xlsx">obtener aquí</a>), o bien, desde R: <code>lite_datos("interestelar_25")</code>.</li>
+</ul>
+<p><strong>Script:</strong></p>
+<ul>
+<li>cluster_lite.R (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/cluster_lite.R">obtener aquí</a>)</li>
+</ul>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="componentes-principales..html"><span class="header-section-number">4</span> Componentes principales.</a></div>
 <div class="next"><a href="modelos-de-elecci%C3%B3n-discreta..html"><span class="header-section-number">6</span> Modelos de elección discreta.</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#an%C3%A1lisis-cl%C3%BAster-jer%C3%A1rquico."><span class="header-section-number">5</span> Análisis clúster jerárquico.</a></li></ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#an%C3%A1lisis-cl%C3%BAster-jer%C3%A1rquico."><span class="header-section-number">5</span> Análisis clúster jerárquico.</a></li>
+<li>
+<a class="nav-link" href="#c05-introduccion"><span class="header-section-number">5.1</span>  Introducción.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#c05-clasificacion-de-los-metodos-de-analisis"><span class="header-section-number">5.1.1</span>  Clasificación de los métodos de análisis clúster.</a></li></ul>
+</li>
+<li><a class="nav-link" href="#c05-el-informe-bluebird"><span class="header-section-number">5.2</span>  El Informe Bluebird.</a></li>
+<li>
+<a class="nav-link" href="#c05-analisis-jerarquico-metodo-de-ward"><span class="header-section-number">5.3</span>  Análisis jerárquico: el método de Ward.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c05-preparacion-de-los-datos"><span class="header-section-number">5.3.1</span>  Preparación de los datos.</a></li>
+<li><a class="nav-link" href="#c05-el-criterio-del-metodo-de-ward"><span class="header-section-number">5.3.2</span>  El criterio del método de Ward.</a></li>
+<li><a class="nav-link" href="#c05-aplicacion-del-metodo-de-ward"><span class="header-section-number">5.3.3</span>  Aplicación del método de Ward: exploración.</a></li>
+<li><a class="nav-link" href="#c05-aplicacion-del-metodo-de-ward-resultados"><span class="header-section-number">5.3.4</span>  Aplicación del método de Ward: resultados.</a></li>
+<li><a class="nav-link" href="#c05-caracterizacion-de-los-grupos-o-conglomerados"><span class="header-section-number">5.3.5</span>  Caracterización de los grupos o conglomerados.</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#c05-materiales-para-realizar-las-practicas-del"><span class="header-section-number">5.4</span>  Materiales para realizar las prácticas del capítulo.</a></li>
+</ul>
+<div class="book-extra">
+        <ul class="list-unstyled"></ul>
 </div>
     </nav>
 </div>
@@ -121,7 +1557,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R, paso a paso y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
+    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

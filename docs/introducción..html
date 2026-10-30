@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>1 Introducción. | R-Stars Lite</title>
 <meta name="author" content="Miguel-Ángel Tarancón Morán">
-<meta name="description" content="Capítulo en preparación.">
+<meta name="description" content="Figura 1.1. La distribución Normal…  1.1 De los datos a la información: la analítica de datos. Vivimos rodeados de datos. Las administraciones públicas los recopilan para diseñar políticas; las...">
 <meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="1 Introducción. | R-Stars Lite">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://teckel71.github.io/RStarslite-book/introducción..html">
 <meta property="og:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
-<meta property="og:description" content="Capítulo en preparación.">
+<meta property="og:description" content="Figura 1.1. La distribución Normal…  1.1 De los datos a la información: la analítica de datos. Vivimos rodeados de datos. Las administraciones públicas los recopilan para diseñar políticas; las...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1 Introducción. | R-Stars Lite">
-<meta name="twitter:description" content="Capítulo en preparación.">
+<meta name="twitter:description" content="Figura 1.1. La distribución Normal…  1.1 De los datos a la información: la analítica de datos. Vivimos rodeados de datos. Las administraciones públicas los recopilan para diseñar políticas; las...">
 <meta name="twitter:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,8 +61,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Análisis de datos con R, paso a paso y sin vértigo">R-Stars Lite</a>:
-        <small class="text-muted">Análisis de datos con R, paso a paso y sin vértigo</small>
+        <a href="index.html" title="Análisis de datos con R y sin vértigo">R-Stars Lite</a>:
+        <small class="text-muted">Análisis de datos con R y sin vértigo</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -85,10 +85,10 @@
 <li><a class="" href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></li>
 <li><a class="" href="escalado-multidimensional..html"><span class="header-section-number">8</span> Escalado multidimensional.</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+<li><a class="" href="ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite..html">Apéndice: Guía de uso de MATlite.</a></li>
 <li><a class="" href="licencia.html">Licencia</a></li>
 </ul>
-
-        <div class="book-extra">
+<div class="book-extra">
           
         </div>
       </nav>
@@ -97,20 +97,181 @@
 <h1>
 <span class="header-section-number">1</span> Introducción.<a class="anchor" aria-label="anchor" href="#introducci%C3%B3n."><i class="fas fa-link"></i></a>
 </h1>
-<p><em>Capítulo en preparación.</em></p>
+<div class="inline-figure"><img src="figuras/01%20Intro.jpg" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 1.1.</strong> <span class="smallcaps">La distribución Normal…</span></p>
+</div>
+<div id="c01-de-los-datos-a-la-informacion-la-analitica" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> <img src="figuras/book.svg" class="hicon"> De los datos a la información: la analítica de datos.<a class="anchor" aria-label="anchor" href="#c01-de-los-datos-a-la-informacion-la-analitica"><i class="fas fa-link"></i></a>
+</h2>
+<p>Vivimos rodeados de datos. Las administraciones públicas los recopilan para diseñar políticas; las empresas los generan en cada transacción; los mercados financieros los emiten segundo a segundo. Pero los datos, por sí solos, no son más que registros en bruto: cifras de ventas, cotizaciones, respuestas a una encuesta, indicadores macroeconómicos. Su verdadero valor aparece cuando somos capaces de transformarlos en <strong>información</strong> que sirva de base para la <strong>toma de decisiones</strong>.</p>
+<p>Un gestor público quiere saber si una política de empleo está funcionando; una empresa aspira a anticipar la demanda o a conocer mejor a su competencia; un emprendedor necesita saber cómo es el sector en el que pretende entrar. En todos estos casos el punto de partida son datos, y el objetivo, extraer de ellos información fiable.</p>
+<p>La ciencia que se ocupa de este tránsito del dato a la información es la <strong>Estadística</strong>, una <strong>ciencia instrumental</strong> que dota al resto de disciplinas de herramientas para recopilar datos de forma sistemática, organizarlos y extraer de ellos información relevante. Como señalan <span class="citation">Mood and Graybill (<a href="bibliograf%C3%ADa.html#ref-Mood&amp;Graybill1963">1963</a>)</span>:</p>
+<blockquote>
+<p><em>“La Estadística es la tecnología del método científico.”</em></p>
+</blockquote>
+<p>La explotación de los datos y su conversión en información es lo que hoy se conoce como <strong>analítica de datos</strong> (<em>data analytics</em>). Este libro se sitúa precisamente en ese terreno, aplicado a problemas de naturaleza económica y empresarial: el análisis del <strong>entorno</strong> en el que operan las empresas.</p>
+<p>Para llevar a cabo esta analítica, además de los datos y de los conocimientos metodológicos, resulta imprescindible contar con un <strong>software</strong> adecuado. En nuestro caso, la herramienta elegida es <strong>R</strong>.</p>
+</div>
+<div id="c01-que-es-r-y-como-nos-ayuda-a-analizar-datos" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> <img src="figuras/key.svg" class="hicon"><img src="images/clipboard-2401404524.png"> ¿Qué es R y cómo nos ayuda a analizar datos?<a class="anchor" aria-label="anchor" href="#c01-que-es-r-y-como-nos-ayuda-a-analizar-datos"><i class="fas fa-link"></i></a>
+</h2>
+<p>R no es una aplicación al uso, sino todo un <strong>lenguaje de programación</strong> orientado principalmente a la analítica de datos, sobre todo desde una perspectiva estadística. Se distribuye como software libre y gratuito, y es multiplataforma, rasgos que han facilitado su difusión y el surgimiento de una comunidad muy activa de usuarios y desarrolladores.</p>
+<p>R nos ofrece un ecosistema idóneo para cubrir todas las etapas de un proyecto de analítica de datos: desde la importación y depuración de los datos, pasando por su exploración gráfica y descriptiva, hasta la estimación de modelos y la presentación de resultados.</p>
+<p>¿Y si nunca hemos programado? No hay de qué preocuparse. En este libro, buena parte del código está <strong>empaquetado</strong> en las funciones del paquete <a href="https://github.com/teckel71/MATlite">MATlite</a>, de modo que cada paso del análisis se resuelve con una sola línea. Nuestro esfuerzo se concentrará en lo verdaderamente importante: <strong>plantear bien el análisis e interpretar sus resultados</strong>.</p>
+</div>
+<div id="c01-instalacion-de-r-y-rstudio" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> <img src="images/clipboard-1383707725.png"><img src="figuras/pie-chart.svg" class="hicon"> Instalación de R y RStudio.<a class="anchor" aria-label="anchor" href="#c01-instalacion-de-r-y-rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>Instalar R resulta sencillo: basta con acudir a la web de <a href="https://cran.r-project.org/">CRAN</a> (<em>Comprehensive R Archive Network</em>), descargar la última versión disponible para nuestro sistema operativo (en este manual, Microsoft® Windows®) y ejecutar el archivo descargado, que completará la instalación.</p>
+<p>R arrastra, eso sí, una limitación: el programa a través del cual interactuamos con el lenguaje resulta muy poco amigable. Para salvar este inconveniente utilizaremos <strong>RStudio</strong>, un entorno de trabajo (IDE) desarrollado por Posit® Software. También es gratuito, así que de nuevo bastará con visitar la web de <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> y descargar e instalar la versión libre de coste.</p>
+<p><strong>Importante:</strong> hay que instalar <strong>los dos programas</strong>, primero R y después RStudio. A partir de ese momento trabajaremos siempre desde RStudio, que utiliza R “por debajo”.</p>
+</div>
+<div id="c01-r-y-rstudio-comienzo-proyectos" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> <img src="images/clipboard-1383707725.png"><img src="figuras/pie-chart.svg" class="hicon"> R y RStudio. Comienzo: Proyectos.<a class="anchor" aria-label="anchor" href="#c01-r-y-rstudio-comienzo-proyectos"><i class="fas fa-link"></i></a>
+</h2>
+<p>Con R y RStudio ya instalados, podemos ponernos manos a la obra. Abriremos RStudio pulsando en el icono correspondiente y aparecerá la siguiente ventana:</p>
+<div class="inline-figure"><img src="figuras/Imagen1_01.png" class="d-block mx-auto" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 1.2.</strong> <span class="smallcaps">IDE de RStudio.</span></p>
+</div>
+<p>La parte izquierda de la ventana es la <strong>consola</strong>: la sección de RStudio desde la que manejamos R introduciendo código directamente. Escribamos, por ejemplo, <code>2+2</code> después del cursor (signo “&gt;”) y pulsemos <code>Enter</code>. La propia consola nos devolverá el valor 4:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">2</span><span class="op">+</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>Con todo, la forma más eficiente de trabajar es mediante <strong>proyectos</strong> y <strong>scripts</strong>.</p>
+<p>Un <strong>proyecto</strong> se asocia, en esencia, a la carpeta en la que R trabajará: allí buscará los datos que le sirven de <em>input</em> y allí depositará, llegado el caso, los resultados u <em>output</em>. Al abrir un proyecto desde RStudio le estamos indicando al programa que busque de forma preferente en esa carpeta todos los archivos que necesite y que guarde en ella lo que vaya generando. Así evitaremos el error más frecuente de quien empieza con R: que el programa “no encuentre” el archivo de datos.</p>
+<p>Para crear un proyecto nuevo seguiremos la ruta <code>File → New Project</code>. El programa nos preguntará entonces si deseamos crearlo en una carpeta nueva o en una ya existente. Situémoslo, por ejemplo, en una carpeta llamada “explora”, que ya tenemos preparada. Aparecerá una ventana para localizar la carpeta y, una vez encontrada, pulsaremos <code>Open</code> y <code>Create Project</code>. El proyecto ya está creado.</p>
+<p>Si ahora abrimos el explorador de Windows® y buscamos la carpeta “explora”, veremos en ella un archivo del mismo nombre, identificado con el icono de un cubo con una “R”. Ese archivo actúa como un faro: le indica a R que, mientras trabajemos en el proyecto “explora”, encontrará en esa carpeta todos los datos que necesite y que en ella deberá depositar los ficheros de salida que produzca.</p>
+<p>En sesiones posteriores, para retomar el mismo proyecto ya no recurriremos a <code>File → New Project</code>, sino a <code>File → Open Project</code> (o, sencillamente, haremos doble clic sobre ese archivo).</p>
+</div>
+<div id="c01-scripts" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> <img src="images/clipboard-1383707725.png"><img src="figuras/pie-chart.svg" class="hicon"> Scripts.<a class="anchor" aria-label="anchor" href="#c01-scripts"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los <strong>scripts</strong>, por su parte, son programas o rutinas en los que varias instrucciones se ejecutan de forma secuencial. Para crear uno seguiremos la ruta <code>File → New File → R Script</code>. ¿Y dónde se guardará? En la carpeta “explora”, la del proyecto en el que estamos trabajando.</p>
+<p>Observaremos que en la parte izquierda de RStudio ha surgido una ventana nueva, situada arriba, que desplaza la consola hacia abajo. Es la ventana del <strong>editor</strong>:</p>
+<div class="inline-figure"><img src="figuras/Imagen1_02.png" class="d-block mx-auto" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 1.3.</strong> <span class="smallcaps">El editor de Scripts de RStudio.</span></p>
+</div>
+<p>Empecemos a escribir nuestro script. Cuando queramos introducir un comentario que no ejecute instrucción alguna, lo precederemos del símbolo almohadilla o <em>hashtag</em> “#”. A continuación pediremos a R que realice la suma 2+2. Escribimos, por tanto, en el editor:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Ejemplo de Script</span></span>
+<span><span class="fl">2</span><span class="op">+</span><span class="fl">2</span>  <span class="co">#este script hace una simple suma.</span></span></code></pre></div>
+<p>Para ejecutar la línea en la que se encuentra el cursor bastará con pulsar <code>Control + ENTER</code> o el botón <code>Run</code>; y si queremos ejecutar varias líneas, las seleccionaremos previamente y emplearemos esas mismas opciones. Para ejecutar el script completo, <code>Control + Mayúsculas + ENTER</code>. En la consola aparecerá:</p>
+<pre><code>## [1] 4</code></pre>
+<p>Guardaremos el script con <code>File → Save As…</code>; y, de nuevo, el destino predeterminado será la carpeta “explora”, la de nuestro proyecto. Llamémoslo, por ejemplo, “explorando”. En la carpeta del proyecto encontraremos un archivo de texto llamado “explorando.R”. Podremos ejecutarlo cuantas veces queramos sin necesidad de teclear nada, o modificarlo si necesitamos introducir cambios. Ahí reside, precisamente, la ventaja de trabajar con scripts.</p>
+<p>En las prácticas de este libro no tendremos que escribir los scripts desde cero: cada capítulo ofrece, en su última sección, el script de la práctica listo para descargar. Bastará con guardarlo en la carpeta del proyecto y abrirlo con <code>File → Open File…</code>.</p>
+</div>
+<div id="c01-funciones" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> <img src="images/clipboard-1383707725.png"><img src="figuras/pie-chart.svg" class="hicon"> Funciones.<a class="anchor" aria-label="anchor" href="#c01-funciones"><i class="fas fa-link"></i></a>
+</h2>
+<p>R trabaja fundamentalmente con datos y funciones. Pero ¿qué es exactamente una <strong>función</strong>?</p>
+<p>Una función es un conjunto o <strong>sistema de instrucciones</strong> que convierte unos datos de entrada o <strong>inputs</strong> en unos datos de salida o <strong>outputs</strong>. Puede ser muy sencilla o realmente compleja. Sus partes básicas son:</p>
+<ul>
+<li><p><strong>Entradas, <em>inputs</em> o argumentos:</strong> son las informaciones necesarias para llevar a cabo el procedimiento. Se escriben entre los paréntesis que siguen al nombre de la función, separadas por comas. Algunos argumentos tienen un valor <strong>por defecto</strong>, que la función utiliza si no le indicamos otro.</p></li>
+<li><p><strong>Cuerpo:</strong> el conjunto de instrucciones que transforman las entradas en salidas.</p></li>
+<li><p><strong>Salidas:</strong> los resultados u <em>outputs</em> de la función.</p></li>
+</ul>
+<p>A modo de ejemplo, creemos una función llamada “suma”, que recibirá dos argumentos —dos números cualesquiera— y devolverá como resultado la suma de ambos:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">suma</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">resultado</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span></span>
+<span>  <span class="kw"><span>return</span></span><span class="op">(</span><span class="va">resultado</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Una vez ejecutado el código anterior, para sumar los números 12 y 16 solo tendremos que escribir:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">suma</span><span class="op">(</span>x<span class="op">=</span><span class="fl">12</span>, y<span class="op">=</span><span class="fl">16</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 28</code></pre>
+<p>Las funciones de <a href="https://github.com/teckel71/MATlite">MATlite</a> que utilizaremos a lo largo del libro son exactamente eso: funciones como “suma”, solo que su cuerpo contiene decenas de instrucciones que no necesitamos ver. Nosotros nos limitaremos a indicarles los argumentos —los datos, las variables, algún título— y a interpretar sus salidas.</p>
+</div>
+<div id="c01-paquetes-packages" class="section level2" number="1.7">
+<h2>
+<span class="header-section-number">1.7</span> <img src="images/clipboard-1383707725.png"><img src="figuras/pie-chart.svg" class="hicon"> Paquetes (<em>packages</em>).<a class="anchor" aria-label="anchor" href="#c01-paquetes-packages"><i class="fas fa-link"></i></a>
+</h2>
+<p>En torno a R se ha desarrollado una cantidad casi inimaginable de recursos: funciones, bases de datos, utilidades… Estos recursos se organizan en <strong>paquetes</strong> (<em>packages</em>, en inglés). Un paquete es una colección de funciones o un conjunto de datos desarrollados por la comunidad de R, que amplían las capacidades básicas del lenguaje.</p>
+<p>La mayor parte de los paquetes reside en diversos servidores denominados repositorios. El más importante es <a href="https://cran.r-project.org/">CRAN</a>, el repositorio oficial, que alberga más de 20.000 paquetes, si bien existen otros, entre los que destaca GitHub.</p>
+<p>Con los paquetes hay que distinguir dos operaciones:</p>
+<ul>
+<li><p><strong>Instalarlos</strong>, es decir, descargarlos en nuestro ordenador. Se hace <strong>una sola vez</strong>. Para los paquetes de CRAN, basta con acudir a la ventana inferior derecha de RStudio, pestaña “Packages”, botón “Install”, o con la instrucción <code>install.packages("nombre del paquete")</code>.</p></li>
+<li><p><strong>Activarlos</strong>, es decir, ponerlos a disposición de R en la sesión de trabajo. Se hace <strong>cada vez</strong> que abrimos RStudio, con la instrucción <code>library(nombre del paquete)</code>. Por eso todos los scripts del libro comienzan con una llamada a <code><span>library()</span></code>.</p></li>
+</ul>
+<div id="c01-el-paquete-matlite" class="section level3" number="1.7.1">
+<h3>
+<span class="header-section-number">1.7.1</span> <img src="figuras/key.svg" class="hicon"> El paquete <code>{MATlite}</code>.<a class="anchor" aria-label="anchor" href="#c01-el-paquete-matlite"><i class="fas fa-link"></i></a>
+</h3>
+<p>El paquete que utilizaremos a lo largo de todo el libro es <a href="https://github.com/teckel71/MATlite">MATlite</a>. No está alojado en CRAN, sino en GitHub, así que se instala de un modo ligeramente distinto. Primero instalaremos, desde CRAN, el paquete <a href="https://remotes.r-lib.org">remotes</a>, que sabe descargar paquetes de GitHub, y después <a href="https://github.com/teckel71/MATlite">MATlite</a>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Instalación (una sola vez)</span></span>
+<span><span class="fu"><span>install.packages</span></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"teckel71/MATlite"</span><span class="op">)</span></span></code></pre></div>
+<p>La instalación tarda unos minutos, porque <a href="https://github.com/teckel71/MATlite">MATlite</a> trae consigo todos los paquetes que utiliza por dentro (<a href="https://readxl.tidyverse.org">readxl</a>, <a href="https://dplyr.tidyverse.org">dplyr</a>, <a href="https://ggplot2.tidyverse.org">ggplot2</a>, etc.). Si durante el proceso R pregunta si se desean actualizar otros paquetes, lo más sencillo es responder que sí a todos (opción “All”).</p>
+<p>Una vez instalado, en cada sesión de trabajo bastará con activarlo:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Activación (cada vez que abrimos RStudio)</span></span>
+<span><span class="kw"><span>library</span></span><span class="op">(</span><span class="va"><a href="https://github.com/teckel71/MATlite">MATlite</a></span><span class="op">)</span></span></code></pre></div>
+<p>Todas las funciones de <a href="https://github.com/teckel71/MATlite">MATlite</a> empiezan por <code>lite_</code>. Basta con escribir esas cinco letras en RStudio para que el autocompletado las muestre todas. Las dos primeras que conviene conocer son:</p>
+<ul>
+<li><p><strong><code><span>lite_comprueba()</span></code></strong>: revisa que R y todos los paquetes necesarios estén correctamente instalados, y nos indica qué hacer si falta algo. Es una buena idea ejecutarla la primera vez.</p></li>
+<li><p><strong><code><span>lite_datos()</span></code></strong>: descarga en la carpeta del proyecto los archivos de datos que utilizaremos en las prácticas.</p></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><span>lite_comprueba</span></span><span class="op">(</span><span class="op">)</span>   <span class="co"># ¿está todo listo?</span></span>
+<span><span class="fu"><span>lite_datos</span></span><span class="op">(</span><span class="op">)</span>       <span class="co"># descarga los datos del curso en la carpeta del proyecto</span></span></code></pre></div>
+</div>
+</div>
+<div id="c01-help-sistema-de-ayuda" class="section level2" number="1.8">
+<h2>
+<span class="header-section-number">1.8</span> <img src="images/clipboard-1383707725.png"><img src="figuras/pie-chart.svg" class="hicon"> Help! (sistema de ayuda).<a class="anchor" aria-label="anchor" href="#c01-help-sistema-de-ayuda"><i class="fas fa-link"></i></a>
+</h2>
+<p>Es habitual albergar dudas sobre el uso de una función: qué argumentos admite, qué valores toman por defecto, qué resultados devuelve. Para consultarlo basta con escribir en la consola un signo de interrogación seguido del nombre de la función:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">?</span><span class="va">lite_describe</span></span></code></pre></div>
+<p>La ficha de la función aparecerá en la pestaña <strong>“Help”</strong> de la ventana inferior derecha de RStudio, con la descripción de sus argumentos y algunos ejemplos de uso. Las fichas de todas las funciones de <a href="https://github.com/teckel71/MATlite">MATlite</a> están, además, en el apéndice <em>Guía de uso de MATlite</em> al final del libro.</p>
+</div>
+<div id="c01-el-universo-r-stars" class="section level2" number="1.9">
+<h2>
+<span class="header-section-number">1.9</span> <img src="figuras/star.svg" class="hicon"> El universo R-Stars.<a class="anchor" aria-label="anchor" href="#c01-el-universo-r-stars"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los ejemplos de este libro se apoyan en un escenario ficticio: el <strong>universo R-Stars</strong>, ambientado en un hipotético sector de transporte interestelar de mercancías en el año 2150. Este universo proporciona una base de datos con 300 empresas caracterizadas por variables económico-financieras y operativas, lo que permite aplicar cada técnica a datos con una estructura realista, pero sin las restricciones de confidencialidad asociadas a datos reales.</p>
+<p>La descripción completa del universo R-Stars —la historia del sector, las empresas más relevantes y la ficha de todas las variables— puede consultarse en los apéndices de <a href="https://teckel71.github.io/RStars-book/"><em>R-Stars: La Guía</em></a>.</p>
+</div>
+<div id="c01-y-ahora" class="section level2" number="1.10">
+<h2>
+<span class="header-section-number">1.10</span> <img src="figuras/book.svg" class="hicon"> ¿Y ahora?<a class="anchor" aria-label="anchor" href="#c01-y-ahora"><i class="fas fa-link"></i></a>
+</h2>
+<p>Ya tenemos R, RStudio y <a href="https://github.com/teckel71/MATlite">MATlite</a> instalados, y sabemos crear proyectos, abrir y ejecutar scripts y consultar la ayuda. En el siguiente capítulo aprenderemos cómo almacena R los datos y cómo importarlos y manipularlos.</p>
 
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="prefacio.html">Prefacio</a></div>
 <div class="next"><a href="almacenando-y-manipulando-datos..html"><span class="header-section-number">2</span> Almacenando y manipulando datos.</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#introducci%C3%B3n."><span class="header-section-number">1</span> Introducción.</a></li></ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducci%C3%B3n."><span class="header-section-number">1</span> Introducción.</a></li>
+<li><a class="nav-link" href="#c01-de-los-datos-a-la-informacion-la-analitica"><span class="header-section-number">1.1</span>  De los datos a la información: la analítica de datos.</a></li>
+<li><a class="nav-link" href="#c01-que-es-r-y-como-nos-ayuda-a-analizar-datos"><span class="header-section-number">1.2</span>  ¿Qué es R y cómo nos ayuda a analizar datos?</a></li>
+<li><a class="nav-link" href="#c01-instalacion-de-r-y-rstudio"><span class="header-section-number">1.3</span>  Instalación de R y RStudio.</a></li>
+<li><a class="nav-link" href="#c01-r-y-rstudio-comienzo-proyectos"><span class="header-section-number">1.4</span>  R y RStudio. Comienzo: Proyectos.</a></li>
+<li><a class="nav-link" href="#c01-scripts"><span class="header-section-number">1.5</span>  Scripts.</a></li>
+<li><a class="nav-link" href="#c01-funciones"><span class="header-section-number">1.6</span>  Funciones.</a></li>
+<li>
+<a class="nav-link" href="#c01-paquetes-packages"><span class="header-section-number">1.7</span>  Paquetes (packages).</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#c01-el-paquete-matlite"><span class="header-section-number">1.7.1</span>  El paquete {MATlite}.</a></li></ul>
+</li>
+<li><a class="nav-link" href="#c01-help-sistema-de-ayuda"><span class="header-section-number">1.8</span>  Help! (sistema de ayuda).</a></li>
+<li><a class="nav-link" href="#c01-el-universo-r-stars"><span class="header-section-number">1.9</span>  El universo R-Stars.</a></li>
+<li><a class="nav-link" href="#c01-y-ahora"><span class="header-section-number">1.10</span>  ¿Y ahora?</a></li>
+</ul>
+<div class="book-extra">
+        <ul class="list-unstyled"></ul>
 </div>
     </nav>
 </div>
@@ -121,7 +282,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R, paso a paso y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
+    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

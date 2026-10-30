@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>6 Modelos de elección discreta. | R-Stars Lite</title>
 <meta name="author" content="Miguel-Ángel Tarancón Morán">
-<meta name="description" content="Capítulo en preparación.">
+<meta name="description" content="Figura 6.1. Concedida o denegada: la decisión como variable.  6.1 Introducción. En muchas situaciones reales del entorno empresarial, la variable que deseamos explicar no es una magnitud continua...">
 <meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="6 Modelos de elección discreta. | R-Stars Lite">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://teckel71.github.io/RStarslite-book/modelos-de-elección-discreta..html">
 <meta property="og:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
-<meta property="og:description" content="Capítulo en preparación.">
+<meta property="og:description" content="Figura 6.1. Concedida o denegada: la decisión como variable.  6.1 Introducción. En muchas situaciones reales del entorno empresarial, la variable que deseamos explicar no es una magnitud continua...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="6 Modelos de elección discreta. | R-Stars Lite">
-<meta name="twitter:description" content="Capítulo en preparación.">
+<meta name="twitter:description" content="Figura 6.1. Concedida o denegada: la decisión como variable.  6.1 Introducción. En muchas situaciones reales del entorno empresarial, la variable que deseamos explicar no es una magnitud continua...">
 <meta name="twitter:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,8 +61,8 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="Análisis de datos con R, paso a paso y sin vértigo">R-Stars Lite</a>:
-        <small class="text-muted">Análisis de datos con R, paso a paso y sin vértigo</small>
+        <a href="index.html" title="Análisis de datos con R y sin vértigo">R-Stars Lite</a>:
+        <small class="text-muted">Análisis de datos con R y sin vértigo</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -85,10 +85,10 @@
 <li><a class="" href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></li>
 <li><a class="" href="escalado-multidimensional..html"><span class="header-section-number">8</span> Escalado multidimensional.</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+<li><a class="" href="ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite..html">Apéndice: Guía de uso de MATlite.</a></li>
 <li><a class="" href="licencia.html">Licencia</a></li>
 </ul>
-
-        <div class="book-extra">
+<div class="book-extra">
           
         </div>
       </nav>
@@ -97,20 +97,2588 @@
 <h1>
 <span class="header-section-number">6</span> Modelos de elección discreta.<a class="anchor" aria-label="anchor" href="#modelos-de-elecci%C3%B3n-discreta."><i class="fas fa-link"></i></a>
 </h1>
-<p><em>Capítulo en preparación.</em></p>
+<div class="inline-figure"><img src="figuras/licencia.jpg" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 6.1.</strong> <span class="smallcaps">Concedida o denegada: la decisión como variable.</span></p>
+</div>
+<div id="c06-introduccion" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> <img src="figuras/book.svg" class="hicon"> Introducción.<a class="anchor" aria-label="anchor" href="#c06-introduccion"><i class="fas fa-link"></i></a>
+</h2>
+<p>En muchas situaciones reales del entorno empresarial, la variable que deseamos explicar no es una magnitud continua (una rentabilidad, unas ventas, un beneficio), sino <strong>categórica</strong>: un banco concede o deniega un crédito, un consumidor compra o no un producto, una empresa pertenece a un sector u otro, un regulador otorga o rechaza una licencia. En todos estos casos, el resultado de la decisión es una <strong>categoría</strong>, no una cifra. La variable dependiente toma un número finito de valores discretos que representan las alternativas posibles, y lo que interesa modelizar es la <strong>probabilidad de que un individuo o caso pertenezca a una u otra categoría</strong> en función de un conjunto de variables explicativas.</p>
+<p>La necesidad de interpretar económicamente estas pautas de comportamiento de los agentes económicos ha originado el desarrollo de la <strong>modelización microeconométrica</strong>. Los modelos microeconométricos ayudan a explicar las decisiones que los agentes del entorno de la empresa toman ante diferentes estímulos concretados en variables o atributos. En definitiva, intentan objetivar la toma de decisiones de los agentes económicos.</p>
+</div>
+<div id="c06-clasificacion-de-los-modelos-de-eleccion" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> <img src="figuras/book.svg" class="hicon"> Clasificación de los modelos de elección discreta.<a class="anchor" aria-label="anchor" href="#c06-clasificacion-de-los-modelos-de-eleccion"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los modelos de elección discreta constituyen una familia amplia de técnicas que se clasifican según las características de la variable dependiente:</p>
+<ul>
+<li><p><strong>Modelos de respuesta binaria:</strong> la variable dependiente presenta solo dos alternativas, codificadas como 0 y 1. Por ejemplo: conceder o no un crédito, comprar o no un producto, obtener o no una licencia. Son los modelos más sencillos y frecuentes.</p></li>
+<li>
+<p><strong>Modelos de respuesta múltiple:</strong> la variable dependiente admite más de dos categorías. A su vez, se subdividen en:</p>
+<ul>
+<li><p><em>Multinomiales:</em> las categorías no tienen un orden natural (por ejemplo, elegir entre tres marcas).</p></li>
+<li><p><em>Ordenados:</em> las categorías responden a una escala ordinal (por ejemplo, grado de satisfacción: bajo, medio, alto).</p></li>
+</ul>
+</li>
+</ul>
+<p>En este capítulo nos centraremos en los <strong>modelos de respuesta binaria</strong> y, dentro de ellos, en el <strong>modelo logit binomial</strong>, que es el más utilizado en la práctica por la facilidad de su especificación, estimación e interpretación.</p>
+</div>
+<div id="c06-el-modelo-de-respuesta-binaria" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> <img src="figuras/book.svg" class="hicon"> El modelo de respuesta binaria.<a class="anchor" aria-label="anchor" href="#c06-el-modelo-de-respuesta-binaria"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c06-planteamiento-general" class="section level3" number="6.3.1">
+<h3>
+<span class="header-section-number">6.3.1</span> Planteamiento general.<a class="anchor" aria-label="anchor" href="#c06-planteamiento-general"><i class="fas fa-link"></i></a>
+</h3>
+<p>Supongamos una variable dependiente categórica <span class="math inline">\(Y\)</span> que puede tomar valores 0 ó 1, y un conjunto de <span class="math inline">\(k\)</span> variables explicativas <span class="math inline">\(X_1, X_2, \ldots, X_k\)</span>. El objetivo es determinar:</p>
+<p><span class="math display">\[
+P[Y = 1 \,/\, X_1, X_2, \ldots, X_k]
+\]</span></p>
+<p>Es decir, la probabilidad de que la variable dependiente tome el valor 1 (pertenencia al grupo de interés) condicionada a los valores de las variables explicativas. Naturalmente, <span class="math inline">\(P[Y = 0 \,/\, X_1, \ldots, X_k] = 1 - P[Y = 1 \,/\, X_1, \ldots, X_k]\)</span>.</p>
+<p>Para relacionar la probabilidad con el valor de las variables explicativas, construimos una <strong>función de enlace</strong> que incorpora una función de distribución de probabilidad subyacente:</p>
+<p><span class="math display">\[
+P[Y = 1 \,/\, X_1, X_2, \ldots, X_k] = f(X_1, X_2, \ldots, X_k; \beta)
+\]</span></p>
+<p>donde <span class="math inline">\(\beta\)</span> es el vector de los <span class="math inline">\(k\)</span> parámetros estructurales del modelo. En la función de enlace supondremos que las variables independientes actúan siguiendo un esquema lineal:</p>
+<p><span class="math display">\[
+f(X_1, X_2, \ldots, X_k; \beta) = f(X_1\beta_1 + X_2\beta_2 + \cdots + X_k\beta_k)
+\]</span></p>
+<p>y el modelo a estimar será:</p>
+<p><span class="math display">\[
+y = f(X_1\beta_1 + X_2\beta_2 + \cdots + X_k\beta_k) + \varepsilon
+\]</span></p>
+<p>donde <span class="math inline">\(y\)</span> es la variable dependiente (0 ó 1) y <span class="math inline">\(\varepsilon\)</span> es la perturbación aleatoria.</p>
+</div>
+<div id="c06-la-funcion-de-enlace-logit-y-probit" class="section level3" number="6.3.2">
+<h3>
+<span class="header-section-number">6.3.2</span> La función de enlace: logit y probit.<a class="anchor" aria-label="anchor" href="#c06-la-funcion-de-enlace-logit-y-probit"><i class="fas fa-link"></i></a>
+</h3>
+<p>La forma funcional concreta de la función de enlace depende de la distribución de probabilidad que asumamos para el comportamiento de la variable <span class="math inline">\(Y\)</span>. Aunque la verdadera naturaleza de <span class="math inline">\(Y\)</span> es discreta, asumimos para ella una distribución de probabilidad continua:</p>
+<ul>
+<li><p><strong>Modelo logit:</strong> suponemos que la variable dependiente sigue una distribución de probabilidad que se ajusta a una <strong>curva logística</strong>.</p></li>
+<li><p><strong>Modelo probit:</strong> suponemos que la variable dependiente sigue una distribución de probabilidad que se ajusta a una <strong>distribución normal</strong>.</p></li>
+</ul>
+<p>En general, ambos modelos aportan soluciones similares en la mayoría de los casos. A nivel práctico, suelen utilizarse más los modelos logit, al ser menos dificultosa su especificación e interpretación de resultados. Por ello, el resto del capítulo se centrará en el modelo logit.</p>
+</div>
+</div>
+<div id="c06-el-modelo-logit-binomial" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> <img src="figuras/book.svg" class="hicon"> El modelo logit binomial.<a class="anchor" aria-label="anchor" href="#c06-el-modelo-logit-binomial"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c06-especificacion" class="section level3" number="6.4.1">
+<h3>
+<span class="header-section-number">6.4.1</span> Especificación.<a class="anchor" aria-label="anchor" href="#c06-especificacion"><i class="fas fa-link"></i></a>
+</h3>
+<p>En el modelo logit binomial, la función de enlace adopta la forma de la <strong>función logística</strong>:</p>
+<p><span class="math display">\[
+y_i = \frac{1}{1 + e^{-(\alpha + x_i\beta)}} + \varepsilon_i
+\]</span></p>
+<p>Bajo las hipótesis básicas habituales (el error sigue una distribución normal de media cero, tiene varianza constante y no está autocorrelacionado), la probabilidad de que la variable dependiente tome el valor 1 viene dada por:</p>
+<p><span class="math display">\[
+P(y_i = 1 \,/\, x_i) = E(Y) = \frac{1}{1 + e^{-(\alpha + x_i\beta)}}
+\]</span></p>
+<p>y la probabilidad estimada, una vez obtenidos los parámetros del modelo, será:</p>
+<p><span class="math display">\[
+\hat{P}(y_i = 1 \,/\, x_i) = \frac{1}{1 + e^{-(\hat{\alpha} + x_i\hat{\beta})}}
+\]</span></p>
+<p>Los parámetros se estiman mediante el método de <strong>máxima verosimilitud</strong>, a diferencia de la regresión lineal, donde se emplea mínimos cuadrados ordinarios (MCO).</p>
+</div>
+<div id="c06-contraste-de-significacion-individual" class="section level3" number="6.4.2">
+<h3>
+<span class="header-section-number">6.4.2</span> Contraste de significación individual: contraste de Wald.<a class="anchor" aria-label="anchor" href="#c06-contraste-de-significacion-individual"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para contrastar si un parámetro individual es significativamente distinto de cero, se utiliza el <strong>contraste de Wald</strong>, que desempeña en el modelo logit un papel análogo al del contraste <em>t</em> en la regresión lineal. La hipótesis nula es <span class="math inline">\(H_0: \beta_j = 0\)</span>, y el estadístico de contraste es:</p>
+<p><span class="math display">\[
+z = \frac{\hat{\beta}_j}{\text{SE}(\hat{\beta}_j)}
+\]</span></p>
+<p>que, bajo <span class="math inline">\(H_0\)</span>, sigue una distribución normal estándar. Si el p-valor asociado es inferior al nivel de significación elegido (por ejemplo, 0,05), se rechaza <span class="math inline">\(H_0\)</span> y se concluye que la variable es estadísticamente significativa.</p>
+<p>Cuando una variable explicativa es un <strong>factor con más de dos niveles</strong> (por ejemplo, EFLO con tres categorías: ANTIGUA, MADURA, RENOVADA), el modelo genera varias variables <em>dummy</em>. Es posible que ninguna de ellas sea individualmente significativa, pero que el factor en su conjunto sí lo sea. Para comprobarlo, se aplica el <strong>contraste de Wald conjunto</strong>, que evalúa simultáneamente la hipótesis <span class="math inline">\(H_0: \beta_{\text{MADURA}} = \beta_{\text{RENOVADA}} = 0\)</span>.</p>
+</div>
+<div id="c06-medidas-de-la-bondad-del-ajuste" class="section level3" number="6.4.3">
+<h3>
+<span class="header-section-number">6.4.3</span> Medidas de la bondad del ajuste.<a class="anchor" aria-label="anchor" href="#c06-medidas-de-la-bondad-del-ajuste"><i class="fas fa-link"></i></a>
+</h3>
+<p>La evaluación de la calidad de un modelo logit difiere de la regresión lineal. No existe un <span class="math inline">\(R^2\)</span> clásico, pero sí varios indicadores alternativos:</p>
+<ul>
+<li><p><strong>Porcentaje de predicciones correctas:</strong> se compara la clasificación predicha por el modelo (asignando al grupo 1 los casos con probabilidad estimada superior a 0,5) con la pertenencia real. Es una medida intuitiva, pero puede ser engañosa cuando los grupos están muy desbalanceados.</p></li>
+<li><p><strong>Pseudo</strong> <span class="math inline">\(R^2\)</span> de Nagelkerke: es una adaptación del coeficiente de determinación para modelos estimados por máxima verosimilitud. Se calcula a partir de las log-verosimilitudes del modelo completo (<span class="math inline">\(L_1\)</span>) y del modelo nulo (<span class="math inline">\(L_0\)</span>):</p></li>
+</ul>
+<p><span class="math display">\[
+R^2_{\text{Nagelkerke}} = \frac{1 - \exp\!\left(-\frac{2}{n}(L_1 - L_0)\right)}{1 - \exp\!\left(\frac{2}{n}\, L_0\right)}
+\]</span></p>
+<p>Sus valores oscilan entre 0 y 1, y se interpreta de forma análoga al <span class="math inline">\(R^2\)</span>: valores más altos indican mejor ajuste.</p>
+<ul>
+<li><p><strong>Criterio de información de Akaike (AIC):</strong> permite comparar modelos con distinto número de variables. Cuanto menor sea el AIC, mejor es la especificación del modelo.</p></li>
+<li><p><strong>Comparación de la devianza:</strong> la devianza mide la discrepancia entre el modelo estimado y un modelo saturado. La diferencia entre la devianza del modelo nulo y la del modelo completo se distribuye como una <span class="math inline">\(\chi^2\)</span> y permite contrastar la significación conjunta del modelo.</p></li>
+</ul>
+</div>
+<div id="c06-odd-ratios-interpretacion-economica-de-los" class="section level3" number="6.4.4">
+<h3>
+<span class="header-section-number">6.4.4</span> <em>Odd ratios</em>: interpretación económica de los coeficientes.<a class="anchor" aria-label="anchor" href="#c06-odd-ratios-interpretacion-economica-de-los"><i class="fas fa-link"></i></a>
+</h3>
+<p>En la regresión lineal, cada coeficiente indica directamente cuánto varía la variable dependiente cuando la explicativa se incrementa en una unidad. En el modelo logit, la interpretación no es tan directa, porque la relación entre las variables explicativas y la probabilidad no es lineal. Sin embargo, existe una transformación que facilita enormemente la lectura: el <strong><em>odd ratio</em></strong>.</p>
+<p>El <em>odd</em> (o <em>ventaja</em>) del suceso <span class="math inline">\(Y = 1\)</span> frente al suceso <span class="math inline">\(Y = 0\)</span> se define como el cociente entre sus probabilidades:</p>
+<p><span class="math display">\[
+\frac{P(y_i = 1)}{P(y_i = 0)} = e^{\alpha + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_k x_{ik}}
+\]</span></p>
+<p>Cuando una variable <span class="math inline">\(x_k\)</span> se incrementa en una unidad (manteniendo las demás constantes), la nueva ventaja se divide por la antigua, obteniéndose:</p>
+<p><span class="math display">\[
+\frac{\text{Ventaja nueva}}{\text{Ventaja antigua}} = e^{\beta_k}
+\]</span></p>
+<p>El valor <span class="math inline">\(e^{\beta_k}\)</span> se denomina <strong><em>odd ratio</em></strong> de la variable <span class="math inline">\(x_k\)</span>, y es el <strong>factor por el que se multiplica la ventaja</strong> cuando la variable se incrementa en una unidad:</p>
+<ul>
+<li><p>Si <span class="math inline">\(\beta_k &gt; 0\)</span> (parámetro positivo), entonces <span class="math inline">\(e^{\beta_k} &gt; 1\)</span>: la ventaja <strong>aumenta</strong> cuando aumenta la variable.</p></li>
+<li><p>Si <span class="math inline">\(\beta_k &lt; 0\)</span> (parámetro negativo), entonces <span class="math inline">\(e^{\beta_k} &lt; 1\)</span>: la ventaja <strong>disminuye</strong> cuando aumenta la variable.</p></li>
+</ul>
+<p>El cambio porcentual en la ventaja se calcula como <span class="math inline">\((e^{\beta_k} - 1) \times 100\%\)</span>.</p>
+</div>
+</div>
+<div id="c06-practica-que-determina-la-concesion-de" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> <img src="figuras/pie-chart.svg"> Práctica: ¿qué determina la concesión de licencias en el sector interestelar?<a class="anchor" aria-label="anchor" href="#c06-practica-que-determina-la-concesion-de"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c06-la-ruta-coruscant-arrakis" class="section level3" number="6.5.1">
+<h3>
+<span class="header-section-number">6.5.1</span> <img src="figuras/star.svg" class="hicon"> La ruta Coruscant–Arrakis.<a class="anchor" aria-label="anchor" href="#c06-la-ruta-coruscant-arrakis"><i class="fas fa-link"></i></a>
+</h3>
+<p>La ruta comercial entre los planetas <em>Coruscant</em> (en la Galaxia de Andrómeda) y <em>Arrakis</em> (en la Gran Nube de Magallanes) se ha consolidado en los últimos años como una de las más rentables del sector del transporte interestelar de mercancías. La expansión del tráfico comercial entre ambos planetas —impulsada por el crecimiento de la demanda de <em>especia</em> y componentes tecnológicos— ha atraído el interés de numerosas compañías navieras.</p>
+<p>La <strong>Autoridad Galáctica de Transporte Interestelar (AGTI)</strong>, organismo regulador del sector, gestiona la concesión de licencias de operación para esta ruta. De las 100 compañías que solicitaron operar en la ruta Coruscant–Arrakis, la AGTI concedió la licencia a <strong>40</strong> y la denegó a <strong>60</strong>, basándose en una evaluación de múltiples indicadores financieros, operativos y de calidad de servicio.</p>
+<p>Ante la previsión de que se convoque un nuevo concurso de licencias para atender la creciente demanda, un equipo de analistas de la consultora <em>Data-Evidence</em>, bajo la supervisión de su directora ejecutiva, <strong>Li Ti-Oh</strong>, ha decidido construir un <strong>modelo logit binomial</strong> que permita identificar qué factores determinan la concesión o denegación de la licencia. Este modelo será útil tanto para las compañías que deseen evaluar sus posibilidades como para la propia AGTI como herramienta de apoyo a la decisión.</p>
+</div>
+<div id="c06-preparacion-de-los-datos" class="section level3" number="6.5.2">
+<h3>
+<span class="header-section-number">6.5.2</span> <img src="figuras/pie-chart.svg"> Preparación de los datos.<a class="anchor" aria-label="anchor" href="#c06-preparacion-de-los-datos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para llevar a cabo la práctica, necesitamos en la carpeta de nuestro proyecto el archivo de datos <strong>licencias_100.xlsx</strong>, con los datos de las 100 compañías solicitantes; el archivo <strong>escenarios_logit_rstars.xlsx</strong>, que utilizaremos para la simulación de escenarios; y el <em>script</em> <strong>logit_lite.R</strong>, con el código que iremos ejecutando paso a paso.</p>
+<p>Como es habitual, comenzamos limpiando la memoria, cargando <a href="https://github.com/teckel71/MATlite">MATlite</a> e importando los datos:</p>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Limpiando el Global Environment</span></span>
+<span><span class="fu"><span>rm</span></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><span>ls</span></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Cargando el paquete de la asignatura</span></span>
+<span><span class="kw"><span>library</span></span><span class="op">(</span><span class="va"><a href="https://github.com/teckel71/MATlite">MATlite</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Importando datos desde Excel</span></span>
+<span><span class="va">LICENCIAS</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_importa</span></span><span class="op">(</span><span class="st">"licencias_100.xlsx"</span><span class="op">)</span></span>
+<span><span class="fu"><span>lite_resumen</span></span><span class="op">(</span><span class="va">LICENCIAS</span><span class="op">)</span></span></code></pre></div>
+<div id="cnmhwwpbgw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#cnmhwwpbgw table {
+  font-family: Lato, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+#cnmhwwpbgw thead, #cnmhwwpbgw tbody, #cnmhwwpbgw tfoot, #cnmhwwpbgw tr, #cnmhwwpbgw td, #cnmhwwpbgw th {
+  border-style: none;
+}
+
+#cnmhwwpbgw p {
+  margin: 0;
+  padding: 0;
+}
+
+#cnmhwwpbgw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #FFFFFF;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cnmhwwpbgw .gt_title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cnmhwwpbgw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cnmhwwpbgw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 0px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cnmhwwpbgw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cnmhwwpbgw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cnmhwwpbgw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cnmhwwpbgw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cnmhwwpbgw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cnmhwwpbgw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cnmhwwpbgw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cnmhwwpbgw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cnmhwwpbgw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cnmhwwpbgw .gt_row {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #F6F7F7;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cnmhwwpbgw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnmhwwpbgw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cnmhwwpbgw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cnmhwwpbgw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cnmhwwpbgw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnmhwwpbgw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cnmhwwpbgw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnmhwwpbgw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_striped {
+  background-color: #FAFAFA;
+}
+
+#cnmhwwpbgw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnmhwwpbgw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cnmhwwpbgw .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cnmhwwpbgw .gt_left {
+  text-align: left;
+}
+
+#cnmhwwpbgw .gt_center {
+  text-align: center;
+}
+
+#cnmhwwpbgw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cnmhwwpbgw .gt_font_normal {
+  font-weight: normal;
+}
+
+#cnmhwwpbgw .gt_font_bold {
+  font-weight: bold;
+}
+
+#cnmhwwpbgw .gt_font_italic {
+  font-style: italic;
+}
+
+#cnmhwwpbgw .gt_super {
+  font-size: 65%;
+}
+
+#cnmhwwpbgw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cnmhwwpbgw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cnmhwwpbgw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cnmhwwpbgw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cnmhwwpbgw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cnmhwwpbgw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cnmhwwpbgw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#cnmhwwpbgw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#cnmhwwpbgw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>LICENCIAS</td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>100 rows x 11 cols</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">Column</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="value">Plot Overview</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_missing">Missing</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mean">Mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Median">Median</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="SD">SD</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:20px;width:20px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#4e79a7;overflow:visible;position:relative;"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;"><div style="max-width: 150px;">
+    <details style="font-weight: normal !important;"><summary style="font-weight: bold !important;">SEDE</summary>
+Tatooine, Fhloston Paradise, Klendathu, Miranda, Arrakis, Coruscant, Júpiter, Mustafar, Nueva Caprica, Mül, Qo'noS, Dagobah, Hoth, Kobol, LV-223, LV-426, Pandora, Romulus, Vulcano, Caprica, Endor, La Tierra (Final), Miller, Risa, Tierra, Zegema Beach, La Luna, Mann, Naboo and Planet P
+</details>
+</div></td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ=="><rect x="1.00" y="2.99" width="139.74" height="20.62"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ==)"><rect x="139.34" y="3.93" width="1.40" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #DDEAF7;"></rect><rect x="137.94" y="3.93" width="1.40" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #D8E6F5;"></rect><rect x="136.54" y="3.93" width="1.40" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #D3E2F3;"></rect><rect x="135.15" y="3.93" width="1.40" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CDDFF1;"></rect><rect x="132.35" y="3.93" width="2.79" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C8DBEF;"></rect><rect x="129.56" y="3.93" width="2.79" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C3D7ED;"></rect><rect x="126.76" y="3.93" width="2.79" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #BED3EB;"></rect><rect x="123.97" y="3.93" width="2.79" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #B9D0E9;"></rect><rect x="121.17" y="3.93" width="2.79" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #B3CCE7;"></rect><rect x="118.38" y="3.93" width="2.79" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #AEC8E5;"></rect><rect x="115.58" y="3.93" width="2.79" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A9C4E3;"></rect><rect x="111.39" y="3.93" width="4.19" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A3C1E1;"></rect><rect x="107.20" y="3.93" width="4.19" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #9EBDDF;"></rect><rect x="103.01" y="3.93" width="4.19" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #99B9DD;"></rect><rect x="98.81" y="3.93" width="4.19" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #93B6DB;"></rect><rect x="94.62" y="3.93" width="4.19" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #8EB2D9;"></rect><rect x="90.43" y="3.93" width="4.19" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #88AED7;"></rect><rect x="86.24" y="3.93" width="4.19" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #83ABD5;"></rect><rect x="82.05" y="3.93" width="4.19" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #7DA7D3;"></rect><rect x="76.46" y="3.93" width="5.59" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #77A4D1;"></rect><rect x="70.87" y="3.93" width="5.59" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #71A0CF;"></rect><rect x="63.88" y="3.93" width="6.99" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6B9DCD;"></rect><rect x="56.89" y="3.93" width="6.99" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6599CB;"></rect><rect x="49.91" y="3.93" width="6.99" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #5F96C9;"></rect><rect x="42.92" y="3.93" width="6.99" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #5892C7;"></rect><rect x="35.93" y="3.93" width="6.99" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #528FC5;"></rect><rect x="27.55" y="3.93" width="8.38" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #4A8BC3;"></rect><rect x="19.16" y="3.93" width="8.38" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #4388C1;"></rect><rect x="10.78" y="3.93" width="8.38" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3A84BF;"></rect><rect x="1.00" y="3.93" width="9.78" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3181BD;"></rect></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><text x="1.00" y="30.18" style='font-size: 8.00px; font-family: "Arial";' textlength="48.06px" lengthadjust="spacingAndGlyphs">30 categories</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">—</td>
+<td headers="Median" class="gt_row gt_right">—</td>
+<td headers="SD" class="gt_row gt_right">—</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:20px;width:20px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#4e79a7;overflow:visible;position:relative;"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;"><div style="max-width: 150px;">
+    <details style="font-weight: normal !important;"><summary style="font-weight: bold !important;">GALAXIA</summary>
+Galaxia de Andrómeda, Vía Láctea, Galaxia del Triángulo, Gran Nube de Magallanes and Pequeña Nube de Magallanes
+</details>
+</div></td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ=="><rect x="1.00" y="2.99" width="139.74" height="20.62"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ==)"><rect x="129.56" y="3.93" width="11.18" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #DDEAF7;"></rect><rect x="100.21" y="3.93" width="29.35" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #B7CFE9;"></rect><rect x="70.87" y="3.93" width="29.35" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #91B4DA;"></rect><rect x="37.33" y="3.93" width="33.54" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #679ACC;"></rect><rect x="1.00" y="3.93" width="36.33" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3181BD;"></rect></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><text x="1.00" y="30.18" style='font-size: 8.00px; font-family: "Arial";' textlength="43.61px" lengthadjust="spacingAndGlyphs">5 categories</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">—</td>
+<td headers="Median" class="gt_row gt_right gt_striped">—</td>
+<td headers="SD" class="gt_row gt_right gt_striped">—</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:20px;width:20px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#4e79a7;overflow:visible;position:relative;"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;"><div style="max-width: 150px;">
+    <details style="font-weight: normal !important;"><summary style="font-weight: bold !important;">EFLO</summary>
+MADURA, RENOVADA and ANTIGUA
+</details>
+</div></td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ=="><rect x="1.00" y="2.99" width="139.74" height="20.62"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8Mi45OXwyMy42MQ==)"><rect x="112.79" y="3.93" width="27.95" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #DDEAF7;"></rect><rect x="63.88" y="3.93" width="48.91" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #91B4DA;"></rect><rect x="1.00" y="3.93" width="62.88" height="18.75" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #3181BD;"></rect></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><text x="1.00" y="30.18" style='font-size: 8.00px; font-family: "Arial";' textlength="43.61px" lengthadjust="spacingAndGlyphs">3 categories</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">—</td>
+<td headers="Median" class="gt_row gt_right">—</td>
+<td headers="SD" class="gt_row gt_right">—</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;">SOLVENCIA</td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="20.22" width="9.77" height="2.40" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="17.12" y="12.21" width="9.77" height="10.41" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="26.89" y="7.41" width="9.77" height="15.22" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="36.66" y="1.00" width="9.77" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="46.44" y="10.61" width="9.77" height="12.02" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="56.21" y="10.61" width="9.77" height="12.02" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="65.98" y="18.62" width="9.77" height="4.01" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="75.75" y="21.83" width="9.77" height="0.80" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="85.52" y="21.83" width="9.77" height="0.80" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="95.30" y="22.63" width="9.77" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="105.07" y="22.63" width="9.77" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="114.84" y="22.63" width="9.77" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="124.61" y="21.83" width="9.77" height="0.80" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="8.05" cy="21.83" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="8.05" cy="21.83" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="42.09" y1="22.63" x2="42.09" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="9.24,25.46 9.24,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="128.53,25.46 128.53,22.63 " style="stroke-width: 0.75;"></polyline><text x="9.24" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="23.41px" lengthadjust="spacingAndGlyphs">126 auto</text><text x="128.53" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="23.41px" lengthadjust="spacingAndGlyphs">325 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">183.7</td>
+<td headers="Median" class="gt_row gt_right gt_striped">180.7</td>
+<td headers="SD" class="gt_row gt_right gt_striped">30.3</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">FLOTA</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="19.17" width="18.15" height="3.46" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="25.50" y="5.32" width="18.15" height="17.30" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="43.64" y="1.00" width="18.15" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="61.79" y="7.92" width="18.15" height="14.71" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="79.94" y="9.65" width="18.15" height="12.98" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="98.09" y="9.65" width="18.15" height="12.98" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="116.24" y="19.17" width="18.15" height="3.46" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="21.75" cy="21.76" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="21.75" cy="21.76" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="62.75" y1="22.63" x2="62.75" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="22.74,25.46 22.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="121.72,25.46 121.72,22.63 " style="stroke-width: 0.75;"></polyline><text x="22.74" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="16.72px" lengthadjust="spacingAndGlyphs">3 auto</text><text x="121.72" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">50 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">24.2</td>
+<td headers="Median" class="gt_row gt_right">22.0</td>
+<td headers="SD" class="gt_row gt_right">13.0</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;">RUTAS</td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="20.13" width="11.55" height="2.50" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="18.90" y="5.99" width="11.55" height="16.64" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="30.45" y="1.00" width="11.55" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="41.99" y="6.82" width="11.55" height="15.81" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="53.54" y="7.65" width="11.55" height="14.97" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="65.09" y="16.80" width="11.55" height="5.82" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="76.64" y="21.79" width="11.55" height="0.83" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="88.19" y="21.79" width="11.55" height="0.83" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="99.74" y="20.96" width="11.55" height="1.66" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="111.29" y="20.96" width="11.55" height="1.66" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="122.84" y="21.79" width="11.55" height="0.83" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="15.10" cy="21.79" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="15.10" cy="21.79" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="44.16" y1="22.63" x2="44.16" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="16.22,25.46 16.22,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="127.90,25.46 127.90,22.63 " style="stroke-width: 0.75;"></polyline><text x="16.22" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">36 auto</text><text x="127.90" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="19.72px" lengthadjust="spacingAndGlyphs">1 kauto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">398.4</td>
+<td headers="Median" class="gt_row gt_right gt_striped">361.0</td>
+<td headers="SD" class="gt_row gt_right gt_striped">257.4</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">IFIDE</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="21.08" width="7.06" height="1.55" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="14.41" y="21.85" width="7.06" height="0.77" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="21.46" y="18.76" width="7.06" height="3.86" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="28.52" y="17.22" width="7.06" height="5.41" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="35.58" y="13.36" width="7.06" height="9.27" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="42.64" y="13.36" width="7.06" height="9.27" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="49.69" y="1.00" width="7.06" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="56.75" y="9.49" width="7.06" height="13.13" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="63.81" y="14.90" width="7.06" height="7.73" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="70.87" y="21.85" width="7.06" height="0.77" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="77.92" y="21.85" width="7.06" height="0.77" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="84.98" y="22.63" width="7.06" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="92.04" y="22.63" width="7.06" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="99.10" y="22.63" width="7.06" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="106.15" y="22.63" width="7.06" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="113.21" y="21.08" width="7.06" height="1.55" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="120.27" y="22.63" width="7.06" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="127.33" y="21.08" width="7.06" height="1.55" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="8.61" cy="21.85" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="8.61" cy="21.85" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="53.01" y1="22.63" x2="53.01" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="9.82,25.46 9.82,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="130.99,25.46 130.99,22.63 " style="stroke-width: 0.75;"></polyline><text x="9.82" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">23 auto</text><text x="130.99" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">69 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">39.4</td>
+<td headers="Median" class="gt_row gt_right">39.6</td>
+<td headers="SD" class="gt_row gt_right">7.4</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;">IPUNT</td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="21.83" width="12.70" height="0.80" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="20.05" y="21.02" width="12.70" height="1.60" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="32.76" y="12.21" width="12.70" height="10.41" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="45.46" y="14.62" width="12.70" height="8.01" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="58.16" y="1.00" width="12.70" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="70.87" y="8.21" width="12.70" height="14.42" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="83.57" y="8.21" width="12.70" height="14.42" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="96.27" y="18.62" width="12.70" height="4.01" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="108.98" y="19.42" width="12.70" height="3.20" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="121.68" y="21.02" width="12.70" height="1.60" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="12.90" cy="21.83" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="12.90" cy="21.83" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="68.52" y1="22.63" x2="68.52" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="14.08,25.46 14.08,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="132.65,25.46 132.65,22.63 " style="stroke-width: 0.75;"></polyline><text x="14.08" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">29 auto</text><text x="132.65" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">96 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">60.7</td>
+<td headers="Median" class="gt_row gt_right gt_striped">59.5</td>
+<td headers="SD" class="gt_row gt_right gt_striped">12.6</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">TINCID</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="20.13" width="14.12" height="2.50" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="21.46" y="20.13" width="14.12" height="2.50" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="35.58" y="6.82" width="14.12" height="15.81" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="49.69" y="4.32" width="14.12" height="18.30" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="63.81" y="10.15" width="14.12" height="12.48" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="77.92" y="1.00" width="14.12" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="92.04" y="15.14" width="14.12" height="7.49" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="106.15" y="20.96" width="14.12" height="1.66" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="120.27" y="21.79" width="14.12" height="0.83" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="16.66" cy="21.79" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="16.66" cy="21.79" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="68.78" y1="22.63" x2="68.78" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="17.71,25.46 17.71,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="123.03,25.46 123.03,22.63 " style="stroke-width: 0.75;"></polyline><text x="17.71" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="28.41px" lengthadjust="spacingAndGlyphs">500 mauto</text><text x="123.03" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">16 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">7.9</td>
+<td headers="Median" class="gt_row gt_right">8.2</td>
+<td headers="SD" class="gt_row gt_right">3.4</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left gt_striped"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left gt_striped" style="font-weight: bold;">EXPERIENCIA</td>
+<td headers="value" class="gt_row gt_center gt_striped">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="19.68" width="15.88" height="2.95" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="23.23" y="9.85" width="15.88" height="12.78" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="39.11" y="1.00" width="15.88" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="54.99" y="1.00" width="15.88" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="70.87" y="6.90" width="15.88" height="15.73" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="86.75" y="7.88" width="15.88" height="14.75" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="102.63" y="15.74" width="15.88" height="6.88" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="118.50" y="20.66" width="15.88" height="1.97" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="19.45" cy="21.64" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="19.45" cy="21.64" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><line x1="67.94" y1="22.63" x2="67.94" y2="1.00" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="20.55,25.46 20.55,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="131.11,25.46 131.11,22.63 " style="stroke-width: 0.75;"></polyline><text x="20.55" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="16.72px" lengthadjust="spacingAndGlyphs">1 auto</text><text x="131.11" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="20.06px" lengthadjust="spacingAndGlyphs">22 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right gt_striped">0.0%</td>
+<td headers="Mean" class="gt_row gt_right gt_striped">9.6</td>
+<td headers="Median" class="gt_row gt_right gt_striped">10.0</td>
+<td headers="SD" class="gt_row gt_right gt_striped">4.8</td>
+</tr>
+<tr>
+<td headers="type" class="gt_row gt_left"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:20px;width:25px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f18e2c;overflow:visible;position:relative;"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path></svg></td>
+<td headers="name" class="gt_row gt_left" style="font-weight: bold;">LICENCIA</td>
+<td headers="value" class="gt_row gt_center">
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141.73pt" height="34.02pt" viewbox="0 0 141.73 34.02"><g class="svglite"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg=="><rect x="0.00" y="0.00" width="141.73" height="34.02"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><rect x="0.00" y="0.00" width="141.73" height="34.02" style="stroke-width: 0.00; stroke: none;"></rect></g><defs><clippath id="cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw=="><rect x="1.00" y="1.00" width="139.74" height="21.63"></rect></clippath></defs><g clip-path="url(#cpMS4wMHwxNDAuNzR8MS4wMHwyMi42Mw==)"><rect x="7.35" y="1.00" width="42.35" height="21.63" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="49.69" y="22.63" width="42.35" height="0.00" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><rect x="92.04" y="8.21" width="42.35" height="14.42" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8BB87;"></rect><circle cx="27.54" cy="22.27" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle><circle cx="27.54" cy="22.27" r="0.46" style="stroke-width: 0.71; stroke: none;"></circle></g><g clip-path="url(#cpMC4wMHwxNDEuNzN8MC4wMHwzNC4wMg==)"><polyline points="1.00,22.63 140.74,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="28.52,25.46 28.52,22.63 " style="stroke-width: 0.75;"></polyline><polyline points="126.80,25.46 126.80,22.63 " style="stroke-width: 0.75;"></polyline><text x="28.52" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="16.72px" lengthadjust="spacingAndGlyphs">0 auto</text><text x="126.80" y="33.56" text-anchor="middle" style='font-size: 6.00px; font-family: "Arial";' textlength="16.72px" lengthadjust="spacingAndGlyphs">1 auto</text></g></g></svg>
+</td>
+<td headers="n_missing" class="gt_row gt_right">0.0%</td>
+<td headers="Mean" class="gt_row gt_right">0.4</td>
+<td headers="Median" class="gt_row gt_right">0.0</td>
+<td headers="SD" class="gt_row gt_right">0.5</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.1</strong></p>
+</div>
+</div>
+<div id="c06-deteccion-de-valores-perdidos" class="section level3" number="6.5.3">
+<h3>
+<span class="header-section-number">6.5.3</span> <img src="figuras/pie-chart.svg"> Detección de valores perdidos.<a class="anchor" aria-label="anchor" href="#c06-deteccion-de-valores-perdidos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Como paso previo a cualquier análisis, comprobamos la presencia de valores perdidos (<em>missing values</em>):</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LICENCIAS</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_na</span></span><span class="op">(</span><span class="va">LICENCIAS</span>, accion <span class="op">=</span> <span class="st">"eliminar"</span>,</span>
+<span>                     titulo    <span class="op">=</span> <span class="st">"Modelo logit binomial."</span>,</span>
+<span>                     subtitulo <span class="op">=</span> <span class="st">"Licencias de operación - Ruta Coruscant–Arrakis"</span><span class="op">)</span></span></code></pre></div>
+<p>La función confirma, con un mensaje en la consola, que la base de datos está completa: no se detectan valores perdidos en ninguna de las 100 observaciones. No obstante, al haber utilizado <code>accion = "eliminar"</code>, si se hubieran detectado casos con <code>NA</code>, habrían quedado automáticamente excluidos del <em>data frame</em> de trabajo.</p>
+</div>
+<div id="c06-conversion-de-variables-categoricas" class="section level3" number="6.5.4">
+<h3>
+<span class="header-section-number">6.5.4</span> <img src="figuras/pie-chart.svg"> Conversión de variables categóricas.<a class="anchor" aria-label="anchor" href="#c06-conversion-de-variables-categoricas"><i class="fas fa-link"></i></a>
+</h3>
+<p>Una vez confirmada la integridad de los datos, es imprescindible convertir las variables categóricas en <strong>factores</strong> (recordemos el capítulo 2). La variable EFLO (estado de la flota) tiene tres niveles, y fijamos como nivel de referencia la categoría ANTIGUA, de modo que los coeficientes de MADURA y RENOVADA indicarán la mejora respecto a ese nivel base. La variable LICENCIA es la variable dependiente binaria (0 = denegada, 1 = concedida). La función <code><span>lite_factor()</span></code> realiza la conversión; con el argumento <code>niveles</code> indicamos el orden de las categorías, y la primera actúa como referencia:</p>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Conversión de variables categóricas a factor</span></span>
+<span><span class="va">LICENCIAS</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_factor</span></span><span class="op">(</span><span class="va">LICENCIAS</span>, <span class="va">EFLO</span>, niveles <span class="op">=</span> <span class="fu"><span>c</span></span><span class="op">(</span><span class="st">"ANTIGUA"</span>, <span class="st">"MADURA"</span>, <span class="st">"RENOVADA"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Codificación (contrastes) de EFLO:
+##          MADURA RENOVADA
+## ANTIGUA       0        0
+## MADURA        1        0
+## RENOVADA      0        1</code></pre>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LICENCIAS</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_factor</span></span><span class="op">(</span><span class="va">LICENCIAS</span>, <span class="va">LICENCIA</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Codificación (contrastes) de LICENCIA:
+##   1
+## 0 0
+## 1 1</code></pre>
+<p>La función muestra la codificación de las variables <em>dummy</em> (los <em>contrastes</em>): para EFLO, la categoría ANTIGUA es la referencia (la fila de ceros), y se crean dos indicadores para MADURA y RENOVADA. Para LICENCIA, el valor 0 es la referencia y el valor 1 el evento de interés.</p>
+</div>
+<div id="c06-analisis-descriptivo-previo" class="section level3" number="6.5.5">
+<h3>
+<span class="header-section-number">6.5.5</span> <img src="figuras/pie-chart.svg"> Análisis descriptivo previo.<a class="anchor" aria-label="anchor" href="#c06-analisis-descriptivo-previo"><i class="fas fa-link"></i></a>
+</h3>
+<p>Antes de estimar el modelo, conviene examinar las diferencias descriptivas entre los dos grupos (licencia concedida vs. denegada). Esto nos permitirá anticipar qué variables podrían ser relevantes. Todo ello lo hace la función <code><span>lite_logit_descriptivo()</span></code>, a la que indicamos la variable dependiente y, si queremos, unas etiquetas para sus dos categorías:</p>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Análisis descriptivo previo</span></span>
+<span><span class="va">descriptivo</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_logit_descriptivo</span></span><span class="op">(</span><span class="va">LICENCIAS</span>, <span class="va">LICENCIA</span>,</span>
+<span>                                      etiquetas <span class="op">=</span> <span class="fu"><span>c</span></span><span class="op">(</span><span class="st">"0"</span> <span class="op">=</span> <span class="st">"Denegada"</span>, <span class="st">"1"</span> <span class="op">=</span> <span class="st">"Concedida"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>La función analiza todas las variables del <em>data frame</em> salvo las categóricas con demasiadas categorías, como SEDE, el planeta de la sede (avisa de ello en la consola). Comenzamos con la distribución de la variable dependiente:</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">descriptivo</span><span class="op">$</span><span class="va">dependiente</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+LICENCIA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Frecuencia
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Porcentaje
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+0
+</td>
+<td style="text-align:right;text-align: center;">
+60
+</td>
+<td style="text-align:right;text-align: center;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+40
+</td>
+<td style="text-align:right;text-align: center;">
+40
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.2</strong></p>
+</div>
+<p>Para las variables categóricas, obtenemos una tabla cruzada con la dependiente. La de EFLO es:</p>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">descriptivo</span><span class="op">$</span><span class="va">cruzadas</span><span class="op">$</span><span class="va">EFLO</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+0
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+1
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+% Concedida
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+ANTIGUA
+</td>
+<td style="text-align:right;text-align: center;">
+15
+</td>
+<td style="text-align:right;text-align: center;">
+5
+</td>
+<td style="text-align:right;text-align: center;">
+25.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+MADURA
+</td>
+<td style="text-align:right;text-align: center;">
+31
+</td>
+<td style="text-align:right;text-align: center;">
+14
+</td>
+<td style="text-align:right;text-align: center;">
+31.11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+RENOVADA
+</td>
+<td style="text-align:right;text-align: center;">
+14
+</td>
+<td style="text-align:right;text-align: center;">
+21
+</td>
+<td style="text-align:right;text-align: center;">
+60.00
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.3</strong></p>
+</div>
+<p>La tabla cruzada revela un patrón sugerente: entre las compañías con flota RENOVADA, el 60% obtuvieron la licencia, frente al 31% de las MADURA y el 25% de las ANTIGUA. Esto sugiere que el estado de la flota podría ser un factor relevante, aunque habrá que confirmar si este efecto se mantiene tras controlar por las demás variables.</p>
+<p>Visualizamos la relación entre las variables categóricas (EFLO y GALAXIA) y la concesión de la licencia mediante gráficos de barras apiladas porcentuales, que muestran la proporción de concesión y denegación dentro de cada categoría:</p>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">descriptivo</span><span class="op">$</span><span class="va">graficos_categoricas</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-102-1.png" alt="" width="100%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 6.2</strong></p>
+</div>
+<p>El gráfico de EFLO confirma visualmente la asociación ya detectada en la tabla cruzada: la proporción de licencias concedidas crece de forma clara al pasar de flotas antiguas a renovadas. En cuanto a GALAXIA, las diferencias son menos marcadas, lo que anticipa que la galaxia de operación probablemente no será una variable determinante en el modelo.</p>
+<p>Veamos ahora las medias de las variables métricas en cada grupo, tanto en formato tabla como en formato gráfico:</p>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">descriptivo</span><span class="op">$</span><span class="va">medias</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+LICENCIA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+SOLVENCIA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+FLOTA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+RUTAS
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IPUNT
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+TINCID
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+EXPERIENCIA
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+0
+</td>
+<td style="text-align:right;text-align: center;">
+176.63
+</td>
+<td style="text-align:right;text-align: center;">
+23.42
+</td>
+<td style="text-align:right;text-align: center;">
+341.1
+</td>
+<td style="text-align:right;text-align: center;">
+37.54
+</td>
+<td style="text-align:right;text-align: center;">
+58.15
+</td>
+<td style="text-align:right;text-align: center;">
+8.96
+</td>
+<td style="text-align:right;text-align: center;">
+8.48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+194.33
+</td>
+<td style="text-align:right;text-align: center;">
+25.40
+</td>
+<td style="text-align:right;text-align: center;">
+484.4
+</td>
+<td style="text-align:right;text-align: center;">
+42.21
+</td>
+<td style="text-align:right;text-align: center;">
+64.49
+</td>
+<td style="text-align:right;text-align: center;">
+6.29
+</td>
+<td style="text-align:right;text-align: center;">
+11.22
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.4</strong></p>
+</div>
+<p>Los gráficos de medias se reparten en dos paneles; la pieza <code>graficos_metricas</code> es una lista, y mostramos cada elemento por separado:</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">descriptivo</span><span class="op">$</span><span class="va">graficos_metricas</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-104-1.png" alt="" width="100%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 6.3</strong></p>
+</div>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">descriptivo</span><span class="op">$</span><span class="va">graficos_metricas</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<div class="inline-figure"><img src="RStarsLite_files/figure-html/unnamed-chunk-105-1.png" alt="" width="100%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 6.4</strong></p>
+</div>
+<p>Los gráficos permiten apreciar de un vistazo las diferencias entre los dos grupos. Las variables que muestran contrastes más acusados son IPUNT (puntualidad), TINCID (tasa de incidencias) y, en menor medida, SOLVENCIA: las compañías que obtuvieron la licencia son, en promedio, más puntuales, registran muchas menos incidencias y tienen mayor solvencia financiera. RUTAS y EXPERIENCIA también presentan diferencias apreciables. En cambio, FLOTA muestra medias muy similares en ambos grupos, lo que anticipa que probablemente no será una variable significativa en el modelo.</p>
+</div>
+<div id="c06-particion-en-muestra-de-estimacion-y-muestra" class="section level3" number="6.5.6">
+<h3>
+<span class="header-section-number">6.5.6</span> <img src="figuras/pie-chart.svg"> Partición en muestra de estimación y muestra de test.<a class="anchor" aria-label="anchor" href="#c06-particion-en-muestra-de-estimacion-y-muestra"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para evaluar la capacidad predictiva del modelo sobre datos no vistos, dividimos la muestra en dos subconjuntos: una <strong>muestra de estimación</strong> (80 observaciones) con la que se ajustarán los parámetros del modelo, y una <strong>muestra de test</strong> (20 observaciones) que se reserva exclusivamente para la validación. La función <code><span>lite_particion()</span></code> toma los 80 primeros casos para estimar y deja el resto para el test:</p>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">muestras</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_particion</span></span><span class="op">(</span><span class="va">LICENCIAS</span>, n_estimacion <span class="op">=</span> <span class="fl">80</span>, dependiente <span class="op">=</span> <span class="va">LICENCIA</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">muestras</span><span class="op">$</span><span class="va">resumen</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Muestra
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Casos
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+LICENCIA = 0
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+LICENCIA = 1
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+Estimación
+</td>
+<td style="text-align:right;text-align: center;">
+80
+</td>
+<td style="text-align:right;text-align: center;">
+52
+</td>
+<td style="text-align:right;text-align: center;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+Test
+</td>
+<td style="text-align:right;text-align: center;">
+20
+</td>
+<td style="text-align:right;text-align: center;">
+8
+</td>
+<td style="text-align:right;text-align: center;">
+12
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.5</strong></p>
+</div>
+<p>Las dos muestras quedan guardadas en <code>muestras$estimacion</code> y <code>muestras$test</code>. Si quisiéramos que los casos de cada muestra se eligieran al azar, bastaría con añadir el argumento <code>aleatoria = TRUE</code>.</p>
+</div>
+<div id="c06-estimacion-del-modelo-logit-completo" class="section level3" number="6.5.7">
+<h3>
+<span class="header-section-number">6.5.7</span> <img src="figuras/pie-chart.svg"> Estimación del modelo logit completo.<a class="anchor" aria-label="anchor" href="#c06-estimacion-del-modelo-logit-completo"><i class="fas fa-link"></i></a>
+</h3>
+<p>Con los datos preparados, estimamos el modelo logit binomial completo con la función <code><span>lite_logit()</span></code>. Le indicamos la muestra de estimación, la variable dependiente, las variables explicativas y, para evaluar después su capacidad predictiva, la muestra de test:</p>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_logit</span></span><span class="op">(</span><span class="va">muestras</span><span class="op">$</span><span class="va">estimacion</span>, <span class="va">LICENCIA</span>,</span>
+<span>                       explicativas <span class="op">=</span> <span class="fu"><span>c</span></span><span class="op">(</span><span class="va">SOLVENCIA</span>, <span class="va">IPUNT</span>, <span class="va">TINCID</span>, <span class="va">IFIDE</span>,</span>
+<span>                                        <span class="va">FLOTA</span>, <span class="va">RUTAS</span>, <span class="va">EXPERIENCIA</span>, <span class="va">EFLO</span><span class="op">)</span>,</span>
+<span>                       test <span class="op">=</span> <span class="va">muestras</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Modelo estimado: LICENCIA ~ SOLVENCIA + IPUNT + TINCID + IFIDE + FLOTA + RUTAS + EXPERIENCIA + EFLO
+## Probabilidad modelizada: P(LICENCIA = 1).  Casos de estimación: 80.  Casos de test: 20.</code></pre>
+<p>La función nos informa de la <strong>especificación</strong> del modelo que ha estimado, escrita en la notación habitual de R: la variable dependiente, el símbolo <code>~</code> (que se lee “en función de”) y las variables explicativas separadas por <code>+</code>. Nos recuerda, además, que la probabilidad que se modeliza es la de LICENCIA = 1, es decir, la de obtener la licencia.</p>
+<p>La primera tabla recoge los <strong>coeficientes</strong> estimados, sus errores estándar, el estadístico z del contraste de Wald individual y los p-valores:</p>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span><span class="op">$</span><span class="va">coeficientes</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Variable
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Coeficiente
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Desv. Típica
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Estadístico z
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+p-valor
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Sig.
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+(Intercept)
+</td>
+<td style="text-align:left;text-align: center;">
+-10.20972
+</td>
+<td style="text-align:right;text-align: center;">
+3.4299
+</td>
+<td style="text-align:right;text-align: center;">
+-2.9767
+</td>
+<td style="text-align:right;text-align: center;">
+0.0029
+</td>
+<td style="text-align:left;text-align: center;">
+**
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+SOLVENCIA
+</td>
+<td style="text-align:left;text-align: center;">
+0.02173
+</td>
+<td style="text-align:right;text-align: center;">
+0.0114
+</td>
+<td style="text-align:right;text-align: center;">
+1.9098
+</td>
+<td style="text-align:right;text-align: center;">
+0.0562
+</td>
+<td style="text-align:left;text-align: center;">
+·
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+IPUNT
+</td>
+<td style="text-align:left;text-align: center;">
+0.06541
+</td>
+<td style="text-align:right;text-align: center;">
+0.0274
+</td>
+<td style="text-align:right;text-align: center;">
+2.3841
+</td>
+<td style="text-align:right;text-align: center;">
+0.0171
+</td>
+<td style="text-align:left;text-align: center;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+TINCID
+</td>
+<td style="text-align:left;text-align: center;">
+-0.27346
+</td>
+<td style="text-align:right;text-align: center;">
+0.1018
+</td>
+<td style="text-align:right;text-align: center;">
+-2.6865
+</td>
+<td style="text-align:right;text-align: center;">
+0.0072
+</td>
+<td style="text-align:left;text-align: center;">
+**
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+IFIDE
+</td>
+<td style="text-align:left;text-align: center;">
+0.07260
+</td>
+<td style="text-align:right;text-align: center;">
+0.0720
+</td>
+<td style="text-align:right;text-align: center;">
+1.0081
+</td>
+<td style="text-align:right;text-align: center;">
+0.3134
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+FLOTA
+</td>
+<td style="text-align:left;text-align: center;">
+-0.01848
+</td>
+<td style="text-align:right;text-align: center;">
+0.0311
+</td>
+<td style="text-align:right;text-align: center;">
+-0.5951
+</td>
+<td style="text-align:right;text-align: center;">
+0.5518
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+RUTAS
+</td>
+<td style="text-align:left;text-align: center;">
+0.00182
+</td>
+<td style="text-align:right;text-align: center;">
+0.0021
+</td>
+<td style="text-align:right;text-align: center;">
+0.8624
+</td>
+<td style="text-align:right;text-align: center;">
+0.3885
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+EXPERIENCIA
+</td>
+<td style="text-align:left;text-align: center;">
+0.05001
+</td>
+<td style="text-align:right;text-align: center;">
+0.1004
+</td>
+<td style="text-align:right;text-align: center;">
+0.4981
+</td>
+<td style="text-align:right;text-align: center;">
+0.6184
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+EFLOMADURA
+</td>
+<td style="text-align:left;text-align: center;">
+-0.03347
+</td>
+<td style="text-align:right;text-align: center;">
+0.9748
+</td>
+<td style="text-align:right;text-align: center;">
+-0.0343
+</td>
+<td style="text-align:right;text-align: center;">
+0.9726
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+EFLORENOVADA
+</td>
+<td style="text-align:left;text-align: center;">
+0.28391
+</td>
+<td style="text-align:right;text-align: center;">
+1.1437
+</td>
+<td style="text-align:right;text-align: center;">
+0.2482
+</td>
+<td style="text-align:right;text-align: center;">
+0.8040
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.6</strong></p>
+</div>
+</div>
+<div id="c06-interpretacion-de-los-resultados" class="section level3" number="6.5.8">
+<h3>
+<span class="header-section-number">6.5.8</span> <img src="figuras/pie-chart.svg"> Interpretación de los resultados.<a class="anchor" aria-label="anchor" href="#c06-interpretacion-de-los-resultados"><i class="fas fa-link"></i></a>
+</h3>
+<p>A nivel individual, el contraste de Wald revela que <strong>dos variables son estadísticamente significativas al 5 %</strong>, y una tercera lo es al 10 %:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>TINCID</strong> (tasa de incidencias): es la variable más significativa del modelo. Su coeficiente es negativo, lo que indica que cuanto mayor es la tasa de incidencias de una compañía, menor es su probabilidad de obtener la licencia. Cada incidencia adicional por cada 1.000 años-luz reduce sustancialmente la ventaja (<em>odds</em>) de la concesión.</p></li>
+<li><p><strong>IPUNT</strong> (índice de puntualidad): su coeficiente positivo indica que la puntualidad favorece la concesión. Cada punto adicional en el índice de puntualidad aumenta la ventaja de obtener la licencia.</p></li>
+<li><p><strong>SOLVENCIA</strong>: su p-valor (0,056) queda ligeramente por encima de 0,05, de modo que solo es significativa al 10 %. Su coeficiente positivo apunta a que las compañías con mayor capacidad financiera tienen más probabilidad de obtener la licencia.</p></li>
+</ol>
+<p>Las demás variables (IFIDE, FLOTA, RUTAS, EXPERIENCIA y EFLO) <strong>no son estadísticamente significativas</strong> a los niveles habituales. Esto no significa que carezcan de relación con la concesión de la licencia —el análisis descriptivo mostró que sí la tienen—, sino que su efecto queda absorbido por las variables significativas una vez que estas se incluyen en el modelo.</p>
+<p>Un resultado especialmente interesante es el de <strong>EFLO</strong>: en el análisis descriptivo, el estado de la flota mostraba una asociación clara con la licencia (60% de concesión en flotas renovadas frente a 25% en antiguas). Sin embargo, en el modelo multivariante, EFLO pierde significación. La explicación radica en que las compañías con flota renovada tienden a tener también mejor puntualidad y menor tasa de incidencias, que son las variables que verdaderamente capturan el efecto. Este hallazgo ilustra un principio fundamental del análisis multivariante: <strong>una asociación bivariante puede desaparecer cuando se controla por otras variables</strong> que median o confunden la relación.</p>
+</div>
+<div id="c06-contraste-de-wald-para-el-factor-eflo" class="section level3" number="6.5.9">
+<h3>
+<span class="header-section-number">6.5.9</span> <img src="figuras/pie-chart.svg"> Contraste de Wald para el factor EFLO.<a class="anchor" aria-label="anchor" href="#c06-contraste-de-wald-para-el-factor-eflo"><i class="fas fa-link"></i></a>
+</h3>
+<p>Dado que EFLO genera dos variables <em>dummy</em> (EFLOMADURA y EFLORENOVADA), es posible que ninguna sea individualmente significativa pero que el factor en su conjunto sí lo sea. <code><span>lite_logit()</span></code> realiza automáticamente el <strong>contraste de Wald conjunto</strong> para cada factor con más de dos categorías:</p>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span><span class="op">$</span><span class="va">wald_factores</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Factor
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+χ²
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+g.l.
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+p-valor
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Decisión
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;text-align: center;">
+EFLO
+</td>
+<td style="text-align:right;text-align: center;">
+0.1801
+</td>
+<td style="text-align:right;text-align: center;">
+2
+</td>
+<td style="text-align:right;text-align: center;">
+0.9139
+</td>
+<td style="text-align:left;text-align: center;">
+No se rechaza H0 (coeficientes nulos) al 5 %
+</td>
+</tr></tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.7</strong></p>
+</div>
+<p>El resultado del contraste confirma lo que ya anticipaban los contrastes individuales: el factor EFLO no es conjuntamente significativo una vez que IPUNT y TINCID están incluidos en el modelo. Esto refuerza la interpretación de que el efecto aparente de la renovación de la flota opera a través de la puntualidad y la seguridad operativa, no de forma directa.</p>
+</div>
+<div id="c06-interpretacion-de-los-odd-ratios" class="section level3" number="6.5.10">
+<h3>
+<span class="header-section-number">6.5.10</span> <img src="figuras/pie-chart.svg"> Interpretación de los <em>odd ratios</em>.<a class="anchor" aria-label="anchor" href="#c06-interpretacion-de-los-odd-ratios"><i class="fas fa-link"></i></a>
+</h3>
+<p>La tabla de <em>odd ratios</em> muestra, para cada variable, el factor por el que se multiplica la ventaja del suceso LICENCIA = 1 cuando la variable se incrementa en una unidad, manteniendo las demás constantes:</p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span><span class="op">$</span><span class="va">odds</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Variable
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Coeficiente
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Odd Ratio (e^β)
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Cambio en ventaja (%)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+(Intercept)
+</td>
+<td style="text-align:right;text-align: center;">
+-10.2097
+</td>
+<td style="text-align:right;text-align: center;">
+0.0000
+</td>
+<td style="text-align:right;text-align: center;">
+-99.9963
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+SOLVENCIA
+</td>
+<td style="text-align:right;text-align: center;">
+0.0217
+</td>
+<td style="text-align:right;text-align: center;">
+1.0220
+</td>
+<td style="text-align:right;text-align: center;">
+2.1971
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+IPUNT
+</td>
+<td style="text-align:right;text-align: center;">
+0.0654
+</td>
+<td style="text-align:right;text-align: center;">
+1.0676
+</td>
+<td style="text-align:right;text-align: center;">
+6.7600
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+TINCID
+</td>
+<td style="text-align:right;text-align: center;">
+-0.2735
+</td>
+<td style="text-align:right;text-align: center;">
+0.7607
+</td>
+<td style="text-align:right;text-align: center;">
+-23.9258
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+IFIDE
+</td>
+<td style="text-align:right;text-align: center;">
+0.0726
+</td>
+<td style="text-align:right;text-align: center;">
+1.0753
+</td>
+<td style="text-align:right;text-align: center;">
+7.5302
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+FLOTA
+</td>
+<td style="text-align:right;text-align: center;">
+-0.0185
+</td>
+<td style="text-align:right;text-align: center;">
+0.9817
+</td>
+<td style="text-align:right;text-align: center;">
+-1.8310
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+RUTAS
+</td>
+<td style="text-align:right;text-align: center;">
+0.0018
+</td>
+<td style="text-align:right;text-align: center;">
+1.0018
+</td>
+<td style="text-align:right;text-align: center;">
+0.1821
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+EXPERIENCIA
+</td>
+<td style="text-align:right;text-align: center;">
+0.0500
+</td>
+<td style="text-align:right;text-align: center;">
+1.0513
+</td>
+<td style="text-align:right;text-align: center;">
+5.1286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+EFLOMADURA
+</td>
+<td style="text-align:right;text-align: center;">
+-0.0335
+</td>
+<td style="text-align:right;text-align: center;">
+0.9671
+</td>
+<td style="text-align:right;text-align: center;">
+-3.2914
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+EFLORENOVADA
+</td>
+<td style="text-align:right;text-align: center;">
+0.2839
+</td>
+<td style="text-align:right;text-align: center;">
+1.3283
+</td>
+<td style="text-align:right;text-align: center;">
+32.8315
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.8</strong></p>
+</div>
+<p>La lectura de esta tabla permite trasladar los resultados estadísticos a un lenguaje económico directo. Por ejemplo, el <em>odd ratio</em> de TINCID es inferior a 1 (con un cambio negativo en la ventaja): cada incidencia adicional por cada 1.000 años-luz reduce la ventaja de obtener la licencia en el porcentaje que indica la columna “Cambio en ventaja (%)”, en torno a un 24 %. El <em>odd ratio</em> de IPUNT, en cambio, es superior a 1: cada punto adicional de puntualidad multiplica la ventaja por ese factor, es decir, la aumenta en torno a un 7 %.</p>
+</div>
+<div id="c06-bondad-del-ajuste" class="section level3" number="6.5.11">
+<h3>
+<span class="header-section-number">6.5.11</span> <img src="figuras/pie-chart.svg"> Bondad del ajuste.<a class="anchor" aria-label="anchor" href="#c06-bondad-del-ajuste"><i class="fas fa-link"></i></a>
+</h3>
+<p>La tabla de <strong>bondad del ajuste</strong> recoge el pseudo <span class="math inline">\(R^2\)</span> de Nagelkerke, el AIC y las devianzas del modelo nulo y del estimado:</p>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span><span class="op">$</span><span class="va">ajuste</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+R² Nagelkerke
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+AIC
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Devianza nula
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+g.l.
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Devianza residual
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+g.l.
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+n
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;text-align: center;">
+0.4425
+</td>
+<td style="text-align:right;text-align: center;">
+92.5858
+</td>
+<td style="text-align:right;text-align: center;">
+103.5915
+</td>
+<td style="text-align:right;text-align: center;">
+79
+</td>
+<td style="text-align:right;text-align: center;">
+72.5858
+</td>
+<td style="text-align:right;text-align: center;">
+70
+</td>
+<td style="text-align:right;text-align: center;">
+80
+</td>
+</tr></tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.9</strong></p>
+</div>
+<p>Podemos evaluar, además, la mejora del modelo frente al modelo nulo (un modelo sin ninguna variable explicativa) mediante el <strong>análisis de la devianza</strong>, que muestra cuánto reduce la devianza cada variable al incorporarse sucesivamente al modelo:</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span><span class="op">$</span><span class="va">devianza</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Variable
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+g.l.
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Devianza
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+g.l. residuales
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Devianza residual
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+p-valor
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+NULL
+</td>
+<td style="text-align:right;text-align: center;">
+NA
+</td>
+<td style="text-align:right;text-align: center;">
+NA
+</td>
+<td style="text-align:right;text-align: center;">
+79
+</td>
+<td style="text-align:right;text-align: center;">
+103.5915
+</td>
+<td style="text-align:right;text-align: center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+SOLVENCIA
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+5.0458
+</td>
+<td style="text-align:right;text-align: center;">
+78
+</td>
+<td style="text-align:right;text-align: center;">
+98.5456
+</td>
+<td style="text-align:right;text-align: center;">
+0.0247
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+IPUNT
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+5.6617
+</td>
+<td style="text-align:right;text-align: center;">
+77
+</td>
+<td style="text-align:right;text-align: center;">
+92.8839
+</td>
+<td style="text-align:right;text-align: center;">
+0.0173
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+TINCID
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+7.4691
+</td>
+<td style="text-align:right;text-align: center;">
+76
+</td>
+<td style="text-align:right;text-align: center;">
+85.4148
+</td>
+<td style="text-align:right;text-align: center;">
+0.0063
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+IFIDE
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+9.7145
+</td>
+<td style="text-align:right;text-align: center;">
+75
+</td>
+<td style="text-align:right;text-align: center;">
+75.7003
+</td>
+<td style="text-align:right;text-align: center;">
+0.0018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+FLOTA
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+0.0781
+</td>
+<td style="text-align:right;text-align: center;">
+74
+</td>
+<td style="text-align:right;text-align: center;">
+75.6222
+</td>
+<td style="text-align:right;text-align: center;">
+0.7799
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+RUTAS
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+2.2601
+</td>
+<td style="text-align:right;text-align: center;">
+73
+</td>
+<td style="text-align:right;text-align: center;">
+73.3621
+</td>
+<td style="text-align:right;text-align: center;">
+0.1327
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+EXPERIENCIA
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+0.5964
+</td>
+<td style="text-align:right;text-align: center;">
+72
+</td>
+<td style="text-align:right;text-align: center;">
+72.7658
+</td>
+<td style="text-align:right;text-align: center;">
+0.4400
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+EFLO
+</td>
+<td style="text-align:right;text-align: center;">
+2
+</td>
+<td style="text-align:right;text-align: center;">
+0.1799
+</td>
+<td style="text-align:right;text-align: center;">
+70
+</td>
+<td style="text-align:right;text-align: center;">
+72.5858
+</td>
+<td style="text-align:right;text-align: center;">
+0.9140
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.10</strong></p>
+</div>
+<p>También resulta ilustrativo comparar el <strong>AIC</strong> del modelo estimado con el del modelo nulo:</p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span><span class="op">$</span><span class="va">aic</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Modelo
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Parámetros
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+AIC
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+Nulo (solo constante)
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+105.5915
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+Estimado
+</td>
+<td style="text-align:right;text-align: center;">
+10
+</td>
+<td style="text-align:right;text-align: center;">
+92.5858
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.11</strong></p>
+</div>
+<p>La reducción sustancial del AIC confirma que las variables explicativas aportan información relevante para explicar la concesión de licencias.</p>
+</div>
+</div>
+<div id="c06-capacidad-predictiva-del-modelo" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> <img src="figuras/pie-chart.svg"> Capacidad predictiva del modelo.<a class="anchor" aria-label="anchor" href="#c06-capacidad-predictiva-del-modelo"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c06-prediccion-in-sample" class="section level3" number="6.6.1">
+<h3>
+<span class="header-section-number">6.6.1</span> Predicción <em>in-sample</em>.<a class="anchor" aria-label="anchor" href="#c06-prediccion-in-sample"><i class="fas fa-link"></i></a>
+</h3>
+<p>La <strong>matriz de confusión</strong> compara las clasificaciones realizadas por el modelo (basadas en un umbral de probabilidad de 0,5) con las pertenencias reales:</p>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span><span class="op">$</span><span class="va">confusion</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Observado  Predicho
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+0
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+1
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+0
+</td>
+<td style="text-align:left;text-align: center;">
+47
+</td>
+<td style="text-align:left;text-align: center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+1
+</td>
+<td style="text-align:left;text-align: center;">
+11
+</td>
+<td style="text-align:left;text-align: center;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+% Correctas: 80%
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.12</strong></p>
+</div>
+<p>El porcentaje de predicciones correctas sobre la muestra de estimación da una primera indicación de la calidad del modelo. Sin embargo, esta medida puede ser optimista, ya que el modelo ha sido ajustado sobre esos mismos datos.</p>
+</div>
+<div id="c06-prediccion-sobre-la-muestra-de-test" class="section level3" number="6.6.2">
+<h3>
+<span class="header-section-number">6.6.2</span> Predicción sobre la muestra de test.<a class="anchor" aria-label="anchor" href="#c06-prediccion-sobre-la-muestra-de-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>La verdadera prueba de la capacidad predictiva de un modelo es su comportamiento sobre <strong>datos que no ha visto durante la estimación</strong>. Como indicamos la muestra de test al estimar el modelo, <code><span>lite_logit()</span></code> ha calculado también su matriz de confusión:</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span><span class="op">$</span><span class="va">confusion_test</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Observado  Predicho
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+0
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+1
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+0
+</td>
+<td style="text-align:left;text-align: center;">
+8
+</td>
+<td style="text-align:left;text-align: center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+1
+</td>
+<td style="text-align:left;text-align: center;">
+4
+</td>
+<td style="text-align:left;text-align: center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+% Correctas: 80%
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+<td style="text-align:left;text-align: center;">
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.13</strong></p>
+</div>
+<p>El porcentaje de acierto sobre la muestra de test permite evaluar de forma honesta si el modelo es capaz de generalizar sus predicciones a nuevos casos.</p>
+</div>
+</div>
+<div id="c06-simulacion-de-escenarios" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> <img src="figuras/pie-chart.svg"> Simulación de escenarios.<a class="anchor" aria-label="anchor" href="#c06-simulacion-de-escenarios"><i class="fas fa-link"></i></a>
+</h2>
+<p>Una vez estimado y validado el modelo, podemos utilizarlo para simular la probabilidad de obtener la licencia bajo diferentes perfiles de compañía. Esto resulta especialmente útil para las empresas que estén considerando presentarse al próximo concurso de licencias: pueden evaluar <em>ex ante</em> sus posibilidades y, en su caso, identificar qué indicadores deberían mejorar para maximizar su probabilidad de concesión.</p>
+<p>Los escenarios se definen en el archivo de Microsoft® Excel® <strong>escenarios_logit_rstars.xlsx</strong>, en su hoja “Escenarios”. Se plantean tres perfiles ficticios:</p>
+<ul>
+<li><p><strong>Candidata fuerte:</strong> alta solvencia, alta puntualidad, pocas incidencias, flota renovada y amplia experiencia.</p></li>
+<li><p><strong>Candidata débil:</strong> solvencia baja, puntualidad deficiente, alta tasa de incidencias, flota antigua y escasa experiencia.</p></li>
+<li><p><strong>Candidata media:</strong> valores intermedios en todos los indicadores y flota madura.</p></li>
+</ul>
+<div class="inline-figure"><img src="figuras/escenarios_logit.jpg" style="width:100.0%"></div>
+<div style="text-align: center;">
+<p><strong>Figura 6.5.</strong> <span class="smallcaps">Escenarios de empresas candidatas a obtención de licencia.</span></p>
+</div>
+<p>La función <code><span>lite_logit_escenarios()</span></code> calcula, para cada perfil, la <strong>probabilidad estimada</strong> de obtener la licencia, un <strong>intervalo de confianza</strong> sobre dicha probabilidad y una <strong>clasificación</strong> según el umbral de 0,5:</p>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">escenarios</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_logit_escenarios</span></span><span class="op">(</span><span class="va">completo</span>, <span class="st">"escenarios_logit_rstars.xlsx"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">escenarios</span><span class="op">$</span><span class="va">tabla</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+ESCENARIO
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+SOLVENCIA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IPUNT
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+TINCID
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+IFIDE
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+FLOTA
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+RUTAS
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+EXPERIENCIA
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+EFLO
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+.prob
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+.prob_lwr
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+.prob_upr
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+.se_link
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+.clasif
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+.level
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+.umbral
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+Candidata débil
+</td>
+<td style="text-align:right;text-align: center;">
+145
+</td>
+<td style="text-align:right;text-align: center;">
+40
+</td>
+<td style="text-align:right;text-align: center;">
+14.0
+</td>
+<td style="text-align:right;text-align: center;">
+25
+</td>
+<td style="text-align:right;text-align: center;">
+8
+</td>
+<td style="text-align:right;text-align: center;">
+150
+</td>
+<td style="text-align:right;text-align: center;">
+2
+</td>
+<td style="text-align:left;text-align: center;">
+ANTIGUA
+</td>
+<td style="text-align:right;text-align: center;">
+0.002
+</td>
+<td style="text-align:right;text-align: center;">
+0.000
+</td>
+<td style="text-align:right;text-align: center;">
+0.042
+</td>
+<td style="text-align:right;text-align: center;">
+1.589
+</td>
+<td style="text-align:right;text-align: center;">
+0
+</td>
+<td style="text-align:right;text-align: center;">
+0.95
+</td>
+<td style="text-align:right;text-align: center;">
+0.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+Candidata fuerte
+</td>
+<td style="text-align:right;text-align: center;">
+210
+</td>
+<td style="text-align:right;text-align: center;">
+78
+</td>
+<td style="text-align:right;text-align: center;">
+2.5
+</td>
+<td style="text-align:right;text-align: center;">
+50
+</td>
+<td style="text-align:right;text-align: center;">
+25
+</td>
+<td style="text-align:right;text-align: center;">
+600
+</td>
+<td style="text-align:right;text-align: center;">
+18
+</td>
+<td style="text-align:left;text-align: center;">
+RENOVADA
+</td>
+<td style="text-align:right;text-align: center;">
+0.985
+</td>
+<td style="text-align:right;text-align: center;">
+0.868
+</td>
+<td style="text-align:right;text-align: center;">
+0.999
+</td>
+<td style="text-align:right;text-align: center;">
+1.189
+</td>
+<td style="text-align:right;text-align: center;">
+1
+</td>
+<td style="text-align:right;text-align: center;">
+0.95
+</td>
+<td style="text-align:right;text-align: center;">
+0.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+Candidata media
+</td>
+<td style="text-align:right;text-align: center;">
+180
+</td>
+<td style="text-align:right;text-align: center;">
+60
+</td>
+<td style="text-align:right;text-align: center;">
+7.0
+</td>
+<td style="text-align:right;text-align: center;">
+40
+</td>
+<td style="text-align:right;text-align: center;">
+15
+</td>
+<td style="text-align:right;text-align: center;">
+350
+</td>
+<td style="text-align:right;text-align: center;">
+9
+</td>
+<td style="text-align:left;text-align: center;">
+MADURA
+</td>
+<td style="text-align:right;text-align: center;">
+0.353
+</td>
+<td style="text-align:right;text-align: center;">
+0.140
+</td>
+<td style="text-align:right;text-align: center;">
+0.645
+</td>
+<td style="text-align:right;text-align: center;">
+0.615
+</td>
+<td style="text-align:right;text-align: center;">
+0
+</td>
+<td style="text-align:right;text-align: center;">
+0.95
+</td>
+<td style="text-align:right;text-align: center;">
+0.5
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.14</strong></p>
+</div>
+<p>En la tabla, la columna “.prob” es la probabilidad estimada; “.prob_lwr” y “.prob_upr”, los límites del intervalo de confianza al 95 %; “.clasif”, la clasificación (1 = concedida, 0 = denegada); y las tres últimas recogen el error estándar en la escala del modelo, el nivel de confianza y el umbral empleados.</p>
+<p>Los resultados de la simulación ilustran de forma elocuente el poder discriminante del modelo. La candidata fuerte obtiene una probabilidad muy elevada de concesión, coherente con sus buenos indicadores de puntualidad, seguridad y solvencia. La candidata débil, con perfil opuesto, tiene una probabilidad muy baja. La candidata media se sitúa en una zona intermedia, lo que refleja que sus indicadores no son suficientes para asegurar la licencia pero tampoco descartan la posibilidad.</p>
+<p>Para las compañías que deseen mejorar sus posibilidades, el modelo señala con claridad dónde concentrar los esfuerzos: <strong>reducir la tasa de incidencias y mejorar la puntualidad</strong> son las dos palancas con mayor impacto sobre la probabilidad de concesión, seguidas de la mejora de la solvencia financiera.</p>
+</div>
+<div id="c06-seleccion-automatica-de-la-especificacion" class="section level2" number="6.8">
+<h2>
+<span class="header-section-number">6.8</span> <img src="figuras/pie-chart.svg"> Selección automática de la especificación.<a class="anchor" aria-label="anchor" href="#c06-seleccion-automatica-de-la-especificacion"><i class="fas fa-link"></i></a>
+</h2>
+<p>Existe un procedimiento automático, el algoritmo <em>step</em>, que busca una especificación más parsimoniosa: elimina iterativamente las variables que no aportan al modelo según el criterio de información de Akaike (AIC). Lo aplica la función <code><span>lite_logit_seleccion()</span></code>, que muestra en la consola cada paso del proceso:</p>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reducido</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_logit_seleccion</span></span><span class="op">(</span><span class="va">completo</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Start:  AIC=92.59
+## LICENCIA ~ SOLVENCIA + IPUNT + TINCID + IFIDE + FLOTA + RUTAS + 
+##     EXPERIENCIA + EFLO
+## 
+##               Df Deviance    AIC
+## - EFLO         2   72.766 88.766
+## - EXPERIENCIA  1   72.836 90.836
+## - FLOTA        1   72.942 90.942
+## - RUTAS        1   73.374 91.374
+## - IFIDE        1   73.678 91.678
+## &lt;none&gt;             72.586 92.586
+## - SOLVENCIA    1   76.441 94.441
+## - IPUNT        1   79.559 97.559
+## - TINCID       1   81.362 99.362
+## 
+## Step:  AIC=88.77
+## LICENCIA ~ SOLVENCIA + IPUNT + TINCID + IFIDE + FLOTA + RUTAS + 
+##     EXPERIENCIA
+## 
+##               Df Deviance    AIC
+## - FLOTA        1   73.278 87.278
+## - EXPERIENCIA  1   73.362 87.362
+## - RUTAS        1   73.672 87.672
+## - IFIDE        1   74.074 88.074
+## &lt;none&gt;             72.766 88.766
+## - SOLVENCIA    1   76.705 90.705
+## - IPUNT        1   79.833 93.833
+## - TINCID       1   82.093 96.093
+## 
+## Step:  AIC=87.28
+## LICENCIA ~ SOLVENCIA + IPUNT + TINCID + IFIDE + RUTAS + EXPERIENCIA
+## 
+##               Df Deviance    AIC
+## - RUTAS        1   73.743 85.743
+## - EXPERIENCIA  1   74.252 86.252
+## - IFIDE        1   74.523 86.523
+## &lt;none&gt;             73.278 87.278
+## - SOLVENCIA    1   77.098 89.098
+## - IPUNT        1   80.474 92.474
+## - TINCID       1   82.920 94.920
+## 
+## Step:  AIC=85.74
+## LICENCIA ~ SOLVENCIA + IPUNT + TINCID + IFIDE + EXPERIENCIA
+## 
+##               Df Deviance    AIC
+## - EXPERIENCIA  1   75.700 85.700
+## &lt;none&gt;             73.743 85.743
+## - IFIDE        1   77.238 87.238
+## - SOLVENCIA    1   77.306 87.306
+## - IPUNT        1   80.622 90.622
+## - TINCID       1   83.042 93.042
+## 
+## Step:  AIC=85.7
+## LICENCIA ~ SOLVENCIA + IPUNT + TINCID + IFIDE
+## 
+##             Df Deviance    AIC
+## &lt;none&gt;           75.700 85.700
+## - SOLVENCIA  1   79.025 87.025
+## - IPUNT      1   81.682 89.682
+## - IFIDE      1   85.415 93.415
+## - TINCID     1   85.688 93.688</code></pre>
+<pre><code>## Modelo seleccionado: LICENCIA ~ SOLVENCIA + IPUNT + TINCID + IFIDE</code></pre>
+<p>En cada paso, la tabla muestra el AIC que resultaría de eliminar cada variable (filas “-”) o de no eliminar ninguna (“<none>”); el algoritmo elimina la variable cuya salida reduce más el AIC, y se detiene cuando ninguna eliminación lo mejora. El modelo seleccionado conserva cuatro variables: SOLVENCIA, IPUNT, TINCID e IFIDE. Sus coeficientes son:</none></p>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reducido</span><span class="op">$</span><span class="va">coeficientes</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Variable
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Coeficiente
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Desv. Típica
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Estadístico z
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+p-valor
+</th>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Sig.
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+(Intercept)
+</td>
+<td style="text-align:left;text-align: center;">
+-11.10383
+</td>
+<td style="text-align:right;text-align: center;">
+3.4889
+</td>
+<td style="text-align:right;text-align: center;">
+-3.1827
+</td>
+<td style="text-align:right;text-align: center;">
+0.0015
+</td>
+<td style="text-align:left;text-align: center;">
+**
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+SOLVENCIA
+</td>
+<td style="text-align:left;text-align: center;">
+0.01962
+</td>
+<td style="text-align:right;text-align: center;">
+0.0111
+</td>
+<td style="text-align:right;text-align: center;">
+1.7696
+</td>
+<td style="text-align:right;text-align: center;">
+0.0768
+</td>
+<td style="text-align:left;text-align: center;">
+·
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+IPUNT
+</td>
+<td style="text-align:left;text-align: center;">
+0.05783
+</td>
+<td style="text-align:right;text-align: center;">
+0.0260
+</td>
+<td style="text-align:right;text-align: center;">
+2.2266
+</td>
+<td style="text-align:right;text-align: center;">
+0.0260
+</td>
+<td style="text-align:left;text-align: center;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+TINCID
+</td>
+<td style="text-align:left;text-align: center;">
+-0.27807
+</td>
+<td style="text-align:right;text-align: center;">
+0.0974
+</td>
+<td style="text-align:right;text-align: center;">
+-2.8557
+</td>
+<td style="text-align:right;text-align: center;">
+0.0043
+</td>
+<td style="text-align:left;text-align: center;">
+**
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+IFIDE
+</td>
+<td style="text-align:left;text-align: center;">
+0.13861
+</td>
+<td style="text-align:right;text-align: center;">
+0.0539
+</td>
+<td style="text-align:right;text-align: center;">
+2.5724
+</td>
+<td style="text-align:right;text-align: center;">
+0.0101
+</td>
+<td style="text-align:left;text-align: center;">
+<ul><li></ul>
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.15</strong></p>
+</div>
+<p>En el modelo reducido, TINCID, IPUNT e IFIDE resultan significativas al 5 %, y SOLVENCIA, al 10 %. La pieza <code>comparacion</code> enfrenta ambos modelos:</p>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reducido</span><span class="op">$</span><span class="va">comparacion</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-bordered table-condensed" style="font-size: 11px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;text-align: center;">
+Modelo
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+Variables
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+AIC
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+R² Nagelkerke
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+% aciertos (estimación)
+</th>
+<th style="text-align:right;font-weight: bold;text-align: center;">
+% aciertos (test)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;text-align: center;">
+Completo
+</td>
+<td style="text-align:right;text-align: center;">
+8
+</td>
+<td style="text-align:right;text-align: center;">
+92.5858
+</td>
+<td style="text-align:right;text-align: center;">
+0.4425
+</td>
+<td style="text-align:right;text-align: center;">
+80.00
+</td>
+<td style="text-align:right;text-align: center;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;text-align: center;">
+Reducido (step)
+</td>
+<td style="text-align:right;text-align: center;">
+4
+</td>
+<td style="text-align:right;text-align: center;">
+85.7003
+</td>
+<td style="text-align:right;text-align: center;">
+0.4054
+</td>
+<td style="text-align:right;text-align: center;">
+76.25
+</td>
+<td style="text-align:right;text-align: center;">
+80
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla 6.16</strong></p>
+</div>
+<p>El modelo reducido mejora el AIC y mantiene la misma capacidad predictiva sobre la muestra de test, con la ventaja de ser más sencillo. En coherencia con el <strong>principio de parsimonia</strong>, el modelo reducido es preferible: explica lo mismo con menos complejidad. Todas las demás tablas del modelo reducido (<em>odd ratios</em>, ajuste, matrices de confusión…) están disponibles en el objeto “reducido”, con las mismas piezas que el modelo completo.</p>
+</div>
+<div id="c06-cierre-el-veredicto-de-data-evidence" class="section level2" number="6.9">
+<h2>
+<span class="header-section-number">6.9</span> <img src="figuras/star.svg" class="hicon"> Cierre: el veredicto de <em>Data-Evidence</em>.<a class="anchor" aria-label="anchor" href="#c06-cierre-el-veredicto-de-data-evidence"><i class="fas fa-link"></i></a>
+</h2>
+<p>El equipo de <em>Data-Evidence</em> entrega su informe a la Autoridad Galáctica de Transporte Interestelar (AGTI) y a las compañías interesadas en la ruta Coruscant–Arrakis con tres conclusiones principales:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>El modelo logit binomial identifica con claridad los factores determinantes de la concesión de licencias.</strong> La puntualidad, la tasa de incidencias y la solvencia financiera son las variables con mayor peso en la decisión de la AGTI. El estado de la flota, pese a su clara asociación con la licencia en el análisis descriptivo, no aporta información adicional una vez tenidos en cuenta los demás factores.</p></li>
+<li><p><strong>La capacidad predictiva del modelo es elevada</strong>, tanto sobre los datos de estimación como sobre la muestra de test, lo que valida su utilidad como herramienta de apoyo a la decisión. La selección automática produce un modelo más parsimonioso sin pérdida apreciable de precisión.</p></li>
+<li><p><strong>La simulación de escenarios ofrece a las compañías candidatas una guía accionable.</strong> Una empresa con buenas prácticas operativas (baja tasa de incidencias, alta puntualidad) y solidez financiera tiene una probabilidad muy alta de obtener la licencia, independientemente de otros factores. Para las compañías en zona intermedia, el modelo señala con precisión dónde invertir esfuerzos para maximizar sus posibilidades.</p></li>
+</ol>
+<p>Cuentan las crónicas que, tras la publicación del informe, varias compañías del sector invirtieron en mejorar sus protocolos de seguridad y puntualidad. Y que <em>Arg-us Korp</em>, siempre atento a las oportunidades del sector, murmuró al leer los resultados: <em>“Interesante… muy interesante”</em>.</p>
+</div>
+<div id="c06-materiales-para-realizar-las-practicas-del" class="section level2" number="6.10">
+<h2>
+<span class="header-section-number">6.10</span> <img src="figuras/arrow-down-circle.svg" class="hicon"> Materiales para realizar las prácticas del capítulo.<a class="anchor" aria-label="anchor" href="#c06-materiales-para-realizar-las-practicas-del"><i class="fas fa-link"></i></a>
+</h2>
+<p>En esta sección se muestran los links de acceso a los diferentes materiales (<em>scripts</em>, datos…) necesarios para llevar a cabo los contenidos prácticos del capítulo.</p>
+<p><strong>Datos (en formato Microsoft® Excel®):</strong></p>
+<ul>
+<li><p>licencias_100.xlsx (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/licencias_100.xlsx">obtener aquí</a>), o bien, desde R: <code>lite_datos("licencias_100")</code>.</p></li>
+<li><p>escenarios_logit_rstars.xlsx (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/escenarios_logit_rstars.xlsx">obtener aquí</a>), o bien, desde R: <code>lite_datos("escenarios_logit_rstars")</code>.</p></li>
+</ul>
+<p><strong>Script:</strong></p>
+<ul>
+<li>logit_lite.R (<a href="https://raw.githubusercontent.com/teckel71/RStarslite-book/main/download/logit_lite.R">obtener aquí</a>)</li>
+</ul>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="an%C3%A1lisis-cl%C3%BAster-jer%C3%A1rquico..html"><span class="header-section-number">5</span> Análisis clúster jerárquico.</a></div>
 <div class="next"><a href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#modelos-de-elecci%C3%B3n-discreta."><span class="header-section-number">6</span> Modelos de elección discreta.</a></li></ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#modelos-de-elecci%C3%B3n-discreta."><span class="header-section-number">6</span> Modelos de elección discreta.</a></li>
+<li><a class="nav-link" href="#c06-introduccion"><span class="header-section-number">6.1</span>  Introducción.</a></li>
+<li><a class="nav-link" href="#c06-clasificacion-de-los-modelos-de-eleccion"><span class="header-section-number">6.2</span>  Clasificación de los modelos de elección discreta.</a></li>
+<li>
+<a class="nav-link" href="#c06-el-modelo-de-respuesta-binaria"><span class="header-section-number">6.3</span>  El modelo de respuesta binaria.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c06-planteamiento-general"><span class="header-section-number">6.3.1</span> Planteamiento general.</a></li>
+<li><a class="nav-link" href="#c06-la-funcion-de-enlace-logit-y-probit"><span class="header-section-number">6.3.2</span> La función de enlace: logit y probit.</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c06-el-modelo-logit-binomial"><span class="header-section-number">6.4</span>  El modelo logit binomial.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c06-especificacion"><span class="header-section-number">6.4.1</span> Especificación.</a></li>
+<li><a class="nav-link" href="#c06-contraste-de-significacion-individual"><span class="header-section-number">6.4.2</span> Contraste de significación individual: contraste de Wald.</a></li>
+<li><a class="nav-link" href="#c06-medidas-de-la-bondad-del-ajuste"><span class="header-section-number">6.4.3</span> Medidas de la bondad del ajuste.</a></li>
+<li><a class="nav-link" href="#c06-odd-ratios-interpretacion-economica-de-los"><span class="header-section-number">6.4.4</span> Odd ratios: interpretación económica de los coeficientes.</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c06-practica-que-determina-la-concesion-de"><span class="header-section-number">6.5</span>  Práctica: ¿qué determina la concesión de licencias en el sector interestelar?</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c06-la-ruta-coruscant-arrakis"><span class="header-section-number">6.5.1</span>  La ruta Coruscant–Arrakis.</a></li>
+<li><a class="nav-link" href="#c06-preparacion-de-los-datos"><span class="header-section-number">6.5.2</span>  Preparación de los datos.</a></li>
+<li><a class="nav-link" href="#c06-deteccion-de-valores-perdidos"><span class="header-section-number">6.5.3</span>  Detección de valores perdidos.</a></li>
+<li><a class="nav-link" href="#c06-conversion-de-variables-categoricas"><span class="header-section-number">6.5.4</span>  Conversión de variables categóricas.</a></li>
+<li><a class="nav-link" href="#c06-analisis-descriptivo-previo"><span class="header-section-number">6.5.5</span>  Análisis descriptivo previo.</a></li>
+<li><a class="nav-link" href="#c06-particion-en-muestra-de-estimacion-y-muestra"><span class="header-section-number">6.5.6</span>  Partición en muestra de estimación y muestra de test.</a></li>
+<li><a class="nav-link" href="#c06-estimacion-del-modelo-logit-completo"><span class="header-section-number">6.5.7</span>  Estimación del modelo logit completo.</a></li>
+<li><a class="nav-link" href="#c06-interpretacion-de-los-resultados"><span class="header-section-number">6.5.8</span>  Interpretación de los resultados.</a></li>
+<li><a class="nav-link" href="#c06-contraste-de-wald-para-el-factor-eflo"><span class="header-section-number">6.5.9</span>  Contraste de Wald para el factor EFLO.</a></li>
+<li><a class="nav-link" href="#c06-interpretacion-de-los-odd-ratios"><span class="header-section-number">6.5.10</span>  Interpretación de los odd ratios.</a></li>
+<li><a class="nav-link" href="#c06-bondad-del-ajuste"><span class="header-section-number">6.5.11</span>  Bondad del ajuste.</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c06-capacidad-predictiva-del-modelo"><span class="header-section-number">6.6</span>  Capacidad predictiva del modelo.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c06-prediccion-in-sample"><span class="header-section-number">6.6.1</span> Predicción in-sample.</a></li>
+<li><a class="nav-link" href="#c06-prediccion-sobre-la-muestra-de-test"><span class="header-section-number">6.6.2</span> Predicción sobre la muestra de test.</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#c06-simulacion-de-escenarios"><span class="header-section-number">6.7</span>  Simulación de escenarios.</a></li>
+<li><a class="nav-link" href="#c06-seleccion-automatica-de-la-especificacion"><span class="header-section-number">6.8</span>  Selección automática de la especificación.</a></li>
+<li><a class="nav-link" href="#c06-cierre-el-veredicto-de-data-evidence"><span class="header-section-number">6.9</span>  Cierre: el veredicto de Data-Evidence.</a></li>
+<li><a class="nav-link" href="#c06-materiales-para-realizar-las-practicas-del"><span class="header-section-number">6.10</span>  Materiales para realizar las prácticas del capítulo.</a></li>
+</ul>
+<div class="book-extra">
+        <ul class="list-unstyled"></ul>
 </div>
     </nav>
 </div>
@@ -121,7 +2689,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R, paso a paso y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
+    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

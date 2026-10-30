@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Apéndice: Guía de uso de MATlite. | R-Stars Lite</title>
+<meta name="author" content="Miguel-Ángel Tarancón Morán">
+<meta name="description" content="Qué es MATlite y cómo funciona. MATlite es el paquete de R de la asignatura. Reúne en un pequeño número de funciones, todas con el prefijo lite_, el código que en R-Stars: La Guía ocupa decenas de...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Apéndice: Guía de uso de MATlite. | R-Stars Lite">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://teckel71.github.io/RStarslite-book/apéndice-guía-de-uso-de-matlite..html">
+<meta property="og:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
+<meta property="og:description" content="Qué es MATlite y cómo funciona. MATlite es el paquete de R de la asignatura. Reúne en un pequeño número de funciones, todas con el prefijo lite_, el código que en R-Stars: La Guía ocupa decenas de...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apéndice: Guía de uso de MATlite. | R-Stars Lite">
+<meta name="twitter:description" content="Qué es MATlite y cómo funciona. MATlite es el paquete de R de la asignatura. Reúne en un pequeño número de funciones, todas con el prefijo lite_, el código que en R-Stars: La Guía ocupa decenas de...">
+<meta name="twitter:image" content="https://teckel71.github.io/RStarslite-book/figuras/Portada_v3-2.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Source_Serif_4-0.4.10/font.css" rel="stylesheet">
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="libs/Source_Sans_3-0.4.10/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Análisis de datos con R y sin vértigo">R-Stars Lite</a>:
+        <small class="text-muted">Análisis de datos con R y sin vértigo</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"></a></li>
+<li><a class="" href="prefacio.html">Prefacio</a></li>
+<li><a class="" href="introducci%C3%B3n..html"><span class="header-section-number">1</span> Introducción.</a></li>
+<li><a class="" href="almacenando-y-manipulando-datos..html"><span class="header-section-number">2</span> Almacenando y manipulando datos.</a></li>
+<li><a class="" href="an%C3%A1lisis-previo-de-datos..html"><span class="header-section-number">3</span> Análisis previo de datos.</a></li>
+<li><a class="" href="componentes-principales..html"><span class="header-section-number">4</span> Componentes principales.</a></li>
+<li><a class="" href="an%C3%A1lisis-cl%C3%BAster-jer%C3%A1rquico..html"><span class="header-section-number">5</span> Análisis clúster jerárquico.</a></li>
+<li><a class="" href="modelos-de-elecci%C3%B3n-discreta..html"><span class="header-section-number">6</span> Modelos de elección discreta.</a></li>
+<li><a class="" href="tablas-de-contingencia..html"><span class="header-section-number">7</span> Tablas de contingencia.</a></li>
+<li><a class="" href="escalado-multidimensional..html"><span class="header-section-number">8</span> Escalado multidimensional.</a></li>
+<li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+<li><a class="active" href="ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite..html">Apéndice: Guía de uso de MATlite.</a></li>
+<li><a class="" href="licencia.html">Licencia</a></li>
+</ul>
+<div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="apéndice-guía-de-uso-de-matlite." class="section level1 unnumbered">
+<h1>Apéndice: Guía de uso de <code>MATlite</code>.<a class="anchor" aria-label="anchor" href="#ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite."><i class="fas fa-link"></i></a>
+</h1>
+<div id="c81-que-es-matlite" class="section level2 unnumbered">
+<h2>Qué es <code>MATlite</code> y cómo funciona.<a class="anchor" aria-label="anchor" href="#c81-que-es-matlite"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>MATlite</code> es el paquete de R de la asignatura. Reúne en un pequeño número de funciones, todas con el prefijo <code>lite_</code>, el código que en <em>R-Stars: La Guía</em> ocupa decenas de líneas por técnica. Las funciones reproducen los mismos cálculos y los mismos resultados que los <em>scripts</em> de La Guía, de modo que el usuario puede concentrarse en <strong>interpretar</strong> los resultados.</p>
+<p><code>MATlite</code> no está en CRAN. Se instala desde GitHub, una sola vez:</p>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")           # solo si no está instalado</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"teckel71/MATlite"</span><span class="op">)</span></span></code></pre></div>
+<p>Al instalarlo se instalan también, automáticamente, los paquetes de los que depende (entre ellos, <a href="https://github.com/teckel71/MATrstars">MATrstars</a>, el paquete de funciones auxiliares de La Guía). En cada sesión de trabajo basta con activarlo:</p>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><span>library</span></span><span class="op">(</span><span class="va"><a href="https://github.com/teckel71/MATlite">MATlite</a></span><span class="op">)</span></span></code></pre></div>
+<p>El código fuente del paquete está en <a href="https://github.com/teckel71/MATlite">https://github.com/teckel71/MATlite</a>.</p>
+<div id="c81-tres-ideas" class="section level3 unnumbered">
+<h3>Tres ideas para usar el paquete.<a class="anchor" aria-label="anchor" href="#c81-tres-ideas"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>Se ejecuta la función una vez y se guarda el resultado en un objeto.</strong> Por ejemplo: <code>componentes &lt;- lite_acp(seleccion_so)</code>.</p></li>
+<li><p><strong>Escribir el nombre del objeto lo muestra todo.</strong> Las tablas aparecen juntas en el panel <em>Viewer</em> de RStudio y los gráficos, en el panel <em>Plots</em> (con las flechas de ese panel se pasa de uno a otro). En la consola aparece, además, un índice de las piezas que contiene el objeto.</p></li>
+<li><p><strong>Cada resultado es una “pieza” del objeto, a la que se accede con <code>$</code>.</strong> Por ejemplo, <code>componentes$cargas</code> muestra solo la tabla de cargas. Algunas piezas son, a su vez, listas (por ejemplo, la composición de cada grupo de un clúster); sus elementos se muestran con dobles corchetes: <code>grupos$composicion[[1]]</code>.</p></li>
+</ol>
+<p>Las variables se indican siempre <strong>sin comillas</strong> (<code>RENECO</code>, <code>c(RENECO, ACTIVO)</code>), y si una función admite el argumento <code>variables</code> y no se indica, utiliza todas las variables numéricas del <em>data frame</em>. Para consultar la ayuda de cualquier función, basta con anteponerle una interrogación: <code><span>?lite_logit</span></code>.</p>
+</div>
+<div id="c81-mapa-de-funciones" class="section level3 unnumbered">
+<h3>Mapa de funciones.<a class="anchor" aria-label="anchor" href="#c81-mapa-de-funciones"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Capítulo</th>
+<th align="left">Funciones</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1. Introducción</td>
+<td align="left">
+<code><span>lite_comprueba()</span></code>, <code><span>lite_datos()</span></code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">2. Datos</td>
+<td align="left">
+<code><span>lite_importa()</span></code>, <code><span>lite_resumen()</span></code>, <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>, <code>%&gt;%</code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">3. Análisis previo</td>
+<td align="left">
+<code><span>lite_na()</span></code>, <code><span>lite_outliers()</span></code>, <code><span>lite_describe()</span></code>, <code><span>lite_correlaciones()</span></code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">4. Componentes principales</td>
+<td align="left">
+<code><span>lite_acp()</span></code>, <code><span>lite_acp_ranking()</span></code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">5. Clúster jerárquico</td>
+<td align="left"><code><span>lite_cluster_ward()</span></code></td>
+</tr>
+<tr class="even">
+<td align="left">6. Elección discreta</td>
+<td align="left">
+<code><span>lite_factor()</span></code>, <code><span>lite_logit_descriptivo()</span></code>, <code><span>lite_particion()</span></code>, <code><span>lite_logit()</span></code>, <code><span>lite_logit_escenarios()</span></code>, <code><span>lite_logit_seleccion()</span></code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">7. Tablas de contingencia</td>
+<td align="left">
+<code><span>lite_recodifica()</span></code>, <code><span>lite_contingencia()</span></code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">8. Escalado multidimensional</td>
+<td align="left">
+<code><span>lite_emd_dimensiones()</span></code>, <code><span>lite_emd()</span></code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">Auxiliares</td>
+<td align="left">
+<code><span>lite_tabla()</span></code>, <code><span>lite_patchwork()</span></code>
+</td>
+</tr>
+</tbody>
+</table></div>
+<div style="text-align: center;">
+<p><strong>Tabla A.1</strong></p>
+</div>
+</div>
+</div>
+<div id="c81-funciones-generales" class="section level2 unnumbered">
+<h2>Funciones generales.<a class="anchor" aria-label="anchor" href="#c81-funciones-generales"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c81-lite-comprueba" class="section level3 unnumbered">
+<h3>
+<code>lite_comprueba()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-comprueba"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Comprueba que la instalación está completa: versión de R, paquetes necesarios y ficheros de datos presentes en la carpeta de trabajo. Para cada problema, indica la instrucción que lo resuelve. Conviene ejecutarla la primera vez.</p>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><span>lite_comprueba</span></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> No tiene.</p>
+<p><strong>Devuelve.</strong> Una tabla con el resultado de cada comprobación (en la consola).</p>
+</div>
+<div id="c81-lite-datos" class="section level3 unnumbered">
+<h3>
+<code>lite_datos()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-datos"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Descarga los ficheros de datos del libro a la carpeta de trabajo.</p>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><span>lite_datos</span></span><span class="op">(</span><span class="op">)</span>                              <span class="co"># descarga todos</span></span>
+<span><span class="fu"><span>lite_datos</span></span><span class="op">(</span><span class="st">"interestelar_100"</span><span class="op">)</span>            <span class="co"># descarga uno</span></span>
+<span><span class="fu"><span>lite_datos</span></span><span class="op">(</span><span class="fu"><span>c</span></span><span class="op">(</span><span class="st">"interestelar_25"</span>, <span class="st">"interestelar_300"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>nombre</code>: nombre de uno o varios ficheros, con o sin <code>.xlsx</code>. Si se omite, se descargan todos.</li>
+<li>
+<code>destino</code>: carpeta de destino. Por defecto, la carpeta de trabajo.</li>
+</ul>
+</div>
+<div id="c81-lite-importa" class="section level3 unnumbered">
+<h3>
+<code>lite_importa()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-importa"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Importa una hoja de un fichero Excel y, si se desea, convierte la primera columna en nombres de fila (los nombres de las empresas).</p>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">interestelar_100</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_importa</span></span><span class="op">(</span><span class="st">"interestelar_100.xlsx"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>archivo</code>: nombre (o ruta) del fichero Excel.</li>
+<li>
+<code>hoja</code>: nombre o número de la hoja. Por defecto, <code>"Datos"</code>.</li>
+<li>
+<code>na</code>: texto que debe leerse como valor ausente. Por defecto, <code>"n.d."</code>.</li>
+<li>
+<code>nombres_fila</code>: si es <code>TRUE</code> (por defecto), la primera columna pasa a ser el nombre de las filas.</li>
+</ul>
+<p><strong>Devuelve.</strong> Un <em>data frame</em>.</p>
+</div>
+<div id="c81-lite-resumen" class="section level3 unnumbered">
+<h3>
+<code>lite_resumen()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-resumen"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Presenta un resumen visual de todas las variables de un <em>data frame</em>: tipo, gráfico de distribución, porcentaje de valores ausentes y estadísticos básicos.</p>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><span>lite_resumen</span></span><span class="op">(</span><span class="va">interestelar_100</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> <code>datos</code> (<em>data frame</em>) y <code>titulo</code> (opcional; por defecto, el nombre del <em>data frame</em>).</p>
+</div>
+<div id="c81-verbos-dplyr" class="section level3 unnumbered">
+<h3>Verbos de <code>{dplyr}</code>.<a class="anchor" aria-label="anchor" href="#c81-verbos-dplyr"><i class="fas fa-link"></i></a>
+</h3>
+<p>Al activar <code>MATlite</code> quedan disponibles, sin cargar otros paquetes, el operador <code>%&gt;%</code> y los verbos de <a href="https://dplyr.tidyverse.org">dplyr</a> utilizados en el libro: <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> (seleccionar variables), <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> (seleccionar casos), <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> y <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code> (ordenar), <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> (crear o transformar variables), <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> y <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>. Su uso se explica en el capítulo 2.</p>
+</div>
+</div>
+<div id="c81-analisis-previo" class="section level2 unnumbered">
+<h2>Análisis previo de datos.<a class="anchor" aria-label="anchor" href="#c81-analisis-previo"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c81-lite-na" class="section level3 unnumbered">
+<h3>
+<code>lite_na()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-na"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Localiza los valores ausentes (<em>missing values</em>): muestra un mapa de ausencias y una tabla con los casos afectados. Opcionalmente, elimina esos casos.</p>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">muestra</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_na</span></span><span class="op">(</span><span class="va">muestra</span>, <span class="va">RENECO</span>, accion <span class="op">=</span> <span class="st">"eliminar"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>: <em>data frame</em>.</li>
+<li>
+<code>variables</code>: variables a analizar, sin comillas. Si se omiten, todas.</li>
+<li>
+<code>accion</code>: <code>"documentar"</code> (por defecto) solo muestra el diagnóstico; <code>"eliminar"</code> además quita los casos con algún valor ausente.</li>
+<li>
+<code>titulo</code>, <code>subtitulo</code>: títulos del gráfico.</li>
+</ul>
+<p><strong>Devuelve.</strong> El <em>data frame</em> (sin cambios, o sin los casos con valores ausentes). Si no hay valores ausentes, solo muestra un mensaje.</p>
+</div>
+<div id="c81-lite-outliers" class="section level3 unnumbered">
+<h3>
+<code>lite_outliers()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-outliers"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Localiza los valores extremos (<em>outliers</em>). Con una variable aplica la regla de 1,5 veces el recorrido intercuartílico sobre un <em>box-plot</em>; con varias, la aplica sobre la distancia de Mahalanobis (<em>outliers</em> multivariantes). Opcionalmente, los elimina.</p>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">muestra_so</span>   <span class="op">&lt;-</span> <span class="fu"><span>lite_outliers</span></span><span class="op">(</span><span class="va">muestra</span>, <span class="va">RENECO</span>, accion <span class="op">=</span> <span class="st">"eliminar"</span><span class="op">)</span></span>
+<span><span class="va">seleccion_so</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_outliers</span></span><span class="op">(</span><span class="va">seleccion</span>, accion <span class="op">=</span> <span class="st">"eliminar"</span><span class="op">)</span>   <span class="co"># Mahalanobis</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> Los mismos que <code><span>lite_na()</span></code>, más <code>escala</code>: <code>"auto"</code> (por defecto), <code>"lineal"</code> o <code>"pseudo_log"</code>, para el eje del <em>box-plot</em>.</p>
+<p><strong>Devuelve.</strong> El <em>data frame</em> (sin cambios, o sin los <em>outliers</em>).</p>
+</div>
+<div id="c81-lite-describe" class="section level3 unnumbered">
+<h3>
+<code>lite_describe()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-describe"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Describe una variable métrica: distribución de frecuencias, estadísticos, contraste de normalidad de Shapiro-Wilk y cuatro gráficos.</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">descriptivo</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_describe</span></span><span class="op">(</span><span class="va">muestra_so</span>, <span class="va">RENECO</span>,</span>
+<span>                             etiqueta <span class="op">=</span> <span class="st">"Rentabilidad Económica (%)"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>, <code>variable</code>: <em>data frame</em> y variable a describir.</li>
+<li>
+<code>intervalos</code>: número de intervalos de la distribución de frecuencias y del histograma: <code>"sturges"</code> (por defecto), <code>"fd"</code> (Freedman-Diaconis) o un número.</li>
+<li>
+<code>etiqueta</code>: texto para los ejes. Por defecto, el nombre de la variable.</li>
+<li>
+<code>titulo</code>, <code>subtitulo</code>: títulos del resumen gráfico.</li>
+</ul>
+<p><strong>Piezas.</strong> <code>$frecuencias</code>, <code>$estadisticos</code>, <code>$normalidad</code> (tablas); <code>$histograma</code>, <code>$densidad</code>, <code>$boxplot</code>, <code>$qq</code> y <code>$resumen</code> (los cuatro gráficos juntos).</p>
+</div>
+<div id="c81-lite-correlaciones" class="section level3 unnumbered">
+<h3>
+<code>lite_correlaciones()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-correlaciones"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Construye la matriz gráfica de correlaciones de Pearson, con la significación de cada coeficiente. Opcionalmente, la compara con la de otro <em>data frame</em> (por ejemplo, el que aún conserva los <em>outliers</em>).</p>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">correlaciones</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_correlaciones</span></span><span class="op">(</span><span class="va">muestra2_so</span>, comparar_con <span class="op">=</span> <span class="va">muestra2</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>, <code>variables</code>.</li>
+<li>
+<code>comparar_con</code>: <em>data frame</em> opcional para la comparación.</li>
+<li>
+<code>titulo</code>, <code>titulo_comparacion</code>: títulos de las dos matrices.</li>
+</ul>
+<p><strong>Piezas.</strong> <code>$matriz</code> (tabla de coeficientes), <code>$grafico</code> y, si hay comparación, <code>$grafico_comparacion</code> y <code>$comparacion</code> (las dos matrices lado a lado).</p>
+</div>
+</div>
+<div id="c81-componentes-principales" class="section level2 unnumbered">
+<h2>Componentes principales.<a class="anchor" aria-label="anchor" href="#c81-componentes-principales"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c81-lite-acp" class="section level3 unnumbered">
+<h3>
+<code>lite_acp()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-acp"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Realiza el análisis de componentes principales con las variables tipificadas: adecuación muestral (KMO y MSA, con la escala de Kaiser), varianza explicada, cargas, autovalores y número de componentes a retener (criterio del autovalor mayor que 1).</p>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">componentes</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_acp</span></span><span class="op">(</span><span class="va">seleccion_so</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> <code>datos</code>, <code>variables</code> y <code>subtitulo</code> (de los gráficos).</p>
+<p><strong>Piezas.</strong> <code>$kmo</code>, <code>$varianza</code>, <code>$cargas</code>, <code>$autovalores</code>, <code>$retencion</code> (tablas); <code>$grafico_autovalores</code> y <code>$grafico_acumulada</code> (gráficos); <code>$n_retener</code> (número de componentes con autovalor mayor o igual que 1); <code>$modelo</code> (el objeto de R con el análisis completo).</p>
+</div>
+<div id="c81-lite-acp-ranking" class="section level3 unnumbered">
+<h3>
+<code>lite_acp_ranking()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-acp-ranking"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Ordena los casos según su puntuación en una componente y presenta los primeros en una tabla y un gráfico.</p>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ranking</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_acp_ranking</span></span><span class="op">(</span><span class="va">componentes</span>, componente <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>acp</code>: resultado de <code><span>lite_acp()</span></code>.</li>
+<li>
+<code>datos</code>: <em>data frame</em> opcional con los casos que se quieren puntuar (por ejemplo, la selección que aún conserva los <em>outliers</em>). Si se omite, se usan los casos con que se calcularon las componentes.</li>
+<li>
+<code>componente</code>: número de la componente. Por defecto, 1.</li>
+<li>
+<code>n</code>: número de casos del ranking. Por defecto, 10.</li>
+<li>
+<code>etiquetas</code>, <code>caption</code>: nombres para las variables y título de la tabla.</li>
+</ul>
+<p><strong>Piezas.</strong> <code>$ranking</code> (tabla), <code>$grafico</code> y <code>$puntuaciones</code> (todas las puntuaciones).</p>
+</div>
+</div>
+<div id="c81-analisis-cluster" class="section level2 unnumbered">
+<h2>Análisis clúster jerárquico.<a class="anchor" aria-label="anchor" href="#c81-analisis-cluster"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c81-lite-cluster-ward" class="section level3 unnumbered">
+<h3>
+<code>lite_cluster_ward()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-cluster-ward"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Realiza el análisis clúster jerárquico con el método de Ward sobre las variables tipificadas. Se usa en dos fases:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Exploración</strong> (sin <code>k</code>): matriz de distancias, dendrograma y número de grupos sugerido por el método de la silueta.</li>
+<li>
+<strong>Resultados</strong> (con <code>k</code>, el número de grupos decidido): grupos marcados en el dendrograma, centroides, composición de cada grupo y gráficos.</li>
+</ol>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_cluster_ward</span></span><span class="op">(</span><span class="va">seleccion</span><span class="op">)</span>          <span class="co"># fase 1</span></span>
+<span><span class="va">grupos</span>      <span class="op">&lt;-</span> <span class="fu"><span>lite_cluster_ward</span></span><span class="op">(</span><span class="va">seleccion</span>, k <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>   <span class="co"># fase 2</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>, <code>variables</code>.</li>
+<li>
+<code>k</code>: número de grupos. Si se omite, solo se hace la exploración.</li>
+<li>
+<code>k_max</code>: número máximo de grupos que se prueba con la silueta. Por defecto, 15.</li>
+<li>
+<code>titulo</code>, <code>subtitulo</code>: títulos de los dendrogramas.</li>
+<li>
+<code>subtitulo_graficos</code>: subtítulo de los gráficos de medias y dispersión.</li>
+</ul>
+<p><strong>Piezas.</strong> En la exploración: <code>$distancias</code>, <code>$dendrograma</code>, <code>$silueta</code> y <code>$k_sugerido</code>. En los resultados: <code>$dendrograma</code>, <code>$centroides</code>, <code>$graficos_centroides</code>, <code>$composicion</code> (lista, un elemento por grupo), <code>$dispersion</code> y <code>$datos</code> (el <em>data frame</em> con una nueva columna, <code>grupo</code>). Los grupos se numeran de izquierda a derecha según el dendrograma.</p>
+</div>
+</div>
+<div id="c81-eleccion-discreta" class="section level2 unnumbered">
+<h2>Modelos de elección discreta.<a class="anchor" aria-label="anchor" href="#c81-eleccion-discreta"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c81-lite-factor" class="section level3 unnumbered">
+<h3>
+<code>lite_factor()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-factor"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Convierte una variable en factor y fija su categoría de referencia. Muestra en la consola la codificación de las variables <em>dummy</em>.</p>
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LICENCIAS</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_factor</span></span><span class="op">(</span><span class="va">LICENCIAS</span>, <span class="va">EFLO</span>, niveles <span class="op">=</span> <span class="fu"><span>c</span></span><span class="op">(</span><span class="st">"ANTIGUA"</span>, <span class="st">"MADURA"</span>, <span class="st">"RENOVADA"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>, <code>variable</code>.</li>
+<li>
+<code>niveles</code>: orden de las categorías (opcional). La primera es la referencia.</li>
+<li>
+<code>referencia</code>: categoría de referencia (opcional; alternativa a <code>niveles</code>).</li>
+</ul>
+<p><strong>Devuelve.</strong> El <em>data frame</em> con la variable convertida.</p>
+</div>
+<div id="c81-lite-logit-descriptivo" class="section level3 unnumbered">
+<h3>
+<code>lite_logit_descriptivo()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-logit-descriptivo"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Compara los dos grupos que define la variable dependiente antes de estimar el modelo: tablas cruzadas y gráficos de barras para las variables categóricas, y medias por grupo para las métricas.</p>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">descriptivo</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_logit_descriptivo</span></span><span class="op">(</span><span class="va">LICENCIAS</span>, <span class="va">LICENCIA</span>,</span>
+<span>                                      etiquetas <span class="op">=</span> <span class="fu"><span>c</span></span><span class="op">(</span><span class="st">"0"</span> <span class="op">=</span> <span class="st">"Denegada"</span>, <span class="st">"1"</span> <span class="op">=</span> <span class="st">"Concedida"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>, <code>dependiente</code>.</li>
+<li>
+<code>variables</code>: explicativas a describir. Si se omiten, todas (salvo las categóricas con más de 10 categorías).</li>
+<li>
+<code>etiquetas</code>: nombres para las dos categorías de la dependiente.</li>
+</ul>
+<p><strong>Piezas.</strong> <code>$dependiente</code>, <code>$cruzadas</code> (lista, una tabla por variable categórica), <code>$graficos_categoricas</code>, <code>$medias</code> y <code>$graficos_metricas</code> (lista de composiciones).</p>
+</div>
+<div id="c81-lite-particion" class="section level3 unnumbered">
+<h3>
+<code>lite_particion()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-particion"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Divide los datos en una muestra de estimación y una de test. Por defecto, la partición es secuencial (los <code>n_estimacion</code> primeros casos para estimar); con <code>aleatoria = TRUE</code>, aleatoria.</p>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">muestras</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_particion</span></span><span class="op">(</span><span class="va">LICENCIAS</span>, n_estimacion <span class="op">=</span> <span class="fl">80</span>, dependiente <span class="op">=</span> <span class="va">LICENCIA</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> <code>datos</code>, <code>n_estimacion</code>, <code>dependiente</code> (opcional, para mostrar su distribución en cada muestra), <code>aleatoria</code> (por defecto, <code>FALSE</code>) y <code>semilla</code> (por defecto, 123).</p>
+<p><strong>Piezas.</strong> <code>$resumen</code>, <code>$estimacion</code> y <code>$test</code> (los dos <em>data frames</em>).</p>
+</div>
+<div id="c81-lite-logit" class="section level3 unnumbered">
+<h3>
+<code>lite_logit()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-logit"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Estima un modelo logit binomial y presenta todos sus resultados. Muestra en la consola la especificación estimada.</p>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">completo</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_logit</span></span><span class="op">(</span><span class="va">muestras</span><span class="op">$</span><span class="va">estimacion</span>, <span class="va">LICENCIA</span>,</span>
+<span>                       explicativas <span class="op">=</span> <span class="fu"><span>c</span></span><span class="op">(</span><span class="va">SOLVENCIA</span>, <span class="va">IPUNT</span>, <span class="va">TINCID</span>, <span class="va">EFLO</span><span class="op">)</span>,</span>
+<span>                       test <span class="op">=</span> <span class="va">muestras</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>: <em>data frame</em> de estimación.</li>
+<li>
+<code>dependiente</code>: variable dependiente con dos categorías. Se modeliza la probabilidad de la segunda (por ejemplo, el 1 en una variable 0/1).</li>
+<li>
+<code>explicativas</code>: variables explicativas, por ejemplo <code>c(SOLVENCIA, IPUNT, EFLO)</code>.</li>
+<li>
+<code>test</code>: <em>data frame</em> de test (opcional).</li>
+<li>
+<code>umbral</code>: probabilidad a partir de la cual un caso se clasifica como “éxito”. Por defecto, 0,5.</li>
+</ul>
+<p><strong>Piezas.</strong> <code>$coeficientes</code> (con el contraste de Wald individual), <code>$wald_factores</code> (contraste de Wald conjunto de los factores con más de dos categorías), <code>$odds</code> (<em>odd ratios</em>), <code>$ajuste</code> (pseudo R² de Nagelkerke, AIC, devianzas), <code>$devianza</code> (análisis de la devianza), <code>$aic</code>, <code>$confusion</code> y <code>$confusion_test</code> (matrices de confusión), <code>$modelo</code> (el objeto de R con el modelo).</p>
+</div>
+<div id="c81-lite-logit-escenarios" class="section level3 unnumbered">
+<h3>
+<code>lite_logit_escenarios()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-logit-escenarios"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Calcula la probabilidad estimada, su intervalo de confianza y la clasificación para unos casos hipotéticos (escenarios) definidos en una hoja de Excel. La hoja debe tener una columna identificativa y una columna por cada variable explicativa del modelo, con los mismos nombres.</p>
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">escenarios</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_logit_escenarios</span></span><span class="op">(</span><span class="va">completo</span>, <span class="st">"escenarios_logit_rstars.xlsx"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>logit</code>: resultado de <code><span>lite_logit()</span></code> o de <code><span>lite_logit_seleccion()</span></code>.</li>
+<li>
+<code>archivo</code>, <code>hoja</code> (por defecto, <code>"Escenarios"</code>) e <code>id</code> (columna identificativa; por defecto, <code>"ESCENARIO"</code>).</li>
+<li>
+<code>umbral</code>: por defecto, el del modelo.</li>
+<li>
+<code>nivel</code>: nivel de confianza del intervalo. Por defecto, 0,95.</li>
+</ul>
+<p><strong>Piezas.</strong> <code>$tabla</code> y <code>$datos</code>.</p>
+</div>
+<div id="c81-lite-logit-seleccion" class="section level3 unnumbered">
+<h3>
+<code>lite_logit_seleccion()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-logit-seleccion"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Busca una especificación más sencilla del modelo con el algoritmo <em>step</em> (eliminación sucesiva de variables según el AIC) y la compara con el modelo de partida.</p>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reducido</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_logit_seleccion</span></span><span class="op">(</span><span class="va">completo</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> <code>logit</code> (resultado de <code><span>lite_logit()</span></code>) y <code>mostrar_pasos</code> (si es <code>TRUE</code>, por defecto, muestra cada paso en la consola).</p>
+<p><strong>Piezas.</strong> Las mismas que <code><span>lite_logit()</span></code>, para el modelo reducido, más <code>$comparacion</code> (modelo de partida frente a reducido).</p>
+</div>
+</div>
+<div id="c81-tablas-de-contingencia" class="section level2 unnumbered">
+<h2>Tablas de contingencia.<a class="anchor" aria-label="anchor" href="#c81-tablas-de-contingencia"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c81-lite-recodifica" class="section level3 unnumbered">
+<h3>
+<code>lite_recodifica()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-recodifica"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Cambia el nombre de algunas categorías de una variable. Las categorías no mencionadas se mantienen.</p>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">seleccion</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_recodifica</span></span><span class="op">(</span><span class="va">seleccion</span>, <span class="va">GALAXIA</span>,</span>
+<span>                             <span class="fu"><span>c</span></span><span class="op">(</span><span class="st">"Galaxia de Andrómeda"</span> <span class="op">=</span> <span class="st">"Andrómeda"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> <code>datos</code>, <code>variable</code> y <code>cambios</code>: vector de la forma <code>c("nombre actual" = "nombre nuevo", ...)</code>.</p>
+<p><strong>Devuelve.</strong> El <em>data frame</em> con la variable recodificada.</p>
+</div>
+<div id="c81-lite-contingencia" class="section level3 unnumbered">
+<h3>
+<code>lite_contingencia()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-contingencia"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Analiza la asociación entre dos atributos: tabla de contingencia, gráficos de mosaico y de barras, contraste ji-cuadrado de independencia, residuos estandarizados ajustados, gráfico de asociación y medidas de asociación.</p>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">galaxia_fjur</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_contingencia</span></span><span class="op">(</span><span class="va">seleccion</span>, <span class="va">GALAXIA</span>, <span class="va">FJUR</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>, <code>fila</code>, <code>columna</code>: <em>data frame</em> y atributos de filas y columnas.</li>
+<li>
+<code>alfa</code>: nivel de significación. Por defecto, 0,05.</li>
+<li>
+<code>titulo</code>, <code>subtitulo</code>: títulos de los gráficos.</li>
+</ul>
+<p><strong>Piezas.</strong> <code>$tabla</code>, <code>$mosaico</code>, <code>$barras</code>, <code>$chi2</code>, <code>$esperadas</code> (frecuencias esperadas bajo independencia), <code>$residuos</code>, <code>$asociacion</code> y <code>$medidas</code> (coeficiente de contingencia <em>C</em>, su máximo y su valor corregido, <em>V</em> de Cramér y, en tablas 2 × 2, Phi).</p>
+</div>
+</div>
+<div id="c81-escalado-multidimensional" class="section level2 unnumbered">
+<h2>Escalado multidimensional.<a class="anchor" aria-label="anchor" href="#c81-escalado-multidimensional"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c81-lite-emd-dimensiones" class="section level3 unnumbered">
+<h3>
+<code>lite_emd_dimensiones()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-emd-dimensiones"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Fase exploratoria del escalado multidimensional: perfiles de los casos, matriz de distancias euclídeas y Stress de las soluciones de 1 a <code>max_dim</code> dimensiones, con su calificación según la escala de Kruskal.</p>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exploracion</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_emd_dimensiones</span></span><span class="op">(</span><span class="va">PERCEPCION</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong></p>
+<ul>
+<li>
+<code>datos</code>, <code>variables</code>: <em>data frame</em> con los atributos de cada caso.</li>
+<li>
+<code>max_dim</code>: número máximo de dimensiones. Por defecto, 6.</li>
+<li>
+<code>tipo</code>: <code>"ordinal"</code> (EMD no métrico, por defecto) o <code>"interval"</code>/<code>"ratio"</code> (métrico).</li>
+</ul>
+<p><strong>Piezas.</strong> <code>$tabla_perfiles</code>, <code>$perfiles</code>, <code>$distancias</code>, <code>$stress</code> y <code>$codo</code>.</p>
+</div>
+<div id="c81-lite-emd" class="section level3 unnumbered">
+<h3>
+<code>lite_emd()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-emd"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Obtiene la solución del escalado multidimensional en el número de dimensiones elegido y construye el mapa perceptual.</p>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapa</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_emd</span></span><span class="op">(</span><span class="va">PERCEPCION</span>, ndim <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> <code>datos</code>, <code>variables</code>, <code>ndim</code> (por defecto, 2), <code>tipo</code> (por defecto, <code>"ordinal"</code>), y <code>titulo</code> y <code>subtitulo</code> del mapa.</p>
+<p><strong>Piezas.</strong> <code>$ajuste</code> (Stress e iteraciones), <code>$coordenadas</code>, <code>$shepard</code>, <code>$correlaciones</code> (atributos frente a dimensiones) y, con dos dimensiones, <code>$mapa</code> y <code>$biplot</code> (mapa con los vectores de los atributos); con tres o más, <code>$mapas</code> (los mapas de cada par de dimensiones). <code>$modelo</code> guarda el objeto de R con la solución.</p>
+</div>
+</div>
+<div id="c81-funciones-auxiliares" class="section level2 unnumbered">
+<h2>Funciones auxiliares.<a class="anchor" aria-label="anchor" href="#c81-funciones-auxiliares"><i class="fas fa-link"></i></a>
+</h2>
+<div id="c81-lite-tabla" class="section level3 unnumbered">
+<h3>
+<code>lite_tabla()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-tabla"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Presenta un <em>data frame</em> o una matriz como tabla con el estilo del libro.</p>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><span>lite_tabla</span></span><span class="op">(</span><span class="fu"><span>head</span></span><span class="op">(</span><span class="va">interestelar_100</span><span class="op">)</span>, caption <span class="op">=</span> <span class="st">"Primeras empresas"</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> <code>x</code> (<em>data frame</em> o matriz) y, opcionalmente, <code>caption</code> (título), <code>col.names</code> (nombres de las columnas) y <code>digits</code> (decimales).</p>
+</div>
+<div id="c81-lite-patchwork" class="section level3 unnumbered">
+<h3>
+<code>lite_patchwork()</code>.<a class="anchor" aria-label="anchor" href="#c81-lite-patchwork"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Para qué sirve.</strong> Agrupa una lista de gráficos en composiciones de 2 × 2 (cuatro gráficos por composición). Es la función que usan internamente otras funciones del paquete para presentar baterías de gráficos.</p>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">composiciones</span> <span class="op">&lt;-</span> <span class="fu"><span>lite_patchwork</span></span><span class="op">(</span><span class="va">lista_de_graficos</span><span class="op">)</span></span>
+<span><span class="va">composiciones</span></span></code></pre></div>
+<p><strong>Argumentos.</strong> <code>graficos</code>: lista de gráficos <code>ggplot</code>.</p>
+<p><strong>Devuelve.</strong> Una lista de composiciones, que se muestran todas al escribir el nombre del objeto.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="bibliograf%C3%ADa.html">Bibliografía</a></div>
+<div class="next"><a href="licencia.html">Licencia</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ap%C3%A9ndice-gu%C3%ADa-de-uso-de-matlite.">Apéndice: Guía de uso de MATlite.</a></li>
+<li>
+<a class="nav-link" href="#c81-que-es-matlite">Qué es MATlite y cómo funciona.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c81-tres-ideas">Tres ideas para usar el paquete.</a></li>
+<li><a class="nav-link" href="#c81-mapa-de-funciones">Mapa de funciones.</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c81-funciones-generales">Funciones generales.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c81-lite-comprueba">lite_comprueba().</a></li>
+<li><a class="nav-link" href="#c81-lite-datos">lite_datos().</a></li>
+<li><a class="nav-link" href="#c81-lite-importa">lite_importa().</a></li>
+<li><a class="nav-link" href="#c81-lite-resumen">lite_resumen().</a></li>
+<li><a class="nav-link" href="#c81-verbos-dplyr">Verbos de {dplyr}.</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c81-analisis-previo">Análisis previo de datos.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c81-lite-na">lite_na().</a></li>
+<li><a class="nav-link" href="#c81-lite-outliers">lite_outliers().</a></li>
+<li><a class="nav-link" href="#c81-lite-describe">lite_describe().</a></li>
+<li><a class="nav-link" href="#c81-lite-correlaciones">lite_correlaciones().</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c81-componentes-principales">Componentes principales.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c81-lite-acp">lite_acp().</a></li>
+<li><a class="nav-link" href="#c81-lite-acp-ranking">lite_acp_ranking().</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c81-analisis-cluster">Análisis clúster jerárquico.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#c81-lite-cluster-ward">lite_cluster_ward().</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#c81-eleccion-discreta">Modelos de elección discreta.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c81-lite-factor">lite_factor().</a></li>
+<li><a class="nav-link" href="#c81-lite-logit-descriptivo">lite_logit_descriptivo().</a></li>
+<li><a class="nav-link" href="#c81-lite-particion">lite_particion().</a></li>
+<li><a class="nav-link" href="#c81-lite-logit">lite_logit().</a></li>
+<li><a class="nav-link" href="#c81-lite-logit-escenarios">lite_logit_escenarios().</a></li>
+<li><a class="nav-link" href="#c81-lite-logit-seleccion">lite_logit_seleccion().</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c81-tablas-de-contingencia">Tablas de contingencia.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c81-lite-recodifica">lite_recodifica().</a></li>
+<li><a class="nav-link" href="#c81-lite-contingencia">lite_contingencia().</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c81-escalado-multidimensional">Escalado multidimensional.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c81-lite-emd-dimensiones">lite_emd_dimensiones().</a></li>
+<li><a class="nav-link" href="#c81-lite-emd">lite_emd().</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#c81-funciones-auxiliares">Funciones auxiliares.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c81-lite-tabla">lite_tabla().</a></li>
+<li><a class="nav-link" href="#c81-lite-patchwork">lite_patchwork().</a></li>
+</ul>
+</li>
+</ul>
+<div class="book-extra">
+        <ul class="list-unstyled"></ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>R-Stars Lite</strong>: Análisis de datos con R y sin vértigo" was written by Miguel-Ángel Tarancón Morán. It was last built on 2026-10-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
